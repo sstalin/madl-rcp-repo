@@ -1,0 +1,811 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+
+   <extension
+         id="application"
+         point="org.eclipse.core.runtime.applications">
+      <application>
+         <run
+               class="edu.depaul.cdm.madl.tools.deploy.MadlIDEApplication">
+         </run>
+      </application>
+   </extension>
+   
+      <extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            locationURI="menu:file?after=new.ext">
+        <!-- <command
+               commandId="edu.depaul.cdm.madl.tools.ui.file.new"
+               icon="$nl$/icons/full/etool16/newfile_wiz.gif"
+               style="push">
+         </command>-->
+      </menuContribution>
+      <menuContribution
+            locationURI="menu:file?after=open.ext">
+         <!-- <command 
+               commandId="edu.depaul.cdm.madl.tools.ui.folder.open"
+               style="push"> 
+         </command> -->
+      </menuContribution>
+      <!-- <menuContribution
+            locationURI="toolbar:org.eclipse.ui.trim.command2">
+         <toolbar
+               id="editor.toolbar">
+            <control
+               class="edu.depaul.cdm.madl.tools.deploy.MadlEditorToolbarControlContribution">
+            </control>
+         </toolbar>
+      </menuContribution> -->
+      <!--<menuContribution
+            allPopups="false"
+            locationURI="menu:org.eclipse.ui.run?after=breakpointGroup">
+         <command
+               commandId="edu.depaul.cdm.madl.tools.debug.ui.run.selection"
+               icon="icons/full/obj16/run_exc.gif"
+               label="%runCommandName"
+               style="push"
+               tooltip="%runDescription">
+         </command>
+         <command
+               commandId="edu.depaul.cdm.madl.tools.debug.ui.run.last.launch"
+               label="Always Run Last Launch"
+               style="toggle">
+         </command>
+      </menuContribution>-->
+      <menuContribution
+            allPopups="false"
+            locationURI="menu:org.eclipse.ui.run?after=emptyLaunchGroup">
+         <!--<command commandId="edu.depaul.cdm.madl.tools.debug.ui.launchDialog" />-->
+         <!-- TODO(devoncarew): enable this once the command-line debugger works remotely -->
+         <!--<command commandId="edu.depaul.cdm.madl.tools.debug.ui.remoteConnection" />-->
+      </menuContribution>
+      <!--<menuContribution
+            allPopups="false"
+            locationURI="menu:org.eclipse.ui.run?after=runGroup">
+         <command
+               commandId="edu.depaul.cdm.madl.tools.debug.ui.removeBreakpoints"
+               style="push"
+               icon="icons/full/obj16/rem_all_brk.gif">
+         </command>
+      </menuContribution>-->
+   </extension>
+   
+  <!-- <extension
+         point="org.eclipse.ui.bindings">
+     <key
+            commandId="edu.depaul.cdm.madl.tools.ui.file.showInFinder"
+            sequence="M1+M2+M3+F"
+            schemeId="edu.depaul.cdm.madl.tools.madlAcceleratorConfiguration" />
+     <key
+            commandId="org.eclipse.ui.file.properties"
+            sequence="M3+CR"
+            schemeId="edu.depaul.cdm.madl.tools.madlAcceleratorConfiguration" />
+     <key
+            commandId="org.eclipse.ui.file.properties"
+            platform="cocoa"
+            schemeId="edu.depaul.cdm.madl.tools.madlAcceleratorConfiguration"
+            sequence="M1+I"/>
+     <key
+            commandId="org.eclipse.ui.file.properties"
+            platform="carbon"
+            schemeId="edu.depaul.cdm.madl.tools.madlAcceleratorConfiguration"
+            sequence="M1+I"/>
+      <key
+            commandId="edu.depaul.cdm.madl.tools.ui.folder.open"
+            contextId="org.eclipse.ui.contexts.window"
+            schemeId="edu.depaul.cdm.madl.tools.madlAcceleratorConfiguration"
+            sequence="M1+O">
+      </key>
+       <key
+            commandId="edu.depaul.cdm.madl.tools.ui.run.script.command"
+            schemeId="edu.depaul.cdm.madl.tools.madlAcceleratorConfiguration"
+            sequence="M1+M2+F1">
+      </key>
+       <key
+            commandId="edu.depaul.cdm.madl.tools.ui.run.script.command"
+            schemeId="edu.depaul.cdm.madl.tools.madlAcceleratorConfiguration"
+            sequence="M1+M2+F2">
+      </key>
+       <key
+            commandId="edu.depaul.cdm.madl.tools.ui.run.script.command"
+            schemeId="edu.depaul.cdm.madl.tools.madlAcceleratorConfiguration"
+            sequence="M1+M2+F3">
+      </key>
+       <key
+            commandId="edu.depaul.cdm.madl.tools.ui.run.script.command"
+            schemeId="edu.depaul.cdm.madl.tools.madlAcceleratorConfiguration"
+            sequence="M1+M2+F4">
+      </key>
+       <key
+            commandId="edu.depaul.cdm.madl.tools.ui.run.script.command"
+            schemeId="edu.depaul.cdm.madl.tools.madlAcceleratorConfiguration"
+            sequence="M1+M2+F5">
+      </key>
+      <key
+            commandId="edu.depaul.cdm.madl.tools.ui.omnibox"
+            schemeId="edu.depaul.cdm.madl.tools.madlAcceleratorConfiguration"
+            sequence="M1+3">
+      </key>
+      <key
+            commandId="edu.depaul.cdm.madl.tools.debug.ui.run.selection"
+            schemeId="edu.depaul.cdm.madl.tools.madlAcceleratorConfiguration"
+            sequence="M1+R">
+      </key>
+      <key
+            commandId="edu.depaul.cdm.madl.tools.ui.generateJavascript"
+            schemeId="edu.depaul.cdm.madl.tools.madlAcceleratorConfiguration"
+            sequence="M1+M2+M3+G">
+      </key>
+      <key
+            commandId="edu.depaul.cdm.madl.tools.debug.ui.launchDialog"
+            schemeId="edu.depaul.cdm.madl.tools.madlAcceleratorConfiguration"
+            sequence="M1+SHIFT+M">
+      </key>
+      <key
+            commandId="org.eclipse.ui.file.refresh"
+            sequence="F5"
+            schemeId="edu.depaul.cdm.madl.tools.madlAcceleratorConfiguration">
+      </key>      
+      <key
+            commandId="org.eclipse.ui.window.activateEditor"
+            sequence="F12"
+            platform="win32"
+            schemeId="edu.depaul.cdm.madl.tools.madlAcceleratorConfiguration"/>
+      <key
+            commandId="org.eclipse.ui.window.activateEditor"
+            sequence="F12"
+            platform="gtk"
+            schemeId="edu.depaul.cdm.madl.tools.madlAcceleratorConfiguration"/>
+      <key
+            commandId="org.eclipse.ui.window.activateEditor"
+            sequence="M1+F12"
+            platform="carbon"
+            schemeId="edu.depaul.cdm.madl.tools.madlAcceleratorConfiguration"/>
+      <key
+            commandId="org.eclipse.ui.window.openEditorDropDown"
+            sequence="M1+E"
+            schemeId="edu.depaul.cdm.madl.tools.madlAcceleratorConfiguration"/>
+      <key
+            commandId="org.eclipse.ui.window.nextEditor"
+            sequence="M1+F6"
+            schemeId="edu.depaul.cdm.madl.tools.madlAcceleratorConfiguration"/>
+      <key
+            commandId="org.eclipse.ui.window.previousEditor"
+            sequence="M1+M2+F6"
+            schemeId="edu.depaul.cdm.madl.tools.madlAcceleratorConfiguration"/>
+      <key
+            commandId="edu.depaul.cdm.madl.tools.ui.buildClean"
+            sequence="M1+M2+M3+B"
+            schemeId="edu.depaul.cdm.madl.tools.madlAcceleratorConfiguration"/>
+   </extension>-->
+   
+   <extension
+         id="product"
+         point="org.eclipse.core.runtime.products">
+      <product
+            application="edu.depaul.cdm.madl.tools.deploy.application"
+            name="Madl Editor">
+         <property
+               name="windowImages"
+               value="icons/madl_16_16.gif,icons/madl_32_32.gif,icons/madl_48_48.gif,icons/madl_64_64.gif,icons/madl_128_128.gif">
+         </property>
+         <property
+               name="aboutText"
+               value="An awesome editor for Madl programming.">
+         </property>
+         <property
+               name="aboutImage"
+               value="icons/madl_116_116.gif">
+         </property>
+         <property
+               name="appName"
+               value="Madl Editor">
+         </property>
+         <property
+               name="startupProgressRect"
+               value="100,350,400,15">
+         </property>
+         <property
+               name="preferenceCustomization"
+               value="plugin_customization.ini">
+         </property>
+         <property
+               name="startupForegroundColor"
+               value="B3B3B3">
+         </property>
+         <property
+               name="startupMessageRect"
+               value="100,330,400,15">
+         </property>
+      </product>
+   </extension>
+   
+   <extension
+         point="org.eclipse.ui.activities">
+      <activity
+            description="Madl Development Activities"
+            id="edu.depaul.cdm.madl.development"
+            name="Madl Development">
+      </activity>
+      <activityPatternBinding
+            activityId="edu.depaul.cdm.madl.development"
+            pattern=".*org\.eclipse\.debug\.ui\.contextualLaunch\.run\.submenu.*">
+      </activityPatternBinding>
+      <activityPatternBinding
+            activityId="edu.depaul.cdm.madl.development"
+            pattern=".*org\.eclipse\.debug\.ui\.contextualLaunch\.debug\.submenu.*">
+      </activityPatternBinding>
+      <activityPatternBinding
+            activityId="edu.depaul.cdm.madl.development"
+            pattern="org\.eclipse\..*convertLineDelimiters">
+      </activityPatternBinding>
+      <activityPatternBinding
+            activityId="edu.depaul.cdm.madl.development"
+            pattern="org\.eclipse\..*toggleShowWhitespaceCharacters">
+      </activityPatternBinding>
+      <activityPatternBinding
+            activityId="edu.depaul.cdm.madl.development"
+            pattern="org\.eclipse\..*toggleBlockSelectionMode">
+      </activityPatternBinding>
+      <activityPatternBinding
+            activityId="edu.depaul.cdm.madl.development"
+            pattern="org.eclipse.search/org.eclipse.search.OpenSearchDialog">
+      </activityPatternBinding>
+      <activityPatternBinding
+            activityId="edu.depaul.cdm.madl.development"
+            pattern="org\.eclipse\..*externaltools.*">
+      </activityPatternBinding>
+      <activityPatternBinding
+            activityId="edu.depaul.cdm.madl.development"
+            pattern="org\.eclipse\..*delimiter.*">
+      </activityPatternBinding>
+      <activityPatternBinding
+            activityId="edu.depaul.cdm.madl.development"
+            pattern="org\.eclipse\..*restartWorkbench">
+      </activityPatternBinding>
+      <activityPatternBinding
+            activityId="edu.depaul.cdm.madl.development"
+            pattern="org\.eclipse\..*cheatsheets.*">
+      </activityPatternBinding>
+      <activityPatternBinding
+            activityId="edu.depaul.cdm.madl.development"
+            pattern="org\.eclipse\..*update.*">
+      </activityPatternBinding>
+      <activityPatternBinding
+            activityId="edu.depaul.cdm.madl.development"
+            pattern="org\.eclipse\.equinox\.p2\.ui\..*">
+      </activityPatternBinding>
+      <activityPatternBinding
+            activityId="edu.depaul.cdm.madl.development"
+            pattern="org.eclipse.team.*">
+      </activityPatternBinding>
+      <activityPatternBinding
+            activityId="edu.depaul.cdm.madl.development"
+            pattern="org\.eclipse\..*openLocalFile">
+      </activityPatternBinding>
+      <activityPatternBinding
+            activityId="edu.depaul.cdm.madl.development"
+            pattern="org\.eclipse\..*toggleInsertMode">
+      </activityPatternBinding>
+      <activityPatternBinding
+            activityId="edu.depaul.cdm.madl.development"
+            pattern="org\.eclipse\..*showInformation">
+      </activityPatternBinding>
+      <activityPatternBinding
+            activityId="edu.depaul.cdm.madl.development"
+            pattern="org\.eclipse\..*.helpContents">
+      </activityPatternBinding>
+      <activityPatternBinding
+            activityId="edu.depaul.cdm.madl.development"
+            pattern="org\.eclipse\..*.helpSearch">
+      </activityPatternBinding>
+      <!-- contributed by org.eclipse.ui.workbench -->
+      <activityPatternBinding
+            activityId="edu.depaul.cdm.madl.development"
+            pattern="org\.eclipse\.ui\.edit\.findIncremental.*">
+      </activityPatternBinding>
+      <!-- contributed by org.eclipse.ui.workbench -->
+      <activityPatternBinding
+            activityId="edu.depaul.cdm.madl.development"
+            pattern="org\.eclipse\.ui\.edit\.text\.gotoLastEditPosition">
+      </activityPatternBinding>
+      <!-- Added by BasicTextEditorActionContributor -->
+      <activityPatternBinding
+            activityId="edu.depaul.cdm.madl.development"
+            pattern="org\.eclipse\.ui\.edit\.text\.hippieCompletion">
+      </activityPatternBinding>
+      <!-- Get rid of default "Open Resource" action -->
+      <activityPatternBinding
+            activityId="edu.depaul.cdm.madl.development"
+            pattern="org\.eclipse\.ui\..*OpenWorkspaceFile.*">
+      </activityPatternBinding>
+      <activityPatternBinding
+            activityId="edu.depaul.cdm.madl.development"
+            pattern="org\.eclipse\.ui\.navigate\.next">
+      </activityPatternBinding>
+      <activityPatternBinding
+            activityId="edu.depaul.cdm.madl.development"
+            pattern="org\.eclipse\.ui\.navigate\.previous">
+      </activityPatternBinding>
+      <!-- Get rid of "org.eclipse.compare" actions -->
+      <activityPatternBinding
+            activityId="edu.depaul.cdm.madl.development"
+            pattern="org\.eclipse\.compare.*">
+      </activityPatternBinding>
+      
+      <!-- Run/debug property pages -->
+      <activityPatternBinding
+            activityId="edu.depaul.cdm.madl.development"
+            pattern="org\.eclipse\..*defaultLaunchConfigurations">
+      </activityPatternBinding>
+
+      <!-- internal web browser contributions -->
+      <activityPatternBinding
+            activityId="edu.depaul.cdm.madl.development"
+            pattern="org.eclipse.ui.browser/org.eclipse.ui.browser.edito.*">
+      </activityPatternBinding>
+
+      <!-- incremental find -->
+      <activityPatternBinding
+            activityId="edu.depaul.cdm.madl.development"
+            pattern="com\.xored\.glance\.ui\..*">
+      </activityPatternBinding>
+   </extension>
+   
+   <!-- Launch and Debug contributions -->
+   <!--
+   <extension
+         point="org.eclipse.ui.activities">
+      <activity
+            description="Madl Launch Activities"
+            id="edu.depaul.cdm.madl.development.launch"
+            name="Madl Launch Activities">
+      </activity>
+
+      <activityPatternBinding
+            activityId="edu.depaul.cdm.madl.development.launch"
+            pattern="org.eclipse.debug.ui/org.eclipse.debug.ui.actions.ToggleStepFilters">
+      </activityPatternBinding>
+      <activityPatternBinding
+            activityId="edu.depaul.cdm.madl.development.launch"
+            pattern="org.eclipse.debug.ui/org.eclipse.debug.ui.actions.RunToLine">
+      </activityPatternBinding>
+    </extension>
+    -->
+
+    <extension
+         point="org.eclipse.core.contenttype.contentTypes">
+      <file-association
+            content-type="org.eclipse.core.runtime.text"
+            file-extensions="js,json,map,md,py,yaml,bat,sql">
+      </file-association>      
+   </extension>
+   
+    <extension
+         point="org.eclipse.ui.perspectives">
+      <perspective
+            name="%madl.perspective.name"
+            icon="$nl$/icons/full/eview16/dperspective.png"
+            class="edu.depaul.cdm.madl.tools.ui.MadlPerspective"
+            id="edu.depaul.cdm.madl.tools.ui.MadlPerspective">
+         <description>
+            %madl.perspective.description
+         </description>
+      </perspective>    
+   </extension>
+
+
+ <extension
+          point="org.eclipse.ui.views">
+      <view
+            allowMultiple="false"
+            category="edu.depaul.cdm.madl.tools.ui.madl"
+            class="edu.depaul.cdm.madl.tools.ui.internal.filesview.FilesView"
+            icon="$nl$/icons/full/obj16/file_folder.gif"
+            id="edu.depaul.cdm.madl.tools.ui.FileExplorer"
+            name="Files"
+            restorable="true">
+      </view>
+      <view
+             allowMultiple="true"
+             category="edu.depaul.cdm.madl.tools.ui.madl"
+             class="edu.depaul.cdm.madl.tools.ui.console.MadlConsoleView"
+             icon="$nl$/icons/full/eview16/console_view.gif"
+             id="edu.depaul.cdm.madl.tools.ui.console"
+             name="Output"
+             restorable="false">
+      </view>
+      <view
+            name="Problems"
+            category="edu.depaul.cdm.madl.tools.ui.madl"
+            class="edu.depaul.cdm.madl.tools.ui.internal.problemsview.ProblemsView"
+            icon="$nl$/icons/full/eview16/problems_view.gif"
+            id="edu.depaul.cdm.madl.tools.ui.ProblemsView">
+      </view> 
+      <!--   
+      <view
+            class="edu.depaul.cdm.madl.tools.debug.ui.internal.view.DebuggerView"
+            id="edu.depaul.cdm.madl.tools.debug.debuggerView"
+            name="Debugger"
+            restorable="true"
+            category="edu.depaul.cdm.madl.tools.ui.madl"
+            icon="icons/full/obj16/debug_exc.gif">
+      </view>
+      <view
+            class="edu.depaul.cdm.madl.tools.debug.ui.internal.view.BreakpointsView"
+            id="edu.depaul.cdm.madl.tools.debug.breakpointsView"
+            name="Breakpoints"
+            restorable="true"
+            category="edu.depaul.cdm.madl.tools.ui.madl"
+            icon="icons/full/obj16/breakpoint_view.gif">
+      </view>
+      -->
+   </extension>
+
+<!--
+   <extension point="org.eclipse.debug.ui.contextViewBindings">
+      <contextViewBinding
+            viewId="edu.depaul.cdm.madl.tools.debug.debuggerView"
+            contextId="org.eclipse.debug.ui.debugging">
+      </contextViewBinding>
+      <contextViewBinding
+           viewId="edu.depaul.cdm.madl.tools.debug.breakpointsView"
+           contextId="org.eclipse.debug.ui.debugging">
+      </contextViewBinding>
+   </extension>
+   -->
+  
+  <!-- 
+   <extension
+         point="org.eclipse.ui.commands">
+      <command
+            categoryId="org.eclipse.ui.category.window"
+            defaultHandler="edu.depaul.cdm.madl.tools.ui.omni.OmniBoxHandler"
+            description="%command.omnibox.description"
+            id="edu.depaul.cdm.madl.tools.ui.omnibox"
+            name="%command.omnibox.name"/> 
+   </extension>
+  --> 
+   
+  <!-- 
+   <extension
+         point="org.eclipse.ui.preferencePages">
+     
+      <page
+            name="%analysisPrefName"
+            class="edu.depaul.cdm.madl.tools.ui.internal.preferences.MadlAnalysisPreferencePage"
+            id="edu.depaul.cdm.madl.tools.ui.preferences.MadlAnalysisPreferencePage">
+      </page>
+     
+      <page
+            name="%madlPrefName"
+            class="edu.depaul.cdm.madl.tools.ui.internal.preferences.MadlBasePreferencePage"
+            id="edu.depaul.cdm.madl.tools.ui.preferences.MadlBasePreferencePage">
+      </page>
+      <page
+            class="edu.depaul.cdm.madl.tools.ui.internal.preferences.FontPreferencePage"
+            id="edu.depaul.cdm.madl.tools.ui.fontOptionsPage"
+            name="%madlFontsPrefName">
+      </page>
+      <page
+            name="%madlHintsPrefName"
+            class="edu.depaul.cdm.madl.tools.ui.internal.preferences.HintPreferencePage"
+            id="edu.depaul.cdm.madl.tools.ui.preferences.HintPreferencePage">
+      </page>
+      <page
+            name="%madlKeysPrefName"
+            class="edu.depaul.cdm.madl.tools.ui.internal.preferences.MadlKeyBindingPreferencePage"
+            id="edu.depaul.cdm.madl.tools.ui.preferences.MadlKeyBindingPreferencePage">
+      </page>
+      <page
+            name="%debugPrefPageName"
+            class="edu.depaul.cdm.madl.tools.debug.ui.internal.preferences.DebugPreferencePage"
+            id="edu.depaul.cdm.madl.tools.debug.debugPreferencePage">
+      </page>
+      <page
+            class="edu.depaul.cdm.madl.tools.ui.update.UpdatePreferencePage"
+            id="edu.depaul.cdm.madl.tools.ui.update.updatePreferencePage"
+            name="%updatePrefPageName">
+      </page>
+   </extension>
+-->
+
+
+<!--
+   <extension
+         point="org.eclipse.ui.presentationFactories">
+      <factory
+            class="edu.depaul.cdm.madl.tools.ui.presentation.MadlEditorPresentationFactory"
+            id="edu.depaul.cdm.madl.tools.ui.presentation"
+            name="Madl Editor Presentation">
+      </factory>
+   </extension>
+  -->
+   
+   <extension
+         point="org.eclipse.ui.editors">
+      <editor
+            class="edu.depaul.cdm.madl.tools.ui.internal.text.editor.SimpleTextEditor"
+            contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor"
+            default="true"
+            icon="$nl$/icons/full/obj16/file_obj.gif"
+            id="edu.depaul.cdm.madl.tools.ui.text.editor.TextEditor"
+            name="%TextFileEditorName"
+            symbolicFontName="edu.depaul.cdm.madl.tools.ui.editors.textfont">
+            <contentTypeBinding contentTypeId="org.eclipse.core.runtime.text" />
+      </editor>
+      <editor
+            class="edu.depaul.cdm.madl.tools.ui.internal.intro.IntroEditor"
+            default="false"
+            icon="$nl$/icons/madl_16_16.gif"
+            id="edu.depaul.cdm.madl.tools.ui.intro.editor"
+            name="Welcome">
+      </editor>
+   </extension>
+
+   <extension-point id="edu.depaul.cdm.madl.tools.ui.theme.mapper" name="Editor Mapping" schema="schema/edu.depaul.cdm.madl.tools.ui.theme.mapper.exsd"/>
+   <extension-point id="edu.depaul.cdm.madl.tools.ui.theme.theme" name="Color Theme" schema="schema/edu.depaul.cdm.madl.tools.ui.theme.theme.exsd"/> 
+   
+<!--
+   <extension
+         point="org.eclipse.ui.preferencePages">
+      <page
+            class="edu.depaul.cdm.madl.tools.ui.theme.preferences.ThemePreferencePage"
+            id="edu.depaul.cdm.madl.tools.ui.theme.preferences.ThemePreferencePage"
+            name="Visual Theme">
+      </page>
+   </extension>
+
+   <extension
+         point="org.eclipse.core.runtime.preferences">
+      <initializer
+            class="edu.depaul.cdm.madl.tools.ui.theme.preferences.PreferenceInitializer">
+      </initializer>
+   </extension>
+
+   <extension
+         point="edu.depaul.cdm.madl.tools.ui.theme.mapper">
+      <mapper
+            class="edu.depaul.cdm.madl.tools.ui.theme.mapper.TextEditorMapper"
+            name="Madl"
+            pluginId="edu.depaul.cdm.madl.tools.ui"
+            xml="mappings/edu.depaul.cdm.madl.tools.ui.xml">
+      </mapper>
+      <mapper
+            class="edu.depaul.cdm.madl.tools.ui.theme.mapper.GenericMapper"
+            name="Java"
+            pluginId="org.eclipse.jdt.ui"
+            xml="mappings/org.eclipse.jdt.ui.xml">
+      </mapper>
+      <mapper
+            class="edu.depaul.cdm.madl.tools.ui.theme.mapper.TextEditorMapper"
+            name="Text"
+            pluginId="org.eclipse.ui.editors"
+            xml="mappings/org.eclipse.ui.editors.xml">
+      </mapper>
+      <mapper
+            class="edu.depaul.cdm.madl.tools.ui.theme.mapper.TextEditorMapper"
+            name="Debug"
+            pluginId="org.eclipse.debug.ui"
+            xml="mappings/org.eclipse.debug.ui.xml">
+      </mapper>
+      <mapper
+            class="edu.depaul.cdm.madl.tools.ui.theme.mapper.WebEditorMapper"
+            name="CSS"
+            pluginId="org.eclipse.wst.css.ui"
+            xml="mappings/org.eclipse.wst.css.ui.xml">
+      </mapper>
+      <mapper
+            class="edu.depaul.cdm.madl.tools.ui.theme.mapper.WebEditorMapper"
+            name="HTML"
+            pluginId="org.eclipse.wst.html.ui"
+            xml="mappings/org.eclipse.wst.html.ui.xml">
+      </mapper>
+      <mapper
+            class="edu.depaul.cdm.madl.tools.ui.theme.mapper.GenericMapper"
+            name="JavaScript"
+            pluginId="org.eclipse.wst.jsdt.ui"
+            xml="mappings/org.eclipse.wst.jsdt.ui.xml">
+      </mapper>
+      <mapper
+            class="edu.depaul.cdm.madl.tools.ui.theme.mapper.WebEditorMapper"
+            name="XML"
+            pluginId="org.eclipse.wst.xml.ui"
+            xml="mappings/org.eclipse.wst.xml.ui.xml">
+      </mapper>
+   </extension>
+
+   <extension
+         point="edu.depaul.cdm.madl.tools.ui.theme.theme">
+      <theme
+            file="themes/black-pastel.xml">
+      </theme>
+      <theme
+            file="themes/frontenddev.xml">
+      </theme>
+      <theme
+            file="themes/gedit-original-oblivion.xml">
+      </theme>
+      <theme
+            file="themes/havenjark.xml">
+      </theme>
+      <theme
+            file="themes/inkpot.xml">
+      </theme>
+      <theme
+            file="themes/minimal.xml">
+      </theme>
+      <theme
+            file="themes/mr.xml">
+      </theme>
+      <theme
+            file="themes/nightlion-aptana-theme.xml">
+      </theme>
+      <theme
+            file="themes/notepad++-like.xml">
+      </theme>
+      <theme
+            file="themes/oblivion.xml">
+      </theme>
+      <theme
+            file="themes/obsidian.xml">
+      </theme>
+      <theme
+            file="themes/pastel.xml">
+      </theme>
+      <theme
+            file="themes/recogneyes.xml">
+      </theme>
+      <theme
+            file="themes/schuss.xml">
+      </theme>
+      <theme
+            file="themes/sublime-text-2.xml">
+      </theme>
+      <theme
+            file="themes/tango.xml">
+      </theme>
+      <theme
+            file="themes/vibrantink.xml">
+      </theme>
+      <theme
+            file="themes/wombat.xml">
+      </theme>
+      <theme
+            file="themes/zenburn.xml">
+      </theme>
+      <theme
+            file="themes/monokai.xml">
+      </theme>
+      <theme
+            file="themes/roboticket.xml">
+      </theme>
+      <theme
+            file="themes/sunburst.xml">
+      </theme>
+      <theme
+            file="themes/retta.xml">
+      </theme>
+      <theme
+            file="themes/madlboard.xml">
+      </theme>
+      <theme
+            file="themes/default.xml">
+      </theme>
+      <theme
+            file="themes/hotpink.xml">
+      </theme>
+      <theme
+            file="themes/debugging.xml">
+      </theme>
+   </extension>
+ -->  
+   
+
+   <!--<extension point="org.eclipse.ui.perspectiveExtensions">
+      <perspectiveExtension targetID="edu.depaul.cdm.madl.tools.ui.MadlPerspective">
+         <actionSet id="edu.depaul.cdm.madl.tools.debug.ui.breakpointActionSet"/>
+      </perspectiveExtension>
+   </extension>-->
+ <!--
+  <extension point="org.eclipse.wst.sse.ui.editorConfiguration">
+    
+    <contentOutlineConfiguration
+      class="org.eclipse.wst.jsdt.web.ui.views.provisional.contentoutline.JsContentOutlineConfig"
+      target="org.eclipse.wst.html.core.htmlsource.source" /> 
+    <quickOutlineConfiguration
+      class="org.eclipse.wst.css.ui.views.contentoutline.CSSQuickOutlineConfiguration"
+      target="org.eclipse.wst.css.core.csssource" />
+      
+    <sourceViewerConfiguration
+      class="edu.depaul.cdm.madl.tools.wst.ui.StructuredTextViewerConfigurationMadl"
+      target="org.eclipse.wst.html.core.htmlsource.source" />
+    <provisionalConfiguration
+      type="linestyleprovider"
+      class="edu.depaul.cdm.madl.tools.wst.ui.style.LineStyleProviderForMadl"
+      target="org.eclipse.wst.html.SCRIPT.type.APPLICATION/DART,org.eclipse.wst.html.SCRIPT.EVENTHANDLER.type.APPLICATION/DART,org.eclipse.wst.html.SCRIPT,org.eclipse.wst.html.SCRIPT.EVENTHANDLER" />
+    <documentationTextHover
+      class="edu.depaul.cdm.madl.tools.wst.ui.taginfo.MadlHoverProcessor"
+      target="org.eclipse.wst.html.SCRIPT.type.APPLICATION/DART,org.eclipse.wst.html.SCRIPT.EVENTHANDLER.type.APPLICATION/DART,org.eclipse.wst.html.SCRIPT,org.eclipse.wst.html.SCRIPT.EVENTHANDLER" />
+   
+    <provisionalConfiguration
+      type="characterpairmatcher"
+      class="edu.depaul.cdm.madl.tools.wst.ui.text.MadlDocumentRegionEdgeMatcher"
+      target="org.eclipse.wst.html.SCRIPT.type.APPLICATION/DART,org.eclipse.wst.html.SCRIPT.EVENTHANDLER.type.APPLICATION/DART,org.eclipse.wst.html.SCRIPT,org.eclipse.wst.html.SCRIPT.EVENTHANDLER" />
+    
+    <provisionalConfiguration
+      type="autoeditstrategy"
+      class="edu.depaul.cdm.madl.tools.wst.ui.autoedit.AutoEditStrategyForMadl"
+      target="org.eclipse.wst.html.SCRIPT.type.APPLICATION/DART,org.eclipse.wst.html.SCRIPT.EVENTHANDLER.type.APPLICATION/DART,org.eclipse.wst.html.SCRIPT,org.eclipse.wst.html.SCRIPT.EVENTHANDLER" />
+     
+    <provisionalConfiguration
+      type="org.eclipse.wst.sse.ui.internal.search.FindOccurrencesProcessor"
+      class="org.eclipse.wst.jsdt.web.ui.internal.java.search.JsFindOccurrencesProcessor"
+      target="org.eclipse.wst.html.SCRIPT,org.eclipse.wst.html.SCRIPT.EVENTHANDLER" />
+    <provisionalConfiguration
+      type="slaveformattingstrategy"
+      class="org.eclipse.wst.jsdt.web.ui.internal.format.FormattingStrategyJSDT"
+      target="org.eclipse.wst.html.SCRIPT" />
+   
+  </extension>
+  -->
+<!--
+  <extension point="org.eclipse.wst.sse.ui.completionProposal">
+    <proposalCategory
+        id="edu.depaul.cdm.madl.tools.wst.ui.ContentAssistProposals"
+        name="%madlProposals"
+        icon="icons/full/elcl16/codeassist.gif">
+    </proposalCategory>
+    <proposalComputer
+        activate="true"
+        categoryId="edu.depaul.cdm.madl.tools.wst.ui.ContentAssistProposals"
+        class="edu.depaul.cdm.madl.tools.wst.ui.contentassist.MadlContentAssistant"
+        id="edu.depaul.cdm.madl.tools.wst.ui.ContentAssistProposals">
+        <contentType
+            id="org.eclipse.wst.html.core.htmlsource">
+        <partitionType
+            autoActivationDelegate="edu.depaul.cdm.madl.tools.wst.ui.contentassist.MadlAutoActivationDelegate"
+            id="org.eclipse.wst.html.SCRIPT.type.APPLICATION/DART">
+        </partitionType>
+        <partitionType
+            autoActivationDelegate="edu.depaul.cdm.madl.tools.wst.ui.contentassist.MadlAutoActivationDelegate"
+            id="org.eclipse.wst.html.SCRIPT.EVENTHANDLER.type.APPLICATION/DART">
+        </partitionType>
+      </contentType>
+    </proposalComputer>
+  </extension>
+
+  <extension point="org.eclipse.wst.sse.ui.sourcevalidation">
+    <validator
+      scope="partial"
+      class="edu.depaul.cdm.madl.tools.wst.ui.EmbeddedMadlReconcilerHook"
+      id="edu.depaul.cdm.madl.tools.wst.ui.EmbeddedMadlReconcilerHook">
+      <contentTypeIdentifier id="org.eclipse.wst.html.core.htmlsource">
+        <partitionType id="org.eclipse.wst.html.SCRIPT.type.APPLICATION/DART"/>
+        <partitionType id="org.eclipse.wst.html.SCRIPT.EVENTHANDLER.type.APPLICATION/DART"/>
+      </contentTypeIdentifier>
+    </validator>
+  </extension>
+  
+  <extension point="org.eclipse.ui.workbench.texteditor.hyperlinkDetectorTargets">
+    <target
+      id="org.eclipse.wst.html.SCRIPT.type.APPLICATION/DART"
+      name="%hyperlink.target.script.name"/>
+    <target
+      id="org.eclipse.wst.html.SCRIPT.EVENTHANDLER.type.APPLICATION/DART"
+      name="%hyperlink.target.eventhandler.name"/>
+  </extension>
+  
+  <extension point="org.eclipse.ui.workbench.texteditor.hyperlinkDetectors">
+    <hyperlinkDetector
+      class="edu.depaul.cdm.madl.tools.wst.ui.hyperlink.MadlHyperlinkDetector"
+      id="edu.depaul.cdm.madl.tools.wst.ui.hyperlink.MadlHyperlinkDetector"
+      name="%hyperlinkDetector.identifier.name"
+      targetId="org.eclipse.wst.html.SCRIPT.type.APPLICATION/DART">
+    </hyperlinkDetector>
+    
+   </extension>
+-->
+</plugin>

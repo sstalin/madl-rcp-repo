@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+
+   <extension
+         point="org.eclipse.ui.editors">
+      <editor
+            name="Madl Editor"
+            extensions="madl"
+             icon="$nl$/icons/full/madl16/dart.png"
+            contributorClass="edu.depaul.cdm.madl.tools.multipage.MadlEditorContributor"
+            class="edu.depaul.cdm.madl.tools.multipage.MultiPageMadlEditor"
+            id="edu.depaul.cdm.cpdt.editor.multipage.MadlEditor">
+      </editor>
+   </extension>
+  <!--
+   <extension
+         point="org.eclipse.ui.newWizards">
+      <category
+            name="New madl file Wizards"
+            id="edu.depaul.cdm.cpdt.editor">
+      </category>
+      <wizard
+            name="Multi-page Madl Editor file"
+            icon="icons/sample.gif"
+            category="edu.depaul.cdm.cpdt.editor"
+            class="edu.depaul.cdm.madl.editor.wizards.MadlNewWizard"
+            id="edu.depaul.cdm.cpdt.editor.wizards.MadlNewWizard">
+      </wizard>
+   </extension>
+   -->
+   <extension
+         id="edu.depaul.cdm.madl.editor.ui.text.editor.MadlDocumentSetupParticipant"
+	     name="MadlDocumentSetupParticipant"
+         point="org.eclipse.core.filebuffers.documentSetup">
+      <participant
+            class="edu.depaul.cdm.madl.tools.ui.internal.text.editor.MadlDocumentSetupParticipant"
+            extensions="madl">
+      </participant>
+   </extension>
+    <extension point="org.eclipse.core.runtime.preferences">
+        <initializer class="edu.depaul.cdm.madl.tools.ui.internal.text.MadlUIPreferenceInitializer"/>
+    </extension>
+    
+     <extension
+         point="org.eclipse.ui.views">
+      <category
+            name="%viewCategoryName"
+            id="edu.depaul.cdm.madl.tools.ui.madl">
+      </category>
+
+      <!-- removed pending rethink/rewrite using new model
+      <view
+            allowMultiple="false"
+            category="edu.depaul.cdm.madl.tools.ui.madl"
+            class="edu.depaul.cdm.madl.tools.ui.internal.appsview.AppsView"
+            icon="icons/full/madl16/app_icon.png"
+            id="edu.depaul.cdm.madl.tools.ui.AppsView"
+            name="Apps"
+            restorable="true">
+      </view>
+      -->
+<!--
+      <view
+            name="%callHierarchyViewName"
+            icon="$nl$/icons/full/eview16/call_hierarchy.gif"
+            category="edu.depaul.cdm.madl.tools.ui.madl"
+            class="edu.depaul.cdm.madl.tools.ui.callhierarchy.CallHierarchyViewPart"
+            allowMultiple="true"
+            id="edu.depaul.cdm.madl.tools.ui.callhierarchy.view">
+      </view>
+
+      <view
+            name="%classHierarchyViewName"
+            icon="$nl$/icons/full/eview16/class_hi.gif"
+            category="edu.depaul.cdm.madl.tools.ui.madl"
+            class="edu.depaul.cdm.madl.tools.ui.internal.typehierarchy.TypeHierarchyViewPart"
+            allowMultiple="false"
+            id="edu.depaul.cdm.madl.tools.ui.TypeHierarchy">
+      </view>
+
+      <view
+            name="%searchViewName"
+            icon="$nl$/icons/full/eview16/search_results.gif"
+            category="edu.depaul.cdm.madl.tools.ui.madl"
+            class="edu.depaul.cdm.madl.tools.search.internal.ui.SearchView"
+            allowMultiple="false"
+            id="edu.depaul.cdm.madl.tools.SearchView">
+      </view>
+      <view
+            category="edu.depaul.cdm.madl.tools.ui.madl"
+            class="edu.depaul.cdm.madl.tools.ui.internal.pub.PackagesView"
+            id="edu.depaul.cdm.madl.tools.ui.view.packages"
+            name="Packages"
+            restorable="true">
+      </view>
+      -->
+      <!-- view
+            category="edu.depaul.cdm.madl.tools.ui.madl"
+            class="edu.depaul.cdm.madl.tools.ui.internal.testing.MadlUnitView"
+            icon="icons/full/tests/testok.gif"
+            id="edu.depaul.cdm.madl.tools.ui.MadlUnitView"
+            name="Tests"
+            restorable="true">
+      </view -->
+   </extension>
+</plugin>

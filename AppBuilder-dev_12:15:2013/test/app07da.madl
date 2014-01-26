@@ -1,0 +1,40 @@
+app('UK+France 2') { 
+
+  View { 
+	Button(text: 'Britain', next: britain)
+	Button(text: 'France', next: france)	
+  }
+
+  View(id: britain) { // autoLayout: true) { 
+	Label('United Kingdom')
+	Button(text: 'Back', next: Previous)
+	Image(file: 'unitedkingdom_flag.gif')
+	Panel(orientation: 'horizontal') {
+	  Label(font: Bold, text: 'Capital:')
+	  Label(text: 'London')
+	}
+	Panel(orientation: 'horizontal') {
+	  Label(font: Bold, text: 'WikiPedia:')
+	  Button(text:'WiKi', next: [to: wiki, data: [ name: 'United Kingdom', uri: 'france'] ])
+	}
+  }
+
+  View(id: france) {  // autoLayout: true) { 
+	Label('France')
+	Button(text: 'Back', next: Previous)
+	Image(file: 'france_flag.gif')
+	Panel(orientation: 'horizontal') {
+	  Label(font: Bold, text: 'Capital:')
+	  Label(text: 'Paris')
+	}
+	Panel(orientation: 'horizontal') {
+	  Label(font: Bold, text: 'WikiPedia:')
+	  Button(text:'WiKi', next: [to: wiki, data: [ name: 'France', uri: 'united_kingdom'] ])
+	}
+  }
+
+  View(id:wiki, title: data.name) {
+	Web(url: "http://en.wikipedia.org/wiki/${data.uri}")
+  }
+
+}
