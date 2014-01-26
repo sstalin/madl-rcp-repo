@@ -2,5 +2,5 @@
 *
 # except for items in the pkg directory and self
 !.gitignore
-!commons-lang
-!guava
+!commons-lang/
+!guava/
