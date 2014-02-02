@@ -1,11 +1,11 @@
 /*
  * Copyright 2012 Google Inc.
- * 
+ *
  * Licensed under the Eclipse Public License v1.0 (the "License"); you may not use this file except
  * in compliance with the License. You may obtain a copy of the License at
- * 
+ *
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software distributed under the License
  * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
  * or implied. See the License for the specific language governing permissions and limitations under
@@ -14,12 +14,12 @@
 
 package edu.depaul.cdm.madl.tools.ui.internal.projects;
 
-import com.google.dart.tools.core.DartCore;
-import com.google.dart.tools.core.generator.AbstractSample;
-import com.google.dart.tools.core.generator.DartIdentifierUtil;
-import com.google.dart.tools.core.internal.util.StatusUtil;
-import com.google.dart.tools.ui.DartToolsPlugin;
-import com.google.dart.tools.ui.internal.util.DirectoryVerification;
+import edu.depaul.cdm.madl.tools.core.MadlCore;
+import edu.depaul.cdm.madl.tools.core.generator.AbstractSample;
+import edu.depaul.cdm.madl.tools.core.generator.MadlIdentifierUtil;
+import edu.depaul.cdm.madl.tools.core.internal.util.StatusUtil;
+import edu.depaul.cdm.madl.tools.ui.MadlToolsPlugin;
+import edu.depaul.cdm.madl.tools.ui.internal.util.DirectoryVerification;
 
 import org.eclipse.core.filesystem.URIUtil;
 import org.eclipse.core.resources.IProject;
@@ -68,9 +68,7 @@ import java.util.List;
 public class NewApplicationCreationPage extends WizardPage {
 
   public static enum ProjectType {
-    NONE,
-    SERVER,
-    WEB
+    NONE, SERVER, WEB
   }
 
   static final String NEW_APPPLICATION_SETTINGS = "newApplicationWizard.settings"; //$NON-NLS-1$
@@ -93,7 +91,7 @@ public class NewApplicationCreationPage extends WizardPage {
     setPageComplete(false);
     setTitle(ProjectMessages.OpenNewApplicationWizardAction_text);
     setDescription(ProjectMessages.OpenNewApplicationWizardAction_desc);
-    setImageDescriptor(DartToolsPlugin.getImageDescriptor("icons/full/wizban/newprj_wiz.png")); //$NON-NLS-1$
+    setImageDescriptor(MadlToolsPlugin.getImageDescriptor("icons/full/wizban/newprj_wiz.png")); //$NON-NLS-1$
 
     defaultLocation = getParentDirectory();
   }
@@ -177,7 +175,7 @@ public class NewApplicationCreationPage extends WizardPage {
     generateContentButton.addSelectionListener(new SelectionAdapter() {
       @Override
       public void widgetSelected(SelectionEvent e) {
-        IDialogSettings settings = DartToolsPlugin.getDefault().getDialogSettingsSection(
+        IDialogSettings settings = MadlToolsPlugin.getDefault().getDialogSettingsSection(
             NEW_APPPLICATION_SETTINGS);
         settings.put(CONTENT_GENERATION_DISABLED, !generateContentButton.getSelection());
 
@@ -212,7 +210,7 @@ public class NewApplicationCreationPage extends WizardPage {
   /**
    * Returns the current project location URI as entered by the user, or <code>null</code> if a
    * valid project location has not been entered.
-   * 
+   *
    * @return the project location URI, or <code>null</code>
    */
   public URI getLocationURI() {
@@ -227,7 +225,7 @@ public class NewApplicationCreationPage extends WizardPage {
    * This method does not create the project resource; this is the responsibility of
    * <code>IProject::create</code> invoked by the new project resource wizard.
    * </p>
-   * 
+   *
    * @return the new project resource handle
    */
   public IProject getProjectHandle(String name) {
@@ -236,7 +234,7 @@ public class NewApplicationCreationPage extends WizardPage {
 
   /**
    * Returns the current project name as entered by the user.
-   * 
+   *
    * @return the project name, its anticipated initial value, or <code>null</code> if no project
    *         name is known
    */
@@ -302,7 +300,7 @@ public class NewApplicationCreationPage extends WizardPage {
   }
 
   private boolean getGenerateContentPreference() {
-    IDialogSettings settings = DartToolsPlugin.getDefault().getDialogSettingsSection(
+    IDialogSettings settings = MadlToolsPlugin.getDefault().getDialogSettingsSection(
         NEW_APPPLICATION_SETTINGS);
     return !settings.getBoolean(CONTENT_GENERATION_DISABLED);
   }
@@ -312,19 +310,19 @@ public class NewApplicationCreationPage extends WizardPage {
   }
 
   private String getParentDirectory() {
-    IDialogSettings settings = DartToolsPlugin.getDefault().getDialogSettingsSection(
+    IDialogSettings settings = MadlToolsPlugin.getDefault().getDialogSettingsSection(
         NEW_APPPLICATION_SETTINGS);
     String path = settings.get(PARENT_DIR);
     if (path != null) {
       return path;
     }
 
-    return DartCore.getUserDefaultDartFolder();
+    return MadlCore.getUserDefaultMadlFolder();
   }
 
   /**
    * Returns the value of the project name field with leading and trailing spaces removed.
-   * 
+   *
    * @return the project name in the field
    */
   private String getProjectNameFieldValue() {
@@ -372,25 +370,20 @@ public class NewApplicationCreationPage extends WizardPage {
     IPath locationPath = new Path(location);
 
     if (!locationPath.isValidPath(getProjectName())) {
-      return new Status(
-          IStatus.ERROR,
-          DartToolsPlugin.PLUGIN_ID,
+      return new Status(IStatus.ERROR, MadlToolsPlugin.PLUGIN_ID,
           ProjectMessages.NewProjectCreationPage_invalid_loc);
     }
 
     // TODO(scheglov) check after Pub issue fixed
-    // https://code.google.com/p/dart/issues/detail?id=10439
+    // https://code.google.com/p/madl/issues/detail?id=10439
     if (locationPath.isUNC()) {
-      return new Status(
-          IStatus.ERROR,
-          DartToolsPlugin.PLUGIN_ID,
+      return new Status(IStatus.ERROR, MadlToolsPlugin.PLUGIN_ID,
           ProjectMessages.NewProjectCreationPage_invalid_loc_unc);
     }
 
     if (doesProjectExist()) {
-      return new Status(IStatus.ERROR, DartToolsPlugin.PLUGIN_ID, NLS.bind(
-          ProjectMessages.NewApplicationWizardPage_error_existing,
-          getProjectName()));
+      return new Status(IStatus.ERROR, MadlToolsPlugin.PLUGIN_ID, NLS.bind(
+          ProjectMessages.NewApplicationWizardPage_error_existing, getProjectName()));
     }
 
     IStatus status = DirectoryVerification.getOpenDirectoryLocationStatus(new File(location));
@@ -403,7 +396,7 @@ public class NewApplicationCreationPage extends WizardPage {
   }
 
   private IStatus validateName() {
-    return DartIdentifierUtil.validateIdentifier(projectNameField.getText());
+    return MadlIdentifierUtil.validateIdentifier(projectNameField.getText());
   }
 
 }

@@ -1,11 +1,11 @@
 /*
  * Copyright (c) 2012, the Madl project authors.
- * 
+ *
  * Licensed under the Eclipse Public License v1.0 (the "License"); you may not use this file except
  * in compliance with the License. You may obtain a copy of the License at
- * 
+ *
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software distributed under the License
  * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
  * or implied. See the License for the specific language governing permissions and limitations under
@@ -26,16 +26,16 @@ import edu.depaul.cdm.madl.tools.ui.actions.MadlEditorActionDefinitionIds;
 // import edu.depaul.cdm.madl.tools.ui.actions.OpenAction;
 // import edu.depaul.cdm.madl.tools.ui.actions.OpenApiDocsAction;
 import edu.depaul.cdm.madl.tools.ui.actions.OpenIntroEditorAction;
-// import edu.depaul.cdm.madl.tools.ui.actions.OpenNewFolderWizardAction;
+import edu.depaul.cdm.madl.tools.ui.actions.OpenNewFolderWizardAction;
 // import edu.depaul.cdm.madl.tools.ui.actions.OpenOnlineDocsAction;
 // import edu.depaul.cdm.madl.tools.ui.actions.OpenTutorialAction;
 // import edu.depaul.cdm.madl.tools.ui.actions.RunPubAction;
 // import edu.depaul.cdm.madl.tools.ui.actions.RunPublishAction;
 // import edu.depaul.cdm.madl.tools.ui.actions.ShowInFinderAction;
 // import edu.depaul.cdm.madl.tools.ui.build.CleanLibrariesAction;
-// import edu.depaul.cdm.madl.tools.ui.internal.handlers.NewFileHandler;
-// import edu.depaul.cdm.madl.tools.ui.internal.handlers.NewFileHandler.NewFileCommandAction;
-// import edu.depaul.cdm.madl.tools.ui.internal.handlers.OpenFolderHandler;
+import edu.depaul.cdm.madl.tools.ui.internal.handlers.NewFileHandler;
+import edu.depaul.cdm.madl.tools.ui.internal.handlers.NewFileHandler.NewFileCommandAction;
+import edu.depaul.cdm.madl.tools.ui.internal.handlers.OpenFolderHandler;
 import edu.depaul.cdm.madl.tools.ui.internal.projects.OpenNewApplicationWizardAction;
 
 import org.eclipse.core.resources.IResource;
@@ -266,13 +266,13 @@ public class ApplicationActionBarAdvisor extends ActionBarAdvisor {
   //ss
   /*
    * private MadlRunAction madlRunAction;
-   * 
+   *
    * private GenerateJavascriptAction deployOptimizedAction;
-   * 
+   *
    * private GenerateMadldocAction generateMadldocAction;
-   * 
+   *
    * private RunPubAction pubInstallAction;
-   * 
+   *
    * private RunPubAction pubUpdateAction;
    */
 
@@ -335,7 +335,7 @@ public class ApplicationActionBarAdvisor extends ActionBarAdvisor {
 
   //private OpenApiDocsAction openApiDocsAction;
 
-  //private NewFileCommandAction newFileAction;
+  private NewFileCommandAction newFileAction;
 
   //private RunPublishAction pubPublishAction;
 
@@ -343,7 +343,7 @@ public class ApplicationActionBarAdvisor extends ActionBarAdvisor {
 
   /**
    * Constructs a new action builder which contributes actions to the given window.
-   * 
+   *
    * @param configurer the action bar configurer for the window
    */
   public ApplicationActionBarAdvisor(IActionBarConfigurer configurer) {
@@ -762,9 +762,9 @@ public class ApplicationActionBarAdvisor extends ActionBarAdvisor {
 //ss
     /*
      * openOnlineDocsAction = new OpenOnlineDocsAction(); register(openOnlineDocsAction);
-     * 
+     *
      * openTutorialAction = new OpenTutorialAction(); register(openTutorialAction);
-     * 
+     *
      * openApiDocsAction = new OpenApiDocsAction(); register(openApiDocsAction);
      */
 
@@ -817,7 +817,7 @@ public class ApplicationActionBarAdvisor extends ActionBarAdvisor {
    * build actions on the toolbar and menu bar based on the current state of autobuild.
    * <p>
    * This method can be called from any thread.
-   * 
+   *
    * @param immediately <code>true</code> to update the actions immediately, <code>false</code> to
    *          queue the update to be run in the event loop
    */
@@ -890,7 +890,7 @@ public class ApplicationActionBarAdvisor extends ActionBarAdvisor {
    * Adds a <code>GroupMarker</code> or <code>Separator</code> to a menu. The test for whether a
    * separator should be added is done by checking for the existence of a preference matching the
    * string useSeparator.MENUID.GROUPID that is set to <code>true</code>.
-   * 
+   *
    * @param menu the menu to add to
    * @param groupId the group id for the added separator or group marker
    */
@@ -1027,19 +1027,19 @@ public class ApplicationActionBarAdvisor extends ActionBarAdvisor {
 
     Action newApplicationAction = new OpenNewApplicationWizardAction();
     menu.add(newApplicationAction);
+
     //ss
-    /*
-     * newFileAction = NewFileHandler.createCommandAction(getWindow()); menu.add(newFileAction);
-     * OpenNewFolderWizardAction newFolderAction = new OpenNewFolderWizardAction(getWindow());
-     * menu.add(newFolderAction);
-     */
+    newFileAction = NewFileHandler.createCommandAction(getWindow());
+    menu.add(newFileAction);
+    OpenNewFolderWizardAction newFolderAction = new OpenNewFolderWizardAction(getWindow());
+    menu.add(newFolderAction);
 
     menu.add(new Separator());
     //ss
-    /*
-     * IAction openFolderAction = OpenFolderHandler.createCommandAction(getWindow());
-     * menu.add(openFolderAction);
-     */
+
+    IAction openFolderAction = OpenFolderHandler.createCommandAction(getWindow());
+    menu.add(openFolderAction);
+
 
     menu.add(new Separator());
 
@@ -1299,7 +1299,7 @@ public class ApplicationActionBarAdvisor extends ActionBarAdvisor {
     /*
      * In order to ensure that the pin action toolbar sets its size correctly, the pin action should
      * set its visiblity before we call updatePinActionToolbar().
-     * 
+     *
      * In other words we always want the PinActionContributionItem to be notified before the
      * WorkbenchActionBuilder.
      */

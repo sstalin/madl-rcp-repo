@@ -1,11 +1,11 @@
 /*
  * Copyright (c) 2012, the Madl project authors.
- * 
+ *
  * Licensed under the Eclipse Public License v1.0 (the "License"); you may not use this file except
  * in compliance with the License. You may obtain a copy of the License at
- * 
+ *
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software distributed under the License
  * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
  * or implied. See the License for the specific language governing permissions and limitations under
@@ -23,28 +23,28 @@ import edu.depaul.cdm.madl.tools.core.analysis.model.ProjectManager;
 import edu.depaul.cdm.madl.tools.core.analysis.model.PubFolder;
 import edu.depaul.cdm.madl.tools.core.internal.MessageConsoleImpl;
 import edu.depaul.cdm.madl.tools.core.internal.OptionManager;
-/*
- * import edu.depaul.cdm.madl.tools.core.internal.analysis.model.ProjectManagerImpl; import
- * edu.depaul.cdm.madl.tools.core.internal.builder.AnalysisMarkerManager; import
- * edu.depaul.cdm.madl.tools.core.internal.model.MadlIgnoreManager; import
- * edu.depaul.cdm.madl.tools.core.internal.util.Extensions; import
- * edu.depaul.cdm.madl.tools.core.internal.util.ResourceUtil; import
- * edu.depaul.cdm.madl.tools.core.internal.util.Util; import
- * edu.depaul.cdm.madl.tools.core.jobs.CleanLibrariesJob; import
- * edu.depaul.cdm.madl.tools.core.model.CompilationUnit; import
- * edu.depaul.cdm.madl.tools.core.model.MadlElement; import
- * edu.depaul.cdm.madl.tools.core.model.MadlIgnoreListener; import
- * edu.depaul.cdm.madl.tools.core.model.MadlLibrary; import
- * edu.depaul.cdm.madl.tools.core.model.MadlModel; import
- * edu.depaul.cdm.madl.tools.core.model.MadlModelException; import
- * edu.depaul.cdm.madl.tools.core.model.MadlProject; import
- * edu.depaul.cdm.madl.tools.core.model.MadlSdk; import
- * edu.depaul.cdm.madl.tools.core.model.MadlSdkListener; import
- * edu.depaul.cdm.madl.tools.core.model.MadlSdkManager; import
- * edu.depaul.cdm.madl.tools.core.model.ElementChangedListener; import
- * edu.depaul.cdm.madl.tools.core.utilities.general.StringUtilities; import
- * edu.depaul.cdm.madl.tools.core.utilities.performance.PerformanceManager;
- */
+
+  //import edu.depaul.cdm.madl.tools.core.internal.analysis.model.ProjectManagerImpl;
+  import edu.depaul.cdm.madl.tools.core.internal.builder.AnalysisMarkerManager;
+  //import edu.depaul.cdm.madl.tools.core.internal.model.MadlIgnoreManager;
+  import edu.depaul.cdm.madl.tools.core.internal.util.Extensions;
+  import edu.depaul.cdm.madl.tools.core.internal.util.ResourceUtil;
+  import edu.depaul.cdm.madl.tools.core.internal.util.Util;
+  //import edu.depaul.cdm.madl.tools.core.jobs.CleanLibrariesJob;
+  import edu.depaul.cdm.madl.tools.core.model.CompilationUnit;
+  import edu.depaul.cdm.madl.tools.core.model.MadlElement;
+  //import edu.depaul.cdm.madl.tools.core.model.MadlIgnoreListener;
+ // import edu.depaul.cdm.madl.tools.core.model.MadlLibrary;
+  import edu.depaul.cdm.madl.tools.core.model.MadlModel;
+  import edu.depaul.cdm.madl.tools.core.model.MadlModelException;
+  import edu.depaul.cdm.madl.tools.core.model.MadlProject;
+  //import edu.depaul.cdm.madl.tools.core.model.MadlSdk;
+  //import edu.depaul.cdm.madl.tools.core.model.MadlSdkListener;
+  //import edu.depaul.cdm.madl.tools.core.model.MadlSdkManager;
+  //import edu.depaul.cdm.madl.tools.core.model.ElementChangedListener;
+  import edu.depaul.cdm.madl.tools.core.utilities.general.StringUtilities;
+  //import edu.depaul.cdm.madl.tools.core.utilities.performance.PerformanceManager;
+
 
 import edu.depaul.cdm.madl.tools.core.model.MadlProject;
 import edu.depaul.cdm.madl.tools.core.model.MadlElement;
@@ -96,7 +96,7 @@ import java.util.Properties;
 /**
  * The class <code>MadlCore</code> is used to access the elements modeling projects that have a Madl
  * nature.
- * 
+ *
  * @coverage madl.tools.core
  */
 public class MadlCore extends Plugin {
@@ -289,7 +289,7 @@ public class MadlCore extends Plugin {
    * reconcile operation (POST_RECONCILE). For finer control of the notification, use
    * {@link #addElementChangedListener(IElementChangedListener,int)}, which allows to specify a
    * different eventMask.
-   * 
+   *
    * @param listener the listener being added
    */
   //ss
@@ -301,7 +301,7 @@ public class MadlCore extends Plugin {
   /**
    * Add the given listener for madl ignore changes to the Madl Model. Has no effect if an identical
    * listener is already registered.
-   * 
+   *
    * @param listener the listener to add
    */
   //ss
@@ -312,7 +312,7 @@ public class MadlCore extends Plugin {
 
   /**
    * Add the given resource to the set of ignored resources.
-   * 
+   *
    * @param resource the resource to ignore
    * @throws IOException if there was an error accessing the ignore file
    * @throws CoreException if there was an error deleting markers
@@ -325,7 +325,7 @@ public class MadlCore extends Plugin {
 
   /**
    * Remove any resource mapping for the given container.
-   * 
+   *
    * @param resource
    */
   public static void clearResourceRemapping(IContainer container) {
@@ -357,7 +357,7 @@ public class MadlCore extends Plugin {
 
   /**
    * Remove any resource mapping for the given file.
-   * 
+   *
    * @param resource
    */
   public static void clearResourceRemapping(IFile resource) {
@@ -383,7 +383,7 @@ public class MadlCore extends Plugin {
   /**
    * Return the Madl project corresponding to the given project. Note that no check is made to
    * ensure that the project has the Madl nature.
-   * 
+   *
    * @param project the resource corresponding to the Madl project
    * @return the Madl project corresponding to the given project
    */
@@ -395,7 +395,7 @@ public class MadlCore extends Plugin {
   /**
    * Return the Madl element corresponding to the given resource, or <code>null</code> if the given
    * resource is not associated with any Madl element.
-   * 
+   *
    * @param resource the resource corresponding to the Madl element
    * @return the Madl element corresponding to the given resource
    */
@@ -407,7 +407,7 @@ public class MadlCore extends Plugin {
 
   /**
    * Return the Madl model corresponding to the given workspace root.
-   * 
+   *
    * @param project the workspace root corresponding to the model
    * @return the Madl model corresponding to the given workspace root
    */
@@ -420,7 +420,7 @@ public class MadlCore extends Plugin {
    * Answer the application directory (a directory contains a "packages" directory and a
    * "pubspec.yaml" file) directly or indirectly containing the specified file or the file itself if
    * it is an application directory.
-   * 
+   *
    * @param libFileOrDir the library file or directory
    * @return the context in which the specified library should be analyzed (not <code>null</code>)
    */
@@ -451,7 +451,7 @@ public class MadlCore extends Plugin {
   /**
    * Return a unique token that can be used to determine whether cached data that changes only when
    * the version of the editor changes is still valid.
-   * 
+   *
    * @return a token used to determine the validity of cached data
    */
   public static String getBuildIdOrDate() {
@@ -465,33 +465,12 @@ public class MadlCore extends Plugin {
   /**
    * Returns the shared message console. Unlike the log ({@link MadlCore#getLog()}), the console is
    * intended for communication with the end-user.
-   * 
+   *
    * @return the message console
    */
   public static MessageConsole getConsole() {
     return CONSOLE;
   }
-
-  /**
-   * Return the list of known Madl-like file extensions. Madl-like extensions are defined in the
-   * {@link Platform.getContentManager() content type manager} for the
-   * {@link #MADL_SOURCE_CONTENT_TYPE}. Note that a Madl-like extension does not include the leading
-   * dot, and that the "madl" extension is always defined as a Madl-like extension.
-   * 
-   * @return the list of known Madl-like file extensions
-   */
-  //ss
-  /*
-   * public static String[] getMadlLikeExtensions() { IContentType madlContentType =
-   * Platform.getContentTypeManager().getContentType( MADL_SOURCE_CONTENT_TYPE); HashSet<String>
-   * extensionSet = new HashSet<String>(); for (IContentType contentType :
-   * Platform.getContentTypeManager().getAllContentTypes()) { if
-   * (contentType.isKindOf(madlContentType)) { for (String extension :
-   * contentType.getFileSpecs(IContentType.FILE_EXTENSION_SPEC)) { extensionSet.add(extension); } }
-   * } extensionSet.remove(Extensions.MADL); ArrayList<String> extensionList = new
-   * ArrayList<String>(extensionSet); extensionList.add(0, Extensions.MADL); return
-   * extensionList.toArray(new String[extensionList.size()]); }
-   */
 
   /**
    * Return a table of all known configurable options with their default values. These options allow
@@ -504,12 +483,13 @@ public class MadlCore extends Plugin {
    * documented constant values.
    * <p>
    * Note: each release may add new options.
-   * 
+   *
    * @return a table of all known configurable options with their default values
    */
   public static Hashtable<String, String> getDefaultOptions() {
     return null;
   }
+
 
   public static File getEclipseInstallationDirectory() {
     return new File(Platform.getInstallLocation().getURL().getFile());
@@ -517,7 +497,7 @@ public class MadlCore extends Plugin {
 
   /**
    * Return the workspace root default charset encoding.
-   * 
+   *
    * @return the name of the default charset encoding for the workspace root
    */
   public static String getEncoding() {
@@ -537,8 +517,27 @@ public class MadlCore extends Plugin {
   }
 
   /**
+   * Return the list of known Madl-like file extensions. Madl-like extensions are defined in the
+   * {@link Platform.getContentManager() content type manager} for the
+   * {@link #MADL_SOURCE_CONTENT_TYPE}. Note that a Madl-like extension does not include the leading
+   * dot, and that the "madl" extension is always defined as a Madl-like extension.
+   *
+   * @return the list of known Madl-like file extensions
+   */
+
+    public static String[] getMadlLikeExtensions() { IContentType madlContentType =
+    Platform.getContentTypeManager().getContentType( MADL_SOURCE_CONTENT_TYPE); HashSet<String>
+    extensionSet = new HashSet<String>(); for (IContentType contentType :
+    Platform.getContentTypeManager().getAllContentTypes()) { if
+    (contentType.isKindOf(madlContentType)) { for (String extension :
+    contentType.getFileSpecs(IContentType.FILE_EXTENSION_SPEC)) { extensionSet.add(extension); } }
+    } extensionSet.remove(Extensions.MADL); ArrayList<String> extensionList = new
+    ArrayList<String>(extensionSet); extensionList.add(0, Extensions.MADL); return
+    extensionList.toArray(new String[extensionList.size()]); }
+
+  /**
    * Extract {@link ErrorCode} form the given {@link IMarker}.
-   * 
+   *
    * @return the {@link ErrorCode}, may be {@code null}.
    */
   //ss
@@ -558,7 +557,7 @@ public class MadlCore extends Plugin {
    * documented constant values.
    * <p>
    * Note: each release may add new options.
-   * 
+   *
    * @param optionName the name of the option whose value is to be returned
    * @return the value of a given option
    */
@@ -581,7 +580,7 @@ public class MadlCore extends Plugin {
    * <p>
    * Returns a default set of options even if the platform is not running.
    * </p>
-   * 
+   *
    * @return table of current settings of all options (key type: <code>String</code>; value type:
    *         <code>String</code>)
    */
@@ -592,7 +591,7 @@ public class MadlCore extends Plugin {
 
   /**
    * Return the unique instance of this class.
-   * 
+   *
    * @return the unique instance of this class
    */
   public static MadlCore getPlugin() {
@@ -602,7 +601,7 @@ public class MadlCore extends Plugin {
   /**
    * Answer the log used by {@link #logError(String)} and other local methods for logging errors,
    * warnings, and information.
-   * 
+   *
    * @return the log (not <code>null</code>)
    */
   public static ILog getPluginLog() {
@@ -611,7 +610,7 @@ public class MadlCore extends Plugin {
 
   /**
    * Answer the unique project manager used for analysis of anything in the workspace.
-   * 
+   *
    * @return the manager (not {@code null})
    */
 
@@ -640,23 +639,23 @@ public class MadlCore extends Plugin {
 
   /**
    * Returns the name of the directory in packages that is linked to the "lib" folder in the project
-   * 
+   *
    * @param project
    * @return the name of the directory, <code>null</code> if there is no self linked packages folder
    */
   //ss
   /*
    * public static String getSelfLinkedPackageName(IResource resource) { String packageName = null;
-   * 
+   *
    * try { PubFolder folder = MadlCore.getProjectManager().getPubFolder(resource); packageName =
    * folder.getPubspec().getName(); } catch (Exception e) { MadlCore.logError(e); }
-   * 
+   *
    * return packageName; }
    */
 
   /**
    * Returns the path string for the default madl directory - user.home/madl
-   * 
+   *
    * @return the name of the user.home/madl directory
    */
   public static String getUserDefaultMadlFolder() {
@@ -670,7 +669,7 @@ public class MadlCore extends Plugin {
    * <p>
    * User-defined properties are defined in the <code>editor.properties</code> file located in the
    * eclipse installation directory.
-   * 
+   *
    * @see MadlCore#getEclipseInstallationDirectory()
    * @param name the name of the property
    * @return the string-valued property
@@ -711,7 +710,7 @@ public class MadlCore extends Plugin {
   /**
    * Return <code>true</code> if the given resource should be analyzed. All resources are to be
    * analyzed unless they have been excluded.
-   * 
+   *
    * @param resource the resource being tested
    * @return <code>true</code> if the given resource should be analyzed
    */
@@ -744,7 +743,7 @@ public class MadlCore extends Plugin {
   /**
    * Answer {@code true} if the specified resource is a build.madl file and exists either in a
    * project or in a folder containing a pubspec file.
-   * 
+   *
    * @param file the file
    * @return {@code true} if the file is a build.madl file that will be run by the builder
    */
@@ -766,7 +765,7 @@ public class MadlCore extends Plugin {
   /**
    * Return <code>true</code> if the given file is contained in the packages directory created by
    * pub
-   * 
+   *
    * @param file the file that is to be checked
    * @return <code>true</code> if the given file is in packages
    */
@@ -780,7 +779,7 @@ public class MadlCore extends Plugin {
   /**
    * Return <code>true</code> if the given file is contained in the packages directory created by
    * pub
-   * 
+   *
    * @param file the file that is to be checked
    * @return <code>true</code> if the given file is in packages
    */
@@ -790,7 +789,7 @@ public class MadlCore extends Plugin {
 
   /**
    * Return <code>true</code> if the given file name's extension is an CSS-like extension.
-   * 
+   *
    * @param fileName the file name being tested
    * @return <code>true</code> if the given file name's extension is an CSS-like extension
    */
@@ -802,7 +801,7 @@ public class MadlCore extends Plugin {
 
   /**
    * Return <code>true</code> if the given file name's extension is a generated Madl like extension.
-   * 
+   *
    * @return <code>true</code> if the given file name's extension is a generated Madl like extension
    */
   //ss
@@ -812,21 +811,24 @@ public class MadlCore extends Plugin {
    */
 
   /**
-   * Return <code>true</code> if the given file name's extension is a Madl-like extension.
-   * 
+   * Return <code>true</code> if the given file name's extension is an HTML-like extension.
+   *
    * @param fileName the file name being tested
-   * @return <code>true</code> if the given file name's extension is a Madl-like extension
-   * @see #getMadlLikeExtensions()
+   * @return <code>true</code> if the given file name's extension is an HTML-like extension
    */
-  //ss
   /*
-   * public static boolean isMadlLikeFileName(String fileName) { return isLikeFileName(fileName,
-   * getMadlLikeExtensions()); }
+   * public static boolean isJSLikeFileName(String fileName) { return isLikeFileName(fileName,
+   * JS_FILE_EXTENSIONS); }
    */
+
+  public static boolean isLinux() {
+    return !isMac() && !isWindows();
+  }
+
 
   /**
    * Return <code>true</code> if file is in the madl sdk lib directory
-   * 
+   *
    * @param file
    * @return <code>true</code> if file is in madl-sdk/lib
    */
@@ -840,7 +842,7 @@ public class MadlCore extends Plugin {
 
   /**
    * Return <code>true</code> if the given file name's extension is an HTML-like extension.
-   * 
+   *
    * @param fileName the file name being tested
    * @return <code>true</code> if the given file name's extension is an HTML-like extension
    */
@@ -851,7 +853,7 @@ public class MadlCore extends Plugin {
    */
   /**
    * Return <code>true</code> if the given file name's extension is an image-like extension.
-   * 
+   *
    * @param fileName the file name being tested
    * @return <code>true</code> if the given file name's extension is an image-like extension
    */
@@ -894,29 +896,26 @@ public class MadlCore extends Plugin {
    * not a self-reference return false; }
    */
 
-  /**
-   * Return <code>true</code> if the given file name's extension is an HTML-like extension.
-   * 
-   * @param fileName the file name being tested
-   * @return <code>true</code> if the given file name's extension is an HTML-like extension
-   */
-  /*
-   * public static boolean isJSLikeFileName(String fileName) { return isLikeFileName(fileName,
-   * JS_FILE_EXTENSIONS); }
-   */
-
-  public static boolean isLinux() {
-    return !isMac() && !isWindows();
-  }
-
   public static boolean isMac() {
     // Look for the "Mac" OS name.
     return System.getProperty("os.name").toLowerCase().startsWith("mac");
   }
 
   /**
+   * Return <code>true</code> if the given file name's extension is a Madl-like extension.
+   *
+   * @param fileName the file name being tested
+   * @return <code>true</code> if the given file name's extension is a Madl-like extension
+   * @see #getMadlLikeExtensions()
+   */
+  //ss
+
+    public static boolean isMadlLikeFileName(String fileName) { return isLikeFileName(fileName,
+    getMadlLikeExtensions()); }
+
+  /**
    * Return true if directory is one that is installed by pub
-   * 
+   *
    * @param file the file to be checked
    * @return <code>true</code> if file name matches and is sibling of pubspec.yaml
    */
@@ -929,7 +928,7 @@ public class MadlCore extends Plugin {
 
   /**
    * Return true if directory is one that is installed by pub
-   * 
+   *
    * @param folder the folder to be checked
    * @return <code>true</code> if folder name matches and is sibling of pubspec.yaml
    */
@@ -987,7 +986,7 @@ public class MadlCore extends Plugin {
   /**
    * Checks if the given linkedResource points to a file in the container. This is used to check for
    * the self link in the packages directory
-   * 
+   *
    * @param resource
    * @param linkedResource
    * @return <code>true</code> if the linked resource points to a file/folder in the project
@@ -1010,7 +1009,7 @@ public class MadlCore extends Plugin {
 
   /**
    * Return <code>true</code> if the given file name's extension is an HTML-like extension.
-   * 
+   *
    * @param fileName the file name being tested
    * @return <code>true</code> if the given file name's extension is an HTML-like extension
    */
@@ -1031,7 +1030,7 @@ public class MadlCore extends Plugin {
 
   /**
    * Log the given message as an error.
-   * 
+   *
    * @param message an explanation of why the error occurred or what it means
    */
   //ss
@@ -1043,7 +1042,7 @@ public class MadlCore extends Plugin {
 
   /**
    * Log the given exception as one representing an error.
-   * 
+   *
    * @param message an explanation of why the error occurred or what it means
    * @param exception the exception being logged
    */
@@ -1056,7 +1055,7 @@ public class MadlCore extends Plugin {
 
   /**
    * Log the given exception as one representing an error.
-   * 
+   *
    * @param exception the exception being logged
    */
   //ss
@@ -1069,7 +1068,7 @@ public class MadlCore extends Plugin {
 
   /**
    * Log the given informational message.
-   * 
+   *
    * @param message an explanation of why the error occurred or what it means
    * @param exception the exception being logged
    */
@@ -1079,7 +1078,7 @@ public class MadlCore extends Plugin {
 
   /**
    * Log the given exception as one representing an informational message.
-   * 
+   *
    * @param message an explanation of why the error occurred or what it means
    * @param exception the exception being logged
    */
@@ -1088,7 +1087,7 @@ public class MadlCore extends Plugin {
     /*
      * if (MadlCoreDebug.VERBOSE) { getPluginLog().log(new Status(Status.INFO, PLUGIN_ID, "INFO: " +
      * message, exception)); }
-     * 
+     *
      * instrumentationLogErrorImpl(message, exception);
      */
   }
@@ -1109,9 +1108,9 @@ public class MadlCore extends Plugin {
    * public static void oldModelCheck() { if (MadlCoreDebug.ENABLE_NEW_ANALYSIS) {
    * IllegalStateException exception = new IllegalStateException(
    * "Wildly inappropriate access to the old model");
-   * 
+   *
    * MadlCore.logError(exception);
-   * 
+   *
    * throw exception; } }
    */
 
@@ -1121,7 +1120,7 @@ public class MadlCore extends Plugin {
    * define a library, then look for a library in the same directory as the file or in a parent of
    * that directory that references the file. If such a library can be found, then open that library
    * and return it. Otherwise return <code>null</code>.
-   * 
+   *
    * @param libraryFile the file defining the library to be opened
    * @param monitor the progress monitor used to provide feedback to the user, or <code>null</code>
    *          if no feedback is desired
@@ -1138,7 +1137,7 @@ public class MadlCore extends Plugin {
    * Removes the file extension from the given file name, if it has a Madl-like file extension.
    * Otherwise the file name itself is returned. Note this removes the dot ('.') before the
    * extension as well.
-   * 
+   *
    * @param fileName the name of a file
    * @return the fileName without the Madl-like extension
    */
@@ -1151,7 +1150,7 @@ public class MadlCore extends Plugin {
   /**
    * Remove the given listener from the list of objects that are listening for changes to Madl
    * elements. Has no affect if an identical listener is not registered.
-   * 
+   *
    * @param listener the listener to be removed
    */
   //ss
@@ -1162,7 +1161,7 @@ public class MadlCore extends Plugin {
 
   /**
    * Remove the given resource (as a path) from the set of ignored resources.
-   * 
+   *
    * @param resource the resource path to (un)ignore
    * @throws IOException if there was an error accessing the ignore file
    */
@@ -1174,7 +1173,7 @@ public class MadlCore extends Plugin {
 
   /**
    * Remove the given resource from the set of ignored resources.
-   * 
+   *
    * @param resource the resource to (un)ignore
    * @throws IOException if there was an error accessing the ignore file
    */
@@ -1187,7 +1186,7 @@ public class MadlCore extends Plugin {
   /**
    * Remove the given listener for madl ignore changes from the Madl Model. Has no effect if an
    * identical listener is not registered.
-   * 
+   *
    * @param listener the non-<code>null</code> listener to remove
    */
   //ss
@@ -1211,7 +1210,7 @@ public class MadlCore extends Plugin {
    * documented constant values.
    * <p>
    * Note: each release may add new options.
-   * 
+   *
    * @param newOptions the new options, or <code>null</code> to reset all options to their default
    *          values
    */
@@ -1222,7 +1221,7 @@ public class MadlCore extends Plugin {
   /**
    * TESTING ONLY: Set the log used by {@link #logError(String)} and other local methods for logging
    * errors, warnings, and information.
-   * 
+   *
    * @param log the log or <code>null</code> to use the default system log
    * @return the log prior to calling this method or <code>null</code> for the default system log
    */
@@ -1235,7 +1234,7 @@ public class MadlCore extends Plugin {
   /**
    * Set a symbolic resource mapping from one resource to another. For some uses of the original
    * resource, like serving web content, the mapped resource should be substituted.
-   * 
+   *
    * @param originalResource
    * @param newResource
    */
@@ -1254,7 +1253,7 @@ public class MadlCore extends Plugin {
    * <p>
    * User-defined properties are defined in the <code>editor.properties</code> file located in the
    * eclipse installation directory.
-   * 
+   *
    * @see MadlCore#getEclipseInstallationDirectory()
    * @param key the name of the property
    * @param value the string-valued property
@@ -1285,13 +1284,13 @@ public class MadlCore extends Plugin {
   /*
    * private static void instrumentationLogErrorImpl(String message, Throwable exception) { if
    * (instrumentationLogErrorEnabled) {
-   * 
+   *
    * InstrumentationBuilder instrumentation = Instrumentation.builder("MadlCore.LogError"); try {
    * instrumentation.data("Log_Message", message != null ? message : "null");
    * instrumentation.data("Log_Exception", exception != null ? exception.toString() : "null");
-   * 
+   *
    * if (exception != null) { instrumentation.record(exception); }
-   * 
+   *
    * } catch (Exception e) { instrumentationLogErrorEnabled = false;
    * logErrorImpl("Instrumentation failed to log error", exception); } finally {
    * instrumentation.log(); } } }
@@ -1300,19 +1299,19 @@ public class MadlCore extends Plugin {
   /**
    * Return <code>true</code> if the given file name's extension matches one of the passed
    * extensions.
-   * 
+   *
    * @param fileName the file name being tested
    * @param extensions an array of file extensions to test against
    * @return <code>true</code> if the given file name's extension matches one of the passed
    *         extensions
    */
   //ss
-  /*
-   * private static boolean isLikeFileName(String fileName, String[] extensions) { if (fileName ==
-   * null || fileName.length() == 0) { return false; } for (String extension : extensions) { if
-   * (StringUtilities.endsWithIgnoreCase(fileName, '.' + extension)) { return true; } } return
-   * false; }
-   */
+
+    private static boolean isLikeFileName(String fileName, String[] extensions) { if (fileName ==
+    null || fileName.length() == 0) { return false; } for (String extension : extensions) { if
+    (StringUtilities.endsWithIgnoreCase(fileName, '.' + extension)) { return true; } } return
+    false; }
+
 
   private static void logErrorImpl(String message, Throwable exception) {
     getPluginLog().log(new Status(Status.ERROR, PLUGIN_ID, message, exception));
@@ -1342,7 +1341,7 @@ public class MadlCore extends Plugin {
   /**
    * Given an File, return the appropriate java.io.File representing a package root. This can be
    * null if a package root should not be used.
-   * 
+   *
    * @param file the File
    * @return the File for the package root, or null if none
    */
@@ -1355,7 +1354,7 @@ public class MadlCore extends Plugin {
   /**
    * Given an IProject, return the appropriate java.io.File representing a package root. This can be
    * null if a package root should not be used.
-   * 
+   *
    * @param project the IProject
    * @return the File for the package root, or null if none
    */
@@ -1363,14 +1362,14 @@ public class MadlCore extends Plugin {
   /*
    * public File getPackageRoot(IProject project) { if (project != null) { String setting =
    * getProjectPreferences(project).get(PROJECT_PREF_PACKAGE_ROOT, "");
-   * 
+   *
    * if (setting != null && setting.length() > 0) { String[] paths =
    * setting.split(File.pathSeparator); return new File(paths[0]); } }
-   * 
+   *
    * File[] roots = CmdLineOptions.getOptions().getPackageRoots();
-   * 
+   *
    * if (roots.length > 0) { return roots[0]; }
-   * 
+   *
    * return null; }
    */
 
@@ -1405,7 +1404,7 @@ public class MadlCore extends Plugin {
 
   /**
    * Save the core plugin preferences
-   * 
+   *
    * @throws CoreException
    */
   public void savePrefs() throws CoreException {
@@ -1419,7 +1418,7 @@ public class MadlCore extends Plugin {
   //ss
   /*
    * @Override public void sdkUpdated(MadlSdk sdk) { Job job = new CleanLibrariesJob();
-   * 
+   *
    * job.schedule(); }
    */
 
@@ -1450,31 +1449,31 @@ public class MadlCore extends Plugin {
     /*
      * CmdLineOptions.setOptions(CmdLineOptions.parseCmdLine(Platform.getApplicationArgs()));
      * CmdLineOptions.getOptions().printWarnings();
-     * 
+     *
      * if (MadlCoreDebug.PERF_THREAD_CONTENTION_MONIOR) { try { java.lang.management.ThreadMXBean th
      * = ManagementFactory.getThreadMXBean(); th.setThreadContentionMonitoringEnabled(true); } catch
      * (UnsupportedOperationException e) { } }
-     * 
+     *
      * AnalysisEngine analysisEngine = AnalysisEngine.getInstance(); analysisEngine.setLogger(new
      * Logger() {
-     * 
+     *
      * @Override public void logError(String message) { MadlCore.logError(message); }
-     * 
+     *
      * @Override public void logError(String message, Throwable exception) {
      * MadlCore.logError(message, exception); }
-     * 
+     *
      * @Override public void logError(Throwable exception) { MadlCore.logError(exception); }
-     * 
+     *
      * @Override public void logInformation(String message) { MadlCore.logInformation(message); }
-     * 
+     *
      * @Override public void logInformation(String message, Throwable exception) {
      * MadlCore.logInformation(message, exception); } });
-     * 
+     *
      * MadlSdkManager.getManager().addSdkListener(this);
-     * 
+     *
      * // Perform the project manager initialization in a job. Job job = new
      * Job("Initialize ProjectManager") {
-     * 
+     *
      * @Override protected IStatus run(IProgressMonitor monitor) { getProjectManager().start();
      * return Status.OK_STATUS; } }; job.setSystem(true); job.schedule();
      */
@@ -1486,9 +1485,9 @@ public class MadlCore extends Plugin {
     super.stop(context);
     /*
      * MadlSdkManager.getManager().removeSdkListener(this);
-     * 
+     *
      * try { getProjectManager().stop();
-     * 
+     *
      * if (MadlCoreDebug.METRICS) { StringWriter writer = new StringWriter();
      * PerformanceManager.getInstance().printMetrics(new PrintWriter(writer)); String metricsInfo =
      * writer.toString(); if (metricsInfo.length() > 0) { getLog().log(new Status(Status.INFO,

@@ -1,11 +1,11 @@
 /*
  * Copyright 2012 Google Inc.
- * 
+ *
  * Licensed under the Eclipse Public License v1.0 (the "License"); you may not use this file except
  * in compliance with the License. You may obtain a copy of the License at
- * 
+ *
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software distributed under the License
  * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
  * or implied. See the License for the specific language governing permissions and limitations under
@@ -176,7 +176,7 @@ public class CreateApplicationWizard extends BasicNewResourceWizard {
    * invocations of this method will answer the same project resource without attempting to create
    * it again.
    * </p>
-   * 
+   *
    * @return the created project resource, or <code>null</code> if the project was not created
    */
   private IProject createNewProject() {
@@ -257,14 +257,15 @@ public class CreateApplicationWizard extends BasicNewResourceWizard {
 
   /**
    * Create a ProjectType.WEB project or a ProjectType.SERVER project.
-   * 
+   *
    * @param project
    * @param projectType
    * @throws CoreException
    */
   private IFile createProjectContent(IProject project, IFolder folder, String name,
       AbstractSample sampleContent) throws CoreException {
-    IProjectUtilities.configurePackagesFilter(project);
+    //ss
+    //IProjectUtilities.configurePackagesFilter(project);
 
     if (sampleContent == null) {
       return null;

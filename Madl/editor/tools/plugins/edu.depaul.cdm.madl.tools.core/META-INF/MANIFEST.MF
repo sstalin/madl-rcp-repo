@@ -20,6 +20,7 @@ Export-Package:
  edu.depaul.cdm.madl.tools.core.buffer,
  edu.depaul.cdm.madl.tools.core.completion,
  edu.depaul.cdm.madl.tools.core.formatter,
+ edu.depaul.cdm.madl.tools.core.generator,
  edu.depaul.cdm.madl.tools.core.internal,
  edu.depaul.cdm.madl.tools.core.internal.buffer,
  edu.depaul.cdm.madl.tools.core.internal.builder,
@@ -31,4 +32,5 @@ Export-Package:
  edu.depaul.cdm.madl.tools.core.problem,
  edu.depaul.cdm.madl.tools.core.utilities.general,
  edu.depaul.cdm.madl.tools.core.utilities.io,
+ edu.depaul.cdm.madl.tools.core.utilities.resource,
  edu.depaul.cdm.madl.tools.core.workingcopy

@@ -40,7 +40,7 @@
 	<variableList>
 		<variable>
 			<name>MADL_TRUNK</name>
-			<value>file:/Users/sstalin/CDM/SE-491/AppBuilder/Madl</value>
+			<value>file:/Users/sstalin/madl-repo/Madl</value>
 		</variable>
 	</variableList>
 </projectDescription>

@@ -5,9 +5,9 @@
    <extension
          point="org.eclipse.ui.editors">
       <editor
-            name="Madl Editor"
+            name="%editorPrefName"
             extensions="madl"
-             icon="$nl$/icons/full/madl16/dart.png"
+             icon="$nl$/icons/full/madl16/madl.png"
             contributorClass="edu.depaul.cdm.madl.tools.multipage.MadlEditorContributor"
             class="edu.depaul.cdm.madl.tools.multipage.MultiPageMadlEditor"
             id="edu.depaul.cdm.cpdt.editor.multipage.MadlEditor">
@@ -31,7 +31,7 @@
    -->
    <extension
          id="edu.depaul.cdm.madl.editor.ui.text.editor.MadlDocumentSetupParticipant"
-	     name="MadlDocumentSetupParticipant"
+	     name="%extension.name"
          point="org.eclipse.core.filebuffers.documentSetup">
       <participant
             class="edu.depaul.cdm.madl.tools.ui.internal.text.editor.MadlDocumentSetupParticipant"
@@ -103,5 +103,423 @@
             name="Tests"
             restorable="true">
       </view -->
+   </extension>
+   
+   
+<!-- =========================================================================== -->
+<!-- JDT/UI command definitions                                                  -->
+<!-- =========================================================================== -->
+
+   <extension
+         point="org.eclipse.ui.contexts">
+      <context
+            name="%context.editingJavaSource.name"
+            description="%context.editingJavaSource.description"
+            parentId="org.eclipse.ui.textEditorScope"
+            id="edu.depaul.cdm.madl.tools.ui.madlEditorScope">
+      </context>
+      <!-- Not really the scope for the JavScript View.. just extends the editor
+           scope for now.  
+       -->
+      <context
+            name="%context.name.0"
+            description="%context.description.0"
+            parentId="edu.depaul.cdm.madl.tools.ui.madlEditorScope"
+            id="edu.depaul.cdm.madl.tools.ui.madlViewScope">
+      </context>
+   </extension>
+   
+   <extension
+         point="org.eclipse.ui.commands">
+<!-- categories -->
+      <category
+            name="%category.source.name"
+            description="%category.source.description"
+            id="edu.depaul.cdm.madl.tools.ui.category.source">
+      </category>
+      <category
+            name="%category.refactoring.name"
+            description="%category.refactoring.description"
+            id="edu.depaul.cdm.madl.tools.ui.category.refactoring">
+      </category>
+      <category
+            name="%category.tools.name"
+            description="%category.tools.description"
+            id="edu.depaul.cdm.madl.tools.ui.category.tools">
+      </category>
+      <!-- search -->
+     <!--
+      <command
+            name="%ActionDefinition.referencesInWorkspace.name"
+            description="%ActionDefinition.referencesInWorkspace.description"
+            categoryId="edu.depaul.cdm.madl.tools.search.ui.category.search"
+            id="edu.depaul.cdm.madl.tools.ui.edit.text.madl.search.references.in.workspace">
+      </command>
+      <command
+            name="%ActionDefinition.declarationsInWorkspace.name"
+            description="%ActionDefinition.declarationsInWorkspace.description"
+            categoryId="edu.depaul.cdm.madl.tools.search.ui.category.search"
+            id="edu.depaul.cdm.madl.tools.ui.edit.text.madl.search.declarations.in.workspace">
+      </command>
+      <command
+            name="%ActionDefinition.declarationsInHierarchy.name"
+            description="%ActionDefinition.declarationsInHierarchy.description"
+            categoryId="edu.depaul.cdm.madl.tools.search.ui.category.search"
+            id="edu.depaul.cdm.madl.tools.ui.edit.text.madl.search.declarations.in.hierarchy">
+      </command>
+      -->
+<!-- file -->
+      <command
+            categoryId="org.eclipse.ui.category.file"
+            defaultHandler="edu.depaul.cdm.madl.tools.ui.internal.handlers.OpenFolderHandler"
+            description="%Command.openFolder.description"
+            id="edu.depaul.cdm.madl.tools.ui.folder.open"
+            name="%Command.openFolder.name">
+      </command>
+      <command
+            categoryId="org.eclipse.ui.category.file"
+            defaultHandler="edu.depaul.cdm.madl.tools.ui.internal.handlers.NewFileHandler"
+            description="%Command.newFile.description"
+            id="edu.depaul.cdm.madl.tools.ui.file.new"
+            name="%Command.newFile.name">
+      </command>
+      <command
+            categoryId="org.eclipse.ui.category.file"
+            description="%Command.showInFinder.description"
+            id="edu.depaul.cdm.madl.tools.ui.file.showInFinder"
+            name="%Command.showInFinder.name">
+      </command>
+<!-- edit -->
+      <command
+            name="%ActionDefinition.selectEnclosing.name"
+            description="%ActionDefinition.selectEnclosing.description"
+            categoryId="org.eclipse.ui.category.edit"
+            id="edu.depaul.cdm.madl.tools.ui.edit.text.madl.select.enclosing">
+      </command>
+      <command
+            name="%ActionDefinition.selectNext.name"
+            description="%ActionDefinition.selectNext.description"
+            categoryId="org.eclipse.ui.category.edit"
+            id="edu.depaul.cdm.madl.tools.ui.edit.text.madl.select.next">
+      </command>
+      <command
+            name="%ActionDefinition.selectPrevious.name"
+            description="%ActionDefinition.selectPrevious.description"
+            categoryId="org.eclipse.ui.category.edit"
+            id="edu.depaul.cdm.madl.tools.ui.edit.text.madl.select.previous">
+      </command>
+      <command
+            name="%ActionDefinition.selectLast.name"
+            description="%ActionDefinition.selectLast.description"
+            categoryId="org.eclipse.ui.category.edit"
+            id="edu.depaul.cdm.madl.tools.ui.edit.text.madl.select.last">
+      </command>
+      <command
+            name="%ActionDefinition.showInPackageView.name"
+            description="%ActionDefinition.showInPackageView.description"
+            categoryId="org.eclipse.ui.category.navigate"
+            id="edu.depaul.cdm.madl.tools.ui.edit.text.madl.show.in.package.view">
+      </command>
+      <command
+            name="%ActionDefinition.foldingCollapseMembers.name"
+            description="%ActionDefinition.foldingCollapseMembers.description"
+            categoryId="org.eclipse.ui.category.textEditor"
+            id="edu.depaul.cdm.madl.tools.ui.text.folding.collapseMembers">
+      </command>
+      <command
+            name="%ActionDefinition.foldingCollapseComments.name"
+            description="%ActionDefinition.foldingCollapseComments.description"
+            categoryId="org.eclipse.ui.category.textEditor"
+            id="edu.depaul.cdm.madl.tools.ui.text.folding.collapseComments">
+      </command>
+<!-- source -->
+      <command
+            name="%ActionDefinition.sourceQuickMenu.name"
+            description="%ActionDefinition.sourceQuickMenu.description"
+            categoryId="edu.depaul.cdm.madl.tools.ui.category.source"
+            id="edu.depaul.cdm.madl.tools.ui.edit.text.madl.source.quickMenu">
+      </command>
+      <command
+            name="%ActionDefinition.comment.name"
+            description="%ActionDefinition.comment.description"
+            categoryId="edu.depaul.cdm.madl.tools.ui.category.source"
+            id="edu.depaul.cdm.madl.tools.ui.edit.text.madl.comment">
+      </command>
+      <command
+            name="%ActionDefinition.uncomment.name"
+            description="%ActionDefinition.uncomment.description"
+            categoryId="edu.depaul.cdm.madl.tools.ui.category.source"
+            id="edu.depaul.cdm.madl.tools.ui.edit.text.madl.uncomment">
+      </command>
+      <command
+            name="%ActionDefinition.toggleComment.name"
+            description="%ActionDefinition.toggleComment.description"
+            categoryId="edu.depaul.cdm.madl.tools.ui.category.source"
+            id="edu.depaul.cdm.madl.tools.ui.edit.text.madl.toggle.comment">
+      </command>
+      <command
+            name="%ActionDefinition.format.name"
+            description="%ActionDefinition.format.description"
+            categoryId="edu.depaul.cdm.madl.tools.ui.category.source"
+            id="edu.depaul.cdm.madl.tools.ui.edit.text.madl.format">
+      </command>
+      <command
+            name="%ActionDefinition.quickformat.name"
+            description="%ActionDefinition.quickformat.description"
+            categoryId="edu.depaul.cdm.madl.tools.ui.category.source"
+            id="edu.depaul.cdm.madl.tools.ui.edit.text.madl.quick.format">
+      </command>
+      <command
+            name="%ActionDefinition.sortMembers.name"
+            description="%ActionDefinition.sortMembers.description"
+            categoryId="edu.depaul.cdm.madl.tools.ui.category.source"
+            id="edu.depaul.cdm.madl.tools.ui.edit.text.madl.sort.members">
+      </command>
+      <command
+            name="%ActionDefinition.overrideMethods.name"
+            description="%ActionDefinition.overrideMethods.description"
+            categoryId="edu.depaul.cdm.madl.tools.ui.category.source"
+            id="edu.depaul.cdm.madl.tools.ui.edit.text.madl.override.methods">
+      </command>
+      <command
+            name="%ActionDefinition.getterSetter.name"
+            description="%ActionDefinition.getterSetter.description"
+            categoryId="edu.depaul.cdm.madl.tools.ui.category.source"
+            id="edu.depaul.cdm.madl.tools.ui.edit.text.madl.create.getter.setter">
+      </command>
+      <command
+            name="%ActionDefinition.generateHashCode.name"
+            description="%ActionDefinition.generateHashCode.description"
+            categoryId="edu.depaul.cdm.madl.tools.ui.category.source"
+            id="edu.depaul.cdm.madl.tools.ui.edit.text.madl.generate.hashcode.equals">
+      </command>
+      <command
+            name="%ActionDefinition.delegateMethods.name"
+            description="%ActionDefinition.delegateMethods.description"
+            categoryId="edu.depaul.cdm.madl.tools.ui.category.source"
+            id="edu.depaul.cdm.madl.tools.ui.edit.text.madl.create.delegate.methods">
+      </command>
+      <command
+            name="%ActionDefinition.addJavadocComment.name"
+            description="%ActionDefinition.addJavadocComment.description"
+            categoryId="edu.depaul.cdm.madl.tools.ui.category.source"
+            id="edu.depaul.cdm.madl.tools.ui.edit.text.madl.add.madldoc.comment">
+      </command>
+      <command
+            name="%ActionDefinition.addUnimplementedConstructors.name"
+            description="%ActionDefinition.addUnimplementedConstructors.description"
+            categoryId="edu.depaul.cdm.madl.tools.ui.category.source"
+            id="edu.depaul.cdm.madl.tools.ui.edit.text.madl.add.unimplemented.constructors">
+      </command>
+      <command
+            name="%ActionDefinition.generateConstructorUsingFields.name"
+            description="%ActionDefinition.generateConstructorsUsingFields.description"
+            categoryId="edu.depaul.cdm.madl.tools.ui.category.source"
+            id="edu.depaul.cdm.madl.tools.ui.edit.text.madl.generate.constructor.using.fields">
+      </command>
+      <command
+            name="%ActionDefinition.surroundWith.tryCatch.name"
+            description="%ActionDefinition.surroundWith.tryCatch.description"
+            categoryId="edu.depaul.cdm.madl.tools.ui.category.source"
+            id="edu.depaul.cdm.madl.tools.ui.edit.text.madl.surround.with.try.catch">
+      </command>
+      <command
+            name="%ActionDefinition.cleanUp.name"
+            description="%ActionDefinition.cleanUp.description"
+            categoryId="edu.depaul.cdm.madl.tools.ui.category.source"
+            id="edu.depaul.cdm.madl.tools.ui.edit.text.madl.clean.up">
+      </command>
+      <command
+            name="%ActionDefinition.externalizeStrings.name"
+            description="%ActionDefinition.externalizeStrings.description"
+            categoryId="edu.depaul.cdm.madl.tools.ui.category.source"
+            id="edu.depaul.cdm.madl.tools.ui.edit.text.madl.externalize.strings">
+      </command>
+      <command
+            name="%ActionDefinition.addBlockComment.name"
+            description="%ActionDefinition.addBlockComment.description"
+            categoryId="edu.depaul.cdm.madl.tools.ui.category.source"
+            id="edu.depaul.cdm.madl.tools.ui.edit.text.madl.add.block.comment">
+      </command>
+      <command
+            name="%ActionDefinition.removeBlockComment.name"
+            description="%ActionDefinition.removeBlockComment.description"
+            categoryId="edu.depaul.cdm.madl.tools.ui.category.source"
+            id="edu.depaul.cdm.madl.tools.ui.edit.text.madl.remove.block.comment">
+      </command>
+      <command
+            name="%ActionDefinition.indent.name"
+            description="%ActionDefinition.indent.description"
+            categoryId="edu.depaul.cdm.madl.tools.ui.category.source"
+            id="edu.depaul.cdm.madl.tools.ui.edit.text.madl.indent">
+      </command>
+     <command
+           name="%toggleMarkOccurrences.label"
+           description="%toggleMarkOccurrences.description"
+           categoryId="edu.depaul.cdm.madl.tools.ui.category.source"
+           id="edu.depaul.cdm.madl.tools.ui.edit.text.madl.toggleMarkOccurrences">
+     </command>
+      <command
+            name="%ActionDefinition.removeOccurrenceAnnotations.name"
+            description="%ActionDefinition.removeOccurrenceAnnotations.description"
+            categoryId="edu.depaul.cdm.madl.tools.ui.category.source"
+            id="edu.depaul.cdm.madl.tools.ui.edit.text.remove.occurrence.annotations">
+      </command>
+
+  
+<!-- perspectives -->
+      <command
+            name="%PerspectiveCommand.java.name"
+            description="%PerspectiveCommand.java.description"
+            categoryId="org.eclipse.ui.category.perspectives"
+            id="edu.depaul.cdm.madl.tools.ui.MadlPerspective" />
+            
+<!-- refactoring -->
+      <command
+            name="%ActionDefinition.renameElement.name"
+            description="%ActionDefinition.renameElement.description"
+            categoryId="edu.depaul.cdm.madl.tools.ui.category.refactoring"
+            id="edu.depaul.cdm.madl.tools.ui.edit.text.madl.rename.element">
+      </command>
+      <command
+            name="%ActionDefinition.inline.name"
+            description="%ActionDefinition.inline.description"
+            categoryId="edu.depaul.cdm.madl.tools.ui.category.refactoring"
+            id="edu.depaul.cdm.madl.tools.ui.edit.text.madl.inline">
+      </command>
+      <command
+            name="%ActionDefinition.convertMethodToGetter.name"
+            description="%ActionDefinition.convertMethodToGetter.description"
+            categoryId="edu.depaul.cdm.madl.tools.ui.category.refactoring"
+            id="edu.depaul.cdm.madl.tools.ui.edit.text.madl.convertMethodToGetter">
+      </command>
+      <command
+            name="%ActionDefinition.convertGetterToMethod.name"
+            description="%ActionDefinition.convertGetterToMethod.description"
+            categoryId="edu.depaul.cdm.madl.tools.ui.category.refactoring"
+            id="edu.depaul.cdm.madl.tools.ui.edit.text.madl.convertGetterToMethod">
+      </command>
+      <command
+            name="%ActionDefinition.extractMethod.name"
+            description="%ActionDefinition.extractMethod.description"
+            categoryId="edu.depaul.cdm.madl.tools.ui.category.refactoring"
+            id="edu.depaul.cdm.madl.tools.ui.edit.text.madl.extract.method">
+      </command>
+      <command
+            name="%ActionDefinition.extractLocalVariable.name"
+            description="%ActionDefinition.extractLocalVariable.description"
+            categoryId="edu.depaul.cdm.madl.tools.ui.category.refactoring"
+            id="edu.depaul.cdm.madl.tools.ui.edit.text.madl.extract.local.variable">
+      </command>
+<!-- navigate -->
+      <command
+            name="%ActionDefinition.gotoNextMember.name"
+            description="%ActionDefinition.gotoNextMember.description"
+            categoryId="org.eclipse.ui.category.navigate"
+            id="edu.depaul.cdm.madl.tools.ui.edit.text.madl.goto.next.member">
+      </command>
+      <command
+            name="%ActionDefinition.gotoPreviousMember.name"
+            description="%ActionDefinition.gotoPreviousMember.description"
+            categoryId="org.eclipse.ui.category.navigate"
+            id="edu.depaul.cdm.madl.tools.ui.edit.text.madl.goto.previous.member">
+      </command>
+      <command
+            name="%ActionDefinition.gotoMatchingBracket.name"
+            description="%ActionDefinition.gotoMatchingBracket.description"
+            categoryId="org.eclipse.ui.category.navigate"
+            id="edu.depaul.cdm.madl.tools.ui.edit.text.madl.goto.matching.bracket">
+      </command>
+      <command
+            name="%ActionDefinition.show.outline.name"
+            description="%ActionDefinition.show.outline.description"
+            categoryId="org.eclipse.ui.category.navigate"
+            id="edu.depaul.cdm.madl.tools.ui.edit.text.madl.show.outline">
+      </command>
+      <command
+            name="%ActionDefinition.open.hierarchy.name"
+            description="%ActionDefinition.open.hierarchy.description"
+            categoryId="org.eclipse.ui.category.navigate"
+            id="edu.depaul.cdm.madl.tools.ui.edit.text.madl.open.hierarchy">
+      </command>
+      <command
+            name="%ActionDefinition.open.structure.name"
+            description="%ActionDefinition.open.structure.description"
+            categoryId="org.eclipse.ui.category.navigate"
+            id="edu.depaul.cdm.madl.tools.ui.edit.text.madl.open.structure">
+      </command>
+      <command
+            name="%ActionDefinition.openEditor.name"
+            description="%ActionDefinition.openEditor.description"
+            categoryId="org.eclipse.ui.category.navigate"
+            id="edu.depaul.cdm.madl.tools.ui.edit.text.madl.open.editor">
+      </command>
+      <command
+            name="%ActionDefinition.openExternalMadldoc.name"
+            description="%ActionDefinition.openExternalMadldoc.description"
+            categoryId="org.eclipse.ui.category.navigate"
+            id="edu.depaul.cdm.madl.tools.ui.edit.text.madl.open.external.madldoc">
+      </command>
+      <command
+            name="%ActionDefinition.openTypeHierarchy.name"
+            description="%ActionDefinition.openTypeHierarchy.description"
+            categoryId="org.eclipse.ui.category.navigate"
+            id="edu.depaul.cdm.madl.tools.ui.edit.text.madl.open.type.hierarchy">
+      </command>
+      <command
+            name="%ActionDefinition.openCallHierarchy.name"
+            description="%ActionDefinition.openCallHierarchy.description"
+            categoryId="org.eclipse.ui.category.navigate"
+            id="edu.depaul.cdm.madl.tools.ui.edit.text.open.call.hierarchy">
+      </command>
+      <command
+            name="%ActionDefinition.openCallHierarchy.name"
+            description="%ActionDefinition.openCallHierarchy.description"
+            categoryId="org.eclipse.ui.category.navigate"
+            id="edu.depaul.cdm.madl.tools.ui.edit.text.analyze.call.hierarchy">
+      </command>
+      <command
+            name="%ActionDefinition.gotoType.name"
+            description="%ActionDefinition.gotoType.description"
+            categoryId="org.eclipse.ui.category.navigate"
+            id="edu.depaul.cdm.madl.tools.ui.navigate.gototype">
+      </command>
+      
+<!-- Tools -->
+      <command
+            name="%ActionDefinition.reanalyzeSources.name"
+            description="%ActionDefinition.reanalyzeSources.description"
+            categoryId="edu.depaul.cdm.madl.tools.ui.category.tools"
+            id="edu.depaul.cdm.madl.tools.ui.buildClean">
+      </command>
+      
+<!-- project -->
+      <command
+            description="%command.description"
+            id="edu.depaul.cdm.madl.tools.ui.commands.ignoreResource"
+            name="%command.name">
+      </command>
+      <command
+            description="%command.description.0"
+            id="edu.depaul.cdm.madl.tools.ui.commands.unIgnoreResource"
+            name="%command.name.0">
+      </command>
+      <command
+            defaultHandler="edu.depaul.cdm.madl.tools.ui.internal.handlers.PubInstallHandler"
+            description="%command.description.1"
+            id="edu.depaul.cdm.madl.tools.ui.commands.pubInstall"
+            name="%command.name.1">
+      </command>
+      <command
+            defaultHandler="edu.depaul.cdm.madl.tools.ui.internal.handlers.PubUpdateHandler"
+            description="%command.description.2"
+            id="edu.depaul.cdm.madl.tools.ui.commands.pubUpdate"
+            name="%command.name.2">
+      </command>
+      <command
+            defaultHandler="edu.depaul.cdm.madl.tools.ui.internal.handlers.RunScriptHandler"
+            id="edu.depaul.cdm.madl.tools.ui.run.script.command"
+            name="%command.name.3">
+      </command>
    </extension>
 </plugin>

@@ -16,18 +16,18 @@
          point="org.eclipse.ui.menus">
       <menuContribution
             locationURI="menu:file?after=new.ext">
-        <!-- <command
+         <command
                commandId="edu.depaul.cdm.madl.tools.ui.file.new"
                icon="$nl$/icons/full/etool16/newfile_wiz.gif"
                style="push">
-         </command>-->
+         </command>
       </menuContribution>
       <menuContribution
             locationURI="menu:file?after=open.ext">
-         <!-- <command 
+         <command 
                commandId="edu.depaul.cdm.madl.tools.ui.folder.open"
                style="push"> 
-         </command> -->
+         </command> 
       </menuContribution>
       <!-- <menuContribution
             locationURI="toolbar:org.eclipse.ui.trim.command2">

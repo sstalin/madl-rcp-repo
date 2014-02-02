@@ -1,11 +1,11 @@
 /*
  * Copyright (c) 2012, the Madl project authors.
- * 
+ *
  * Licensed under the Eclipse Public License v1.0 (the "License"); you may not use this file except
  * in compliance with the License. You may obtain a copy of the License at
- * 
+ *
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software distributed under the License
  * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
  * or implied. See the License for the specific language governing permissions and limitations under
@@ -14,7 +14,7 @@
 package edu.depaul.cdm.madl.tools.ui.internal.projects;
 
 import edu.depaul.cdm.madl.tools.core.MadlCore;
-import edu.depaul.cdm.madl.tools.core.generator.ApplicationGenerator;
+//import edu.depaul.cdm.madl.tools.core.generator.ApplicationGenerator;
 import edu.depaul.cdm.madl.tools.core.generator.MadlIdentifierUtil;
 import edu.depaul.cdm.madl.tools.core.utilities.resource.IProjectUtilities;
 import edu.depaul.cdm.madl.tools.ui.internal.intro.IntroMessages;
@@ -63,7 +63,7 @@ public class ProjectUtils {
 
   /**
    * Creates a new project resource.
-   * 
+   *
    * @param name the project name
    * @param newProjectHandle the project handle
    * @param projectType the type of project
@@ -129,11 +129,12 @@ public class ProjectUtils {
       }
       return null;
     }
-    try {
+    //ss
+   /* try {
       IProjectUtilities.configurePackagesFilter(newProjectHandle);
     } catch (CoreException e) {
       MadlCore.logError("Could not set package filter on folder " + newProjectHandle.getName(), e);
-    }
+    }*/
 
     return newProjectHandle;
   }
@@ -188,7 +189,7 @@ public class ProjectUtils {
   /**
    * Selects and reveals the newly added resource in all parts of the active workbench window's
    * active page.
-   * 
+   *
    * @see ISetSelectionTarget
    */
   public static void selectAndReveal(IResource newResource) {
@@ -198,7 +199,8 @@ public class ProjectUtils {
 
   private static IFile createProjectContent(IProject project, ProjectType projectType)
       throws CoreException {
-    ApplicationGenerator generator = new ApplicationGenerator(project);
+    //ss
+  /*  ApplicationGenerator generator = new ApplicationGenerator(project);
 
     generator.setApplicationLocation(project.getLocation().toOSString());
     generator.setApplicationName(MadlIdentifierUtil.createValidIdentifier(project.getName()));
@@ -206,7 +208,8 @@ public class ProjectUtils {
 
     generator.execute(new NullProgressMonitor());
 
-    return generator.getFile();
+    return generator.getFile();*/
+    return null;
   }
 
   private static IProjectDescription createProjectDescription(IProject project, URI location) {

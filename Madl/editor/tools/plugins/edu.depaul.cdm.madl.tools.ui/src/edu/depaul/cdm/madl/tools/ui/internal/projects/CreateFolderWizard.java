@@ -98,14 +98,13 @@ public class CreateFolderWizard extends BasicNewFolderResourceWizard {
     }
     // if new folder is pub white listed directory/sub-directory, run pub install
     // to create the link to packages
-    if (.contains(folder.getName()) || isPubDirectoryParent(folder)
-        || isLibDirectory(folder)) {
-      IContainer pubspecDir = getPubWorkingDir(folder);
-      if (pubspecDir != null) {
-        RunPubJob job = new RunPubJob(pubspecDir, RunPubJob.INSTALL_COMMAND, true);
-        job.schedule();
-      }
-    }
+
+    //ss
+    /*
+     * if (.contains(folder.getName()) || isPubDirectoryParent(folder) || isLibDirectory(folder)) {
+     * IContainer pubspecDir = getPubWorkingDir(folder); if (pubspecDir != null) { RunPubJob job =
+     * new RunPubJob(pubspecDir, RunPubJob.INSTALL_COMMAND, true); job.schedule(); } }
+     */
     selectAndReveal(folder);
 
     return true;

@@ -1,11 +1,11 @@
 /*
  * Copyright (c) 2012, the Madl project authors.
- * 
+ *
  * Licensed under the Eclipse Public License v1.0 (the "License"); you may not use this file except
  * in compliance with the License. You may obtain a copy of the License at
- * 
+ *
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software distributed under the License
  * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
  * or implied. See the License for the specific language governing permissions and limitations under
@@ -309,7 +309,7 @@ public abstract class MadlEditor extends AbstractDecoratedTextEditor implements
 
     /**
      * Initialize with the node to wrap
-     * 
+     *
      * @param context the context to access
      * @param qualifier the qualifier
      */
@@ -604,7 +604,7 @@ public abstract class MadlEditor extends AbstractDecoratedTextEditor implements
      * Installs this selection changed listener with the given selection provider. If the selection
      * provider is a post selection provider, post selection changed events are the preferred
      * choice, otherwise normal selection changed events are requested.
-     * 
+     *
      * @param selectionProvider
      */
     public void install(ISelectionProvider selectionProvider) {
@@ -622,7 +622,7 @@ public abstract class MadlEditor extends AbstractDecoratedTextEditor implements
 
     /**
      * Removes this selection changed listener from the given selection provider.
-     * 
+     *
      * @param selectionProvider the selection provider
      */
     public void uninstall(ISelectionProvider selectionProvider) {
@@ -830,7 +830,7 @@ public abstract class MadlEditor extends AbstractDecoratedTextEditor implements
       setText("Format (experimental)");
     }
 
-    
+
     @Override
     public boolean isEnabled() {
       return super.isEnabled() && MadlFormatter.isAvailable();
@@ -894,7 +894,7 @@ public abstract class MadlEditor extends AbstractDecoratedTextEditor implements
 
     /**
      * Creates a new next sub-word action.
-     * 
+     *
      * @param code Action code for the default operation. Must be an action code from @see
      *          org.eclipse.swt.custom.ST.
      */
@@ -936,7 +936,7 @@ public abstract class MadlEditor extends AbstractDecoratedTextEditor implements
 
     /**
      * Finds the next position after the given position.
-     * 
+     *
      * @param position the current position
      * @return the next position
      */
@@ -979,7 +979,7 @@ public abstract class MadlEditor extends AbstractDecoratedTextEditor implements
 
     /**
      * Sets the caret position to the sub-word boundary given with <code>position</code>.
-     * 
+     *
      * @param position Position where the action should move the caret
      */
     protected abstract void setCaretPosition(int position);
@@ -994,7 +994,7 @@ public abstract class MadlEditor extends AbstractDecoratedTextEditor implements
 
     /**
      * Creates a new previous sub-word action.
-     * 
+     *
      * @param code Action code for the default operation. Must be an action code from @see
      *          org.eclipse.swt.custom.ST.
      */
@@ -1037,7 +1037,7 @@ public abstract class MadlEditor extends AbstractDecoratedTextEditor implements
 
     /**
      * Finds the previous position before the given position.
-     * 
+     *
      * @param position the current position
      * @return the previous position
      */
@@ -1081,7 +1081,7 @@ public abstract class MadlEditor extends AbstractDecoratedTextEditor implements
 
     /**
      * Sets the caret position to the sub-word boundary given with <code>position</code>.
-     * 
+     *
      * @param position Position where the action should move the caret
      */
     protected abstract void setCaretPosition(int position);
@@ -1163,7 +1163,7 @@ public abstract class MadlEditor extends AbstractDecoratedTextEditor implements
 
     /**
      * Creates a new smart line start action
-     * 
+     *
      * @param textWidget the styled text widget
      * @param doSelect a boolean flag which tells if the text up to the beginning of the line should
      *          be selected
@@ -1464,7 +1464,7 @@ public abstract class MadlEditor extends AbstractDecoratedTextEditor implements
     /**
      * Return the AST structure held in this cache, or <code>null</code> if the AST structure needs
      * to be created.
-     * 
+     *
      * @return the AST structure held in this cache
      */
     public MadlUnit getAST() {
@@ -1479,7 +1479,7 @@ public abstract class MadlEditor extends AbstractDecoratedTextEditor implements
     /**
      * Set the AST structure held in this cache to the given AST structure provided that the cache
      * has not been cleared since the time at which the AST structure was created.
-     * 
+     *
      * @param creationTime the time at which the AST structure was created (in nanoseconds)
      * @param ast the AST structure that is to be cached
      */
@@ -1489,6 +1489,18 @@ public abstract class MadlEditor extends AbstractDecoratedTextEditor implements
           cachedAST = new SoftReference<MadlUnit>(ast);
         }
       }
+    }
+  }
+
+  /**
+   * Updates the outline page selection and this editor's range indicator.
+   */
+  private class EditorSelectionChangedListener extends AbstractSelectionChangedListener {
+
+    @Override
+    public void selectionChanged(SelectionChangedEvent event) {
+      // XXX: see https://bugs.eclipse.org/bugs/show_bug.cgi?id=56161
+      MadlEditor.this.selectionChanged();
     }
   }
 
@@ -1567,18 +1579,6 @@ public abstract class MadlEditor extends AbstractDecoratedTextEditor implements
       };
       listeners.put(listener, madlListener);
       return madlListener;
-    }
-  }
-
-  /**
-   * Updates the outline page selection and this editor's range indicator.
-   */
-  private class EditorSelectionChangedListener extends AbstractSelectionChangedListener {
-
-    @Override
-    public void selectionChanged(SelectionChangedEvent event) {
-      // XXX: see https://bugs.eclipse.org/bugs/show_bug.cgi?id=56161
-      MadlEditor.this.selectionChanged();
     }
   }
 
@@ -1908,7 +1908,7 @@ public abstract class MadlEditor extends AbstractDecoratedTextEditor implements
 
   /**
    * The cached selected range.
-   * 
+   *
    * @see ITextViewer#getSelectedRange()
    */
   private Point fCachedSelectedRange;
@@ -2309,7 +2309,7 @@ public abstract class MadlEditor extends AbstractDecoratedTextEditor implements
   /**
    * Return the AST structure corresponding to the current contents of this editor's document, or
    * <code>null</code> if the AST structure cannot be created.
-   * 
+   *
    * @return the AST structure corresponding to the current contents of this editor's document
    */
   public MadlUnit getAST() {
@@ -2325,21 +2325,12 @@ public abstract class MadlEditor extends AbstractDecoratedTextEditor implements
    * <p>
    * The result might be outdated if queried from a non-UI thread.</em>
    * </p>
-   * 
+   *
    * @return the caret offset in the master document
    * @see ITextViewer#getSelectedRange()
    */
   public Point getCachedSelectedRange() {
     return fCachedSelectedRange;
-  }
-
-  /**
-   * Answer the {@link MadlReconcilingStrategy} associated with this editor.
-   * 
-   * @return the strategy or {@code null} if none
-   */
-  public MadlReconcilingStrategy getMadlReconcilingStrategy() {
-    return null;
   }
 
   // TODO(scheglov)
@@ -2414,7 +2405,7 @@ public abstract class MadlEditor extends AbstractDecoratedTextEditor implements
     if (inputResourceFile != null) {
       return projectManager.getSource(inputResourceFile);
     }
-    
+
     // may be SDK
     //ss
  /*   if (inputJavaFile != null) {
@@ -2436,6 +2427,15 @@ public abstract class MadlEditor extends AbstractDecoratedTextEditor implements
 
   public edu.depaul.cdm.madl.engine.ast.CompilationUnit getInputUnit() {
     return resolvedUnit;
+  }
+
+  /**
+   * Answer the {@link MadlReconcilingStrategy} associated with this editor.
+   *
+   * @return the strategy or {@code null} if none
+   */
+  public MadlReconcilingStrategy getMadlReconcilingStrategy() {
+    return null;
   }
 
   @Override
@@ -2731,7 +2731,7 @@ public abstract class MadlEditor extends AbstractDecoratedTextEditor implements
   /**
    * Determines whether the preference change encoded by the given event changes the override
    * indication.
-   * 
+   *
    * @param event the event to be investigated
    * @return <code>true</code> if event causes a change
    */
@@ -2784,7 +2784,7 @@ public abstract class MadlEditor extends AbstractDecoratedTextEditor implements
    * outline page selection and the editor range indication.
    * <p>
    * to replace {@link #computeHighlightRangeSourceReference()}.
-   * 
+   *
    * @return the computed source element
    */
   protected LightNodeElement computeHighlightRangeSourceElement(
@@ -2847,7 +2847,7 @@ public abstract class MadlEditor extends AbstractDecoratedTextEditor implements
   /**
    * Computes and returns the source reference that includes the caret and serves as provider for
    * the outline page selection and the editor range indication.
-   * 
+   *
    * @return the computed source reference
    */
   protected SourceReference computeHighlightRangeSourceReference() {
@@ -3077,7 +3077,7 @@ public abstract class MadlEditor extends AbstractDecoratedTextEditor implements
 
   /**
    * Returns a new Madl source viewer configuration.
-   * 
+   *
    * @return a new <code>MadlSourceViewerConfiguration</code>
    */
   protected MadlSourceViewerConfiguration createMadlSourceViewerConfiguration() {
@@ -3126,7 +3126,7 @@ public abstract class MadlEditor extends AbstractDecoratedTextEditor implements
 
   /**
    * Creates the outline page used with this editor.
-   * 
+   *
    * @return the created Madl outline page
    */
   //ss
@@ -3184,7 +3184,7 @@ public abstract class MadlEditor extends AbstractDecoratedTextEditor implements
             EditorsUI.getTooltipAffordanceString());
       }
     });*/
-    
+
     //ss
  /*   fProjectionSupport.setInformationPresenterControlCreator(new IInformationControlCreator() {
       @Override
@@ -3194,7 +3194,7 @@ public abstract class MadlEditor extends AbstractDecoratedTextEditor implements
         return new SourceViewerInformationControl(shell, shellStyle, style);
       }
     });*/
-    
+
     fProjectionSupport.install();
 //ss
    /* fProjectionModelUpdater = MadlToolsPlugin.getDefault().getFoldingStructureProviderRegistry().getCurrentFoldingProvider();
@@ -3260,7 +3260,8 @@ public abstract class MadlEditor extends AbstractDecoratedTextEditor implements
 
   @Override
   protected void doSetInput(IEditorInput input) throws CoreException {
-    AnalysisContext sdkContext = MadlCore.getProjectManager().getSdkContext();
+    //ss
+    //AnalysisContext sdkContext = MadlCore.getProjectManager().getSdkContext();
     if (input instanceof IFileEditorInput) {
       IFileEditorInput fileInput = (IFileEditorInput) input;
       inputResourceFile = fileInput.getFile();
@@ -3306,7 +3307,7 @@ public abstract class MadlEditor extends AbstractDecoratedTextEditor implements
    * <p>
    * Overrides the default implementation to handle {@link IJavaAnnotation}.
    * </p>
-   * 
+   *
    * @param offset the region offset
    * @param length the region length
    * @param forward <code>true</code> for forwards, <code>false</code> for backward
@@ -3398,18 +3399,18 @@ public abstract class MadlEditor extends AbstractDecoratedTextEditor implements
 */
   /**
    * Returns the standard action group of this editor.
-   * 
+   *
    * @return returns this editor's standard action group
    */
   //ss
 /*  protected ActionGroup getActionGroup() {
-	  
+
     return fActionGroups;
   }*/
 
   /**
    * Returns the Madl element of this editor's input corresponding to the given MadlElement.
-   * 
+   *
    * @param element the Madl element
    * @return the corresponding Madl element
    */
@@ -3417,7 +3418,7 @@ public abstract class MadlEditor extends AbstractDecoratedTextEditor implements
 
   /**
    * Returns the most narrow Madl element including the given offset.
-   * 
+   *
    * @param offset the offset inside of the requested element
    * @return the most narrow Madl element
    */
@@ -3425,7 +3426,7 @@ public abstract class MadlEditor extends AbstractDecoratedTextEditor implements
 
   /**
    * Returns the most narrow Madl element including the given offset.
-   * 
+   *
    * @param offset the offset inside of the requested element
    * @param reconcile <code>true</code> if editor input should be reconciled in advance
    * @return the most narrow element
@@ -3436,7 +3437,7 @@ public abstract class MadlEditor extends AbstractDecoratedTextEditor implements
 
   /**
    * Returns the folding action group, or <code>null</code> if there is none.
-   * 
+   *
    * @return the folding action group, or <code>null</code> if there is none
    */
 /*  protected FoldingActionGroup getFoldingActionGroup() {
@@ -3445,7 +3446,7 @@ public abstract class MadlEditor extends AbstractDecoratedTextEditor implements
 
   /**
    * Returns the Madl element wrapped by this editors input.
-   * 
+   *
    * @return the Madl element wrapped by this editors input.
    */
 
@@ -3502,7 +3503,7 @@ public abstract class MadlEditor extends AbstractDecoratedTextEditor implements
    * <p>
    * The selection offset is model based.
    * </p>
-   * 
+   *
    * @param sourceViewer the source viewer
    * @return a region denoting the current signed selection, for a resulting RtoL selections length
    *         is < 0
@@ -3773,7 +3774,7 @@ public abstract class MadlEditor extends AbstractDecoratedTextEditor implements
 
   /**
    * Initializes the given viewer's colors.
-   * 
+   *
    * @param viewer the viewer to be initialized
    */
   @Override
@@ -3844,7 +3845,7 @@ public abstract class MadlEditor extends AbstractDecoratedTextEditor implements
 
   /**
    * Tells whether override indicators are shown.
-   * 
+   *
    * @return <code>true</code> if the override indicators are shown
    */
   //ss
@@ -3965,7 +3966,7 @@ public abstract class MadlEditor extends AbstractDecoratedTextEditor implements
   }
 
   protected void setContextMenuContext(IMenuManager menu, ActionContext context) {
-	//ss  
+	//ss
   /*  fOpenEditorActionGroup.setContext(context);
     fOpenEditorActionGroup.fillContextMenu(menu);
     fOpenEditorActionGroup.setContext(null);*/
@@ -3973,7 +3974,7 @@ public abstract class MadlEditor extends AbstractDecoratedTextEditor implements
 
   /**
    * Sets the input of the editor's outline page.
-   * 
+   *
    * @param page the Madl outline page
    * @param input the editor input
    */
@@ -3986,7 +3987,7 @@ public abstract class MadlEditor extends AbstractDecoratedTextEditor implements
 
   /**
    * Sets the outliner's context menu ID.
-   * 
+   *
    * @param menuId the menu ID
    */
   protected void setOutlinerContextMenuId(String menuId) {
@@ -4159,7 +4160,7 @@ public abstract class MadlEditor extends AbstractDecoratedTextEditor implements
 
   /**
    * Synchronizes the outliner selection with the given element position in the editor.
-   * 
+   *
    * @param element the madl element to select
    */
   protected void synchronizeOutlinePage(Object /* Element */element) {
@@ -4168,7 +4169,7 @@ public abstract class MadlEditor extends AbstractDecoratedTextEditor implements
 
   /**
    * Synchronizes the outliner selection with the given element position in the editor.
-   * 
+   *
    * @param element the Madl element to select
    * @param checkIfOutlinePageActive <code>true</code> if check for active outline page needs to be
    *          done
@@ -4240,7 +4241,7 @@ public abstract class MadlEditor extends AbstractDecoratedTextEditor implements
 
   /**
    * Updates the occurrences annotations based on the current selection.
-   * 
+   *
    * @param selection the text selection
    * @param astRoot the compilation unit AST
    */
@@ -4372,7 +4373,7 @@ public abstract class MadlEditor extends AbstractDecoratedTextEditor implements
         matches = edu.depaul.cdm.madl.engine.services.util.NameOccurrencesFinder.findIn(ident, unit);
       }
     }*/
-    
+
     if (matches == null || matches.size() == 0) {
       if (!fStickyOccurrenceAnnotations) {
         removeOccurrenceAnnotations();
@@ -4396,7 +4397,7 @@ public abstract class MadlEditor extends AbstractDecoratedTextEditor implements
 
   /**
    * Updates the occurrences annotations based on the current selection.
-   * 
+   *
    * @param selection the text selection
    * @param astRoot the compilation unit AST
    */
@@ -4518,7 +4519,7 @@ public abstract class MadlEditor extends AbstractDecoratedTextEditor implements
 
   /**
    * Creates and returns the preference store for this Madl editor with the given input.
-   * 
+   *
    * @param input The editor input for which to create the preference store
    * @return the preference store for this editor
    */
@@ -4557,7 +4558,7 @@ public abstract class MadlEditor extends AbstractDecoratedTextEditor implements
 
   /**
    * Returns the annotation overlapping with the given range or <code>null</code>.
-   * 
+   *
    * @param offset the region offset
    * @param length the region length
    * @return the found annotation or <code>null</code>
@@ -4620,7 +4621,7 @@ public abstract class MadlEditor extends AbstractDecoratedTextEditor implements
 
   /**
    * Returns the boolean preference for the given key.
-   * 
+   *
    * @param store the preference store
    * @param key the preference key
    * @return <code>true</code> if the key exists in the store and its value is <code>true</code>
@@ -4631,7 +4632,7 @@ public abstract class MadlEditor extends AbstractDecoratedTextEditor implements
 
   /**
    * Returns the lock object for the given annotation model.
-   * 
+   *
    * @param annotationModel the annotation model
    * @return the annotation model's lock object
    */
