@@ -88,10 +88,9 @@ public class OpenExternalFolderDialogAction extends InstrumentedAction implement
 
 
     //ss
-    //CreateAndRevealProjectAction createAction = new CreateAndRevealProjectAction(window, directory);
-  //  createAction.run();
-  //  IProject project = createAction.getProject();
-    IProject project= null;
+    CreateAndRevealProjectAction createAction = new CreateAndRevealProjectAction(window, directory);
+    createAction.run();
+    IProject project = createAction.getProject();
     // TODO: project can be null; this indicates that we didn't do any work when the user hit OK.
     // This should be communicated to the user.
 

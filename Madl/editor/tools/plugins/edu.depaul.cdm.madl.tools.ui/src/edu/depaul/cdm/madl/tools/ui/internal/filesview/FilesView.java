@@ -29,7 +29,7 @@ import edu.depaul.cdm.madl.tools.ui.MadlUI;
 import edu.depaul.cdm.madl.tools.ui.ProblemsLabelDecorator;
 // import edu.depaul.cdm.madl.tools.ui.actions.CleanFoldersAction;
 // import edu.depaul.cdm.madl.tools.ui.actions.CopyFilePathAction;
-// import edu.depaul.cdm.madl.tools.ui.actions.DeleteAction;
+import edu.depaul.cdm.madl.tools.ui.actions.DeleteAction;
 // import edu.depaul.cdm.madl.tools.ui.actions.NewAppFromPackageAction;
 // import edu.depaul.cdm.madl.tools.ui.actions.OpenAsTextAction;
 // import edu.depaul.cdm.madl.tools.ui.actions.OpenExternalMadldocAction;
@@ -42,7 +42,7 @@ import edu.depaul.cdm.madl.tools.ui.instrumentation.UIInstrumentation;
 import edu.depaul.cdm.madl.tools.ui.instrumentation.UIInstrumentationBuilder;
 
 // import edu.depaul.cdm.madl.tools.ui.internal.actions.CollapseAllAction;
-// import edu.depaul.cdm.madl.tools.ui.internal.handlers.OpenFolderHandler;
+ import edu.depaul.cdm.madl.tools.ui.internal.handlers.OpenFolderHandler;
 
 import edu.depaul.cdm.madl.tools.ui.internal.projects.HideProjectAction;
 import edu.depaul.cdm.madl.tools.ui.internal.projects.OpenNewApplicationWizardAction;
@@ -245,7 +245,7 @@ public class FilesView extends ViewPart implements ISetSelectionTarget {
   private RenameResourceAction renameAction;
 //  private CleanUpAction cleanUpAction;
   //ss
-  //private DeleteAction deleteAction;
+  private DeleteAction deleteAction;
   private OpenNewFileWizardAction createFileAction;
   private OpenNewFolderWizardAction createFolderAction;
   private OpenNewApplicationWizardAction createApplicationAction;
@@ -401,21 +401,16 @@ public class FilesView extends ViewPart implements ISetSelectionTarget {
     this.memento = memento;
 //ss
 
- /*   madlIgnoreListener = new MadlIgnoreListener() {
-
-      @Override
-      public void ignoresChanged(MadlIgnoreEvent event) {
-        Display.getDefault().asyncExec(new Runnable() {
-
-          @Override
-          public void run() {
-            treeViewer.refresh();
-          }
-        });
-      }
-    };
-
-    MadlCore.addIgnoreListener(madlIgnoreListener);*/
+    /*
+     * madlIgnoreListener = new MadlIgnoreListener() {
+     *
+     * @Override public void ignoresChanged(MadlIgnoreEvent event) {
+     * Display.getDefault().asyncExec(new Runnable() {
+     *
+     * @Override public void run() { treeViewer.refresh(); } }); } };
+     *
+     * MadlCore.addIgnoreListener(madlIgnoreListener);
+     */
 
   }
 
@@ -481,15 +476,15 @@ public class FilesView extends ViewPart implements ISetSelectionTarget {
     //ss -disabling all actions
 
     if (allElementsAreResources(selection)) {
-      // manager.add(createFileAction);
+       manager.add(createFileAction);
 
     }
     if (selection.size() == 0 || selection.getFirstElement() instanceof IContainer) {
-      // manager.add(createFolderAction);
+       manager.add(createFolderAction);
     }
 
     if (selection.size() == 0) {
-      // manager.add(createApplicationAction);
+       manager.add(createApplicationAction);
     }
 
     // OPEN GROUP
@@ -499,7 +494,7 @@ public class FilesView extends ViewPart implements ISetSelectionTarget {
     }
 
     if (selection.size() == 0) {
-      // manager.add(OpenFolderHandler.createCommandAction(getSite().getWorkbenchWindow()));
+       manager.add(OpenFolderHandler.createCommandAction(getSite().getWorkbenchWindow()));
     }
 
     // Close folder action (aka Remove from Editor)
@@ -555,8 +550,8 @@ public class FilesView extends ViewPart implements ISetSelectionTarget {
       if (selection.size() == 1) {
 
         if (!isPackagesDir && !isPubFile(selection.getFirstElement())) {
-          manager.add(renameAction);
-          manager.add(moveAction);
+          //manager.add(renameAction);
+          //manager.add(moveAction);
         }
 
       }
@@ -586,7 +581,7 @@ public class FilesView extends ViewPart implements ISetSelectionTarget {
       }
 
       manager.add(new Separator());
-      // manager.add(deleteAction);
+       manager.add(deleteAction);
       manager.add(new Separator());
     }
 
@@ -824,73 +819,87 @@ public class FilesView extends ViewPart implements ISetSelectionTarget {
 
   private void makeActions() {
     //ss
-    /*
-     * createFileAction = new OpenNewFileWizardAction(getSite().getWorkbenchWindow());
-     * treeViewer.addSelectionChangedListener(createFileAction); createFolderAction = new
-     * OpenNewFolderWizardAction(getSite().getWorkbenchWindow());
-     * treeViewer.addSelectionChangedListener(createFolderAction); createApplicationAction = new
-     * OpenNewApplicationWizardAction(); renameAction = new RenameResourceAction(getShell(),
-     * treeViewer.getTree()) {
-     *
-     * @Override public void run() { if (!RefactoringUtils.waitReadyForRefactoring()) { return; }
-     * super.run(); } }; treeViewer.addSelectionChangedListener(renameAction); // cleanUpAction =
-     * new CleanUpAction(getViewSite()); // treeViewer.addSelectionChangedListener(cleanUpAction);
-     * moveAction = new MoveResourceAction(getShell());
-     * treeViewer.addSelectionChangedListener(moveAction);
-     *
-     * propertyDialogAction = new PropertyDialogAction(getViewSite(), treeViewer);
-     * propertyDialogAction.setActionDefinitionId(IWorkbenchCommandConstants.FILE_PROPERTIES);
-     * propertyDialogAction.setEnabled(false); //selection events will update
-     * treeViewer.addSelectionChangedListener(propertyDialogAction);
-     *
-     * ignoreResourceAction = new IgnoreResourceAction(getShell());
-     * treeViewer.addSelectionChangedListener(ignoreResourceAction);
-     *
-     * enableBuilderAction = new EnableMadlBuilderAction(getShell());
-     * treeViewer.addSelectionChangedListener(enableBuilderAction);
-     *
-     * clipboard = new Clipboard(getShell().getDisplay());
-     *
-     * pasteAction = new PasteAction(getShell(), clipboard);
-     * treeViewer.addSelectionChangedListener(pasteAction);
-     *
-     * copyAction = new CopyAction(getShell(), clipboard, pasteAction);
-     * copyAction.setEnabled(false); //selection events will update
-     * treeViewer.addSelectionChangedListener(copyAction);
-     *
-     * refreshAction = new RefreshAction(this);
-     * treeViewer.addSelectionChangedListener(refreshAction);
-     *
-     * deleteAction = new DeleteAction(getSite());
-     * deleteAction.setImageDescriptor(PlatformUI.getWorkbench
-     * ().getSharedImages().getImageDescriptor( ISharedImages.IMG_TOOL_DELETE));
-     * treeViewer.addSelectionChangedListener(deleteAction);
-     *
-     * hideContainerAction = new HideProjectAction(getSite());
-     * treeViewer.addSelectionChangedListener(hideContainerAction);
-     *
-     * cleanFoldersAction = new CleanFoldersAction(getSite());
-     * treeViewer.addSelectionChangedListener(cleanFoldersAction);
-     *
-     * copyFilePathAction = new CopyFilePathAction(getSite());
-     * treeViewer.addSelectionChangedListener(copyFilePathAction);
-     *
-     * openAsTextAction = new OpenAsTextAction(getSite().getPage());
-     * treeViewer.addSelectionChangedListener(openAsTextAction);
-     *
-     * pubUpdateAction = RunPubAction.createPubUpdateAction(getSite().getWorkbenchWindow());
-     * pubInstallAction = RunPubAction.createPubInstallAction(getSite().getWorkbenchWindow());
-     * pubInstallOfflineAction =
-     * RunPubAction.createPubInstallOfflineAction(getSite().getWorkbenchWindow()); pubDeployAction =
-     * RunPubAction.createPubDeployAction(getSite().getWorkbenchWindow());
-     *
-     * copyPackageAction = new NewAppFromPackageAction(getSite());
-     *
-     * browseMadlDocAction = new OpenExternalMadldocAction(getSite()) {
-     *
-     * @Override protected boolean isValidSelection(
-     * edu.depaul.cdm.madl.tools.ui.internal.text.editor.MadlSelection selection) { return true; }
-     * }; treeViewer.addSelectionChangedListener(browseMadlDocAction);
-     */
+
+    createFileAction = new OpenNewFileWizardAction(getSite().getWorkbenchWindow());
+    treeViewer.addSelectionChangedListener(createFileAction);
+    createFolderAction = new OpenNewFolderWizardAction(getSite().getWorkbenchWindow());
+    treeViewer.addSelectionChangedListener(createFolderAction);
+    createApplicationAction = new OpenNewApplicationWizardAction();
+    //ss
+ /*   renameAction = new RenameResourceAction(getShell(), treeViewer.getTree()) {
+
+      @Override
+      public void run() {
+        if (!RefactoringUtils.waitReadyForRefactoring()) {
+          return;
+        }
+        super.run();
+      }
+    };
+
+    treeViewer.addSelectionChangedListener(renameAction);
+    */
+     // cleanUpAction = new CleanUpAction(getViewSite()); // treeViewer.addSelectionChangedListener(cleanUpAction);
+
+    moveAction = new MoveResourceAction(getShell());
+    treeViewer.addSelectionChangedListener(moveAction);
+
+    propertyDialogAction = new PropertyDialogAction(getViewSite(), treeViewer);
+    propertyDialogAction.setActionDefinitionId(IWorkbenchCommandConstants.FILE_PROPERTIES);
+    propertyDialogAction.setEnabled(false); //selection events will update
+    treeViewer.addSelectionChangedListener(propertyDialogAction);
+
+   // ignoreResourceAction = new IgnoreResourceAction(getShell());
+    //treeViewer.addSelectionChangedListener(ignoreResourceAction);
+
+    //enableBuilderAction = new EnableMadlBuilderAction(getShell());
+    //treeViewer.addSelectionChangedListener(enableBuilderAction);
+
+    clipboard = new Clipboard(getShell().getDisplay());
+
+   // pasteAction = new PasteAction(getShell(), clipboard);
+    //treeViewer.addSelectionChangedListener(pasteAction);
+
+   // copyAction = new CopyAction(getShell(), clipboard, pasteAction);
+    //copyAction.setEnabled(false); //selection events will update
+    //treeViewer.addSelectionChangedListener(copyAction);
+
+   // refreshAction = new RefreshAction(this);
+    //treeViewer.addSelectionChangedListener(refreshAction);
+
+    deleteAction = new DeleteAction(getSite());
+    deleteAction.setImageDescriptor(PlatformUI.getWorkbench().getSharedImages().getImageDescriptor(
+        ISharedImages.IMG_TOOL_DELETE));
+    treeViewer.addSelectionChangedListener(deleteAction);
+
+    hideContainerAction = new HideProjectAction(getSite());
+    treeViewer.addSelectionChangedListener(hideContainerAction);
+
+    //cleanFoldersAction = new CleanFoldersAction(getSite());
+    //treeViewer.addSelectionChangedListener(cleanFoldersAction);
+
+    //copyFilePathAction = new CopyFilePathAction(getSite());
+    //treeViewer.addSelectionChangedListener(copyFilePathAction);
+
+    //openAsTextAction = new OpenAsTextAction(getSite().getPage());
+    //treeViewer.addSelectionChangedListener(openAsTextAction);
+
+   /* pubUpdateAction = RunPubAction.createPubUpdateAction(getSite().getWorkbenchWindow());
+    pubInstallAction = RunPubAction.createPubInstallAction(getSite().getWorkbenchWindow());
+    pubInstallOfflineAction = RunPubAction.createPubInstallOfflineAction(getSite().getWorkbenchWindow());
+    pubDeployAction = RunPubAction.createPubDeployAction(getSite().getWorkbenchWindow());
+
+    copyPackageAction = new NewAppFromPackageAction(getSite());*/
+
+    /*browseMadlDocAction = new OpenExternalMadldocAction(getSite()) {
+
+      @Override
+      protected boolean isValidSelection(
+          edu.depaul.cdm.madl.tools.ui.internal.text.editor.MadlSelection selection) {
+        return true;
+      }
+    };
+    treeViewer.addSelectionChangedListener(browseMadlDocAction);*/
+
   }
 }

@@ -1166,10 +1166,10 @@ public class MadlCore extends Plugin {
    * @throws IOException if there was an error accessing the ignore file
    */
   //ss
-  /*
-   * public static void removeFromIgnores(IPath resource) throws IOException {
-   * getProjectManager().getIgnoreManager().removeFromIgnores(resource); }
-   */
+
+//   public static void removeFromIgnores(IPath resource) throws IOException {
+  //  getProjectManager().getIgnoreManager().removeFromIgnores(resource); }
+
 
   /**
    * Remove the given resource from the set of ignored resources.
