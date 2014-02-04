@@ -19,17 +19,29 @@ import java.util.List;
 /**
  * Create a sample web application with Pub support.
  *
- * @coverage dart.tools.core.generator
+ * @coverage madl.tools.core.generator
  */
 public class BasicAppSample extends AbstractSample {
 
   public BasicAppSample() {
-    super("Madl application", "Create basic sample application ");
+    super("Basic App", "Create basic sample application ");
 
     List<String[]> templates = new ArrayList<String[]>();
 
     templates.add(new String[] {"src/{name.lower}.madl", "app(name: \"{name.lower}\"){\n\n}"});
-
+    templates.add(new String[] {"org.properties", "developer {\n"
+        + "\tname = \"App Team\"\n"
+        + "\torg = \"App Inc\"\n"
+        + "\tdomain = \"apps.com\"\n}"
+        + "\n"
+        + "platform {\n"
+        + "\tios{\n"
+        + "\t\tversion = 6\n"
+        + "\t}\n"
+        + "\tandroid {\n"
+        + "\t\tversion = 4.0\n"
+        + "\t}\n"
+        + "}\n"});
     setTemplates(templates);
     setMainFile("{name.lower}.madl");
   }
@@ -40,3 +52,4 @@ public class BasicAppSample extends AbstractSample {
   }
 
 }
+

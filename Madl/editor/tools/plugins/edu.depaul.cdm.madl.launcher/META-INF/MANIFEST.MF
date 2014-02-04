@@ -12,3 +12,6 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.jdt.debug.ui;bundle-version="3.6.200"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Bundle-ActivationPolicy: lazy
+Export-Package: edu.depaul.cdm.madl.launch,
+ edu.depaul.cdm.madl.launcher,
+ edu.depaul.cdm.madl.tabGroup
