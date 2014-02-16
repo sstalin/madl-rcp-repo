@@ -16,7 +16,7 @@ package edu.depaul.cdm.madl.tools.deploy;
 import edu.depaul.cdm.madl.tools.core.MadlCoreDebug;
 // import edu.depaul.cdm.madl.tools.debug.ui.internal.view.BreakpointsView;
 // import edu.depaul.cdm.madl.tools.debug.ui.internal.view.DebuggerView;
-// import edu.depaul.cdm.madl.tools.debug.ui.launch.MadlRunAction;
+//import edu.depaul.cdm.madl.tools.debug.ui.launch.MadlRunAction;
 import edu.depaul.cdm.madl.tools.internal.corext.refactoring.util.ReflectionUtils;
 import edu.depaul.cdm.madl.tools.ui.MadlUI;
 // import edu.depaul.cdm.madl.tools.ui.actions.AboutMadlAction;
@@ -264,17 +264,17 @@ public class ApplicationActionBarAdvisor extends ActionBarAdvisor {
   private IWorkbenchAction upAction;
 
   //ss
-  /*
-   * private MadlRunAction madlRunAction;
-   *
-   * private GenerateJavascriptAction deployOptimizedAction;
-   *
-   * private GenerateMadldocAction generateMadldocAction;
-   *
-   * private RunPubAction pubInstallAction;
-   *
-   * private RunPubAction pubUpdateAction;
-   */
+
+   // private MadlRunAction madlRunAction;
+
+    //private GenerateJavascriptAction deployOptimizedAction;
+
+   // private GenerateMadldocAction generateMadldocAction;
+
+  //  private RunPubAction pubInstallAction;
+
+   // private RunPubAction pubUpdateAction;
+
 
 //  private OrganizeImportsAction organizeImportsAction;
 //ss
@@ -549,7 +549,7 @@ public class ApplicationActionBarAdvisor extends ActionBarAdvisor {
       helpToolBar.add(new GroupMarker(IWorkbenchActionConstants.GROUP_APP));
 
       //ss
-      //helpToolBar.add(madlRunAction);
+     // helpToolBar.add(madlRunAction);
 
       // Add to the cool bar manager
       coolBar.add(actionBarConfigurer.createToolBarContributionItem(helpToolBar,
@@ -565,7 +565,7 @@ public class ApplicationActionBarAdvisor extends ActionBarAdvisor {
     menuBar.add(createFileMenu());
     menuBar.add(createEditMenu());
     menuBar.add(createNavigateMenu());
-    //menuBar.add(createBuildMenu());
+    menuBar.add(createBuildMenu());
     menuBar.add(new GroupMarker(IWorkbenchActionConstants.MB_ADDITIONS));
     //menuBar.add(createViewMenu());
     menuBar.add(createToolsMenu());
@@ -966,11 +966,11 @@ public class ApplicationActionBarAdvisor extends ActionBarAdvisor {
   /**
    * Creates and returns the Build menu (roughly equivalent to the eclipse "Project" menu).
    */
-  @SuppressWarnings("unused")
+
   private MenuManager createBuildMenu() {
     MenuManager menu = new MenuManager(WorkbenchMessages.build_menu,
         IWorkbenchActionConstants.M_PROJECT);
-    menu.add(cleanAllAction);
+    //menu.add(cleanAllAction);
     menu.add(new GroupMarker(IWorkbenchActionConstants.BUILD_EXT));
     menu.add(new Separator());
     menu.add(new GroupMarker(IWorkbenchActionConstants.MB_ADDITIONS));
@@ -1231,7 +1231,7 @@ public class ApplicationActionBarAdvisor extends ActionBarAdvisor {
       menu.add(new ActionContributionItem(openPreferencesAction));
     }
 
-    //menu.add(ContributionItemFactory.OPEN_WINDOWS.create(getWindow()));
+    menu.add(ContributionItemFactory.OPEN_WINDOWS.create(getWindow()));
     return menu;
   }
 

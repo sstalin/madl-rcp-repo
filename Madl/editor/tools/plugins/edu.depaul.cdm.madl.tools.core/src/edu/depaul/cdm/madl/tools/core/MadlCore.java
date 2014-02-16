@@ -24,27 +24,26 @@ import edu.depaul.cdm.madl.tools.core.analysis.model.PubFolder;
 import edu.depaul.cdm.madl.tools.core.internal.MessageConsoleImpl;
 import edu.depaul.cdm.madl.tools.core.internal.OptionManager;
 
-  //import edu.depaul.cdm.madl.tools.core.internal.analysis.model.ProjectManagerImpl;
-  import edu.depaul.cdm.madl.tools.core.internal.builder.AnalysisMarkerManager;
-  //import edu.depaul.cdm.madl.tools.core.internal.model.MadlIgnoreManager;
-  import edu.depaul.cdm.madl.tools.core.internal.util.Extensions;
-  import edu.depaul.cdm.madl.tools.core.internal.util.ResourceUtil;
-  import edu.depaul.cdm.madl.tools.core.internal.util.Util;
-  //import edu.depaul.cdm.madl.tools.core.jobs.CleanLibrariesJob;
-  import edu.depaul.cdm.madl.tools.core.model.CompilationUnit;
-  import edu.depaul.cdm.madl.tools.core.model.MadlElement;
-  //import edu.depaul.cdm.madl.tools.core.model.MadlIgnoreListener;
- // import edu.depaul.cdm.madl.tools.core.model.MadlLibrary;
-  import edu.depaul.cdm.madl.tools.core.model.MadlModel;
-  import edu.depaul.cdm.madl.tools.core.model.MadlModelException;
-  import edu.depaul.cdm.madl.tools.core.model.MadlProject;
-  //import edu.depaul.cdm.madl.tools.core.model.MadlSdk;
-  //import edu.depaul.cdm.madl.tools.core.model.MadlSdkListener;
-  //import edu.depaul.cdm.madl.tools.core.model.MadlSdkManager;
-  //import edu.depaul.cdm.madl.tools.core.model.ElementChangedListener;
-  import edu.depaul.cdm.madl.tools.core.utilities.general.StringUtilities;
-  //import edu.depaul.cdm.madl.tools.core.utilities.performance.PerformanceManager;
-
+// import edu.depaul.cdm.madl.tools.core.internal.analysis.model.ProjectManagerImpl;
+import edu.depaul.cdm.madl.tools.core.internal.builder.AnalysisMarkerManager;
+// import edu.depaul.cdm.madl.tools.core.internal.model.MadlIgnoreManager;
+import edu.depaul.cdm.madl.tools.core.internal.util.Extensions;
+import edu.depaul.cdm.madl.tools.core.internal.util.ResourceUtil;
+import edu.depaul.cdm.madl.tools.core.internal.util.Util;
+// import edu.depaul.cdm.madl.tools.core.jobs.CleanLibrariesJob;
+import edu.depaul.cdm.madl.tools.core.model.CompilationUnit;
+import edu.depaul.cdm.madl.tools.core.model.MadlElement;
+// import edu.depaul.cdm.madl.tools.core.model.MadlIgnoreListener;
+// import edu.depaul.cdm.madl.tools.core.model.MadlLibrary;
+import edu.depaul.cdm.madl.tools.core.model.MadlModel;
+import edu.depaul.cdm.madl.tools.core.model.MadlModelException;
+import edu.depaul.cdm.madl.tools.core.model.MadlProject;
+import edu.depaul.cdm.madl.tools.core.model.MadlSdk;
+// import edu.depaul.cdm.madl.tools.core.model.MadlSdkListener;
+import edu.depaul.cdm.madl.tools.core.model.MadlSdkManager;
+// import edu.depaul.cdm.madl.tools.core.model.ElementChangedListener;
+import edu.depaul.cdm.madl.tools.core.utilities.general.StringUtilities;
+// import edu.depaul.cdm.madl.tools.core.utilities.performance.PerformanceManager;
 
 import edu.depaul.cdm.madl.tools.core.model.MadlProject;
 import edu.depaul.cdm.madl.tools.core.model.MadlElement;
@@ -274,7 +273,7 @@ public class MadlCore extends Plugin {
    * The unique project manager used for analysis of anything in the workspace
    */
   //ss
-  //private static ProjectManager projectManager;
+  private static ProjectManager projectManager;
 
   /**
    * Used to synchronize access to {@link #projectManager}.
@@ -490,7 +489,6 @@ public class MadlCore extends Plugin {
     return null;
   }
 
-
   public static File getEclipseInstallationDirectory() {
     return new File(Platform.getInstallLocation().getURL().getFile());
   }
@@ -525,15 +523,22 @@ public class MadlCore extends Plugin {
    * @return the list of known Madl-like file extensions
    */
 
-    public static String[] getMadlLikeExtensions() { IContentType madlContentType =
-    Platform.getContentTypeManager().getContentType( MADL_SOURCE_CONTENT_TYPE); HashSet<String>
-    extensionSet = new HashSet<String>(); for (IContentType contentType :
-    Platform.getContentTypeManager().getAllContentTypes()) { if
-    (contentType.isKindOf(madlContentType)) { for (String extension :
-    contentType.getFileSpecs(IContentType.FILE_EXTENSION_SPEC)) { extensionSet.add(extension); } }
-    } extensionSet.remove(Extensions.MADL); ArrayList<String> extensionList = new
-    ArrayList<String>(extensionSet); extensionList.add(0, Extensions.MADL); return
-    extensionList.toArray(new String[extensionList.size()]); }
+  public static String[] getMadlLikeExtensions() {
+    IContentType madlContentType = Platform.getContentTypeManager().getContentType(
+        MADL_SOURCE_CONTENT_TYPE);
+    HashSet<String> extensionSet = new HashSet<String>();
+    for (IContentType contentType : Platform.getContentTypeManager().getAllContentTypes()) {
+      if (contentType.isKindOf(madlContentType)) {
+        for (String extension : contentType.getFileSpecs(IContentType.FILE_EXTENSION_SPEC)) {
+          extensionSet.add(extension);
+        }
+      }
+    }
+    extensionSet.remove(Extensions.MADL);
+    ArrayList<String> extensionList = new ArrayList<String>(extensionSet);
+    extensionList.add(0, Extensions.MADL);
+    return extensionList.toArray(new String[extensionList.size()]);
+  }
 
   /**
    * Extract {@link ErrorCode} form the given {@link IMarker}.
@@ -617,13 +622,14 @@ public class MadlCore extends Plugin {
   public static ProjectManager getProjectManager() {
     //TODO
     //ss
-    /*
-     * synchronized (projectManagerLock) { if (projectManager == null) { projectManager = new
-     * ProjectManagerImpl( ResourcesPlugin.getWorkspace().getRoot(),
-     * MadlSdkManager.getManager().getNewSdk(), MadlIgnoreManager.getInstance()); } } return
-     * projectManager;
-     */
-    return null;
+
+    synchronized (projectManagerLock) {
+      if (projectManager == null) {
+       // projectManager = new ProjectManagerImpl(ResourcesPlugin.getWorkspace().getRoot(),
+         //   MadlSdkManager.getManager().getNewSdk(), MadlIgnoreManager.getInstance());
+      }
+    }
+    return projectManager;
   }
 
   /**
@@ -715,10 +721,10 @@ public class MadlCore extends Plugin {
    * @return <code>true</code> if the given resource should be analyzed
    */
   //ss
-  /*
-   * public static boolean isAnalyzed(IResource resource) { return
-   * getProjectManager().getIgnoreManager().isAnalyzed(resource); }
-   */
+//  public static boolean isAnalyzed(IResource resource) {
+    //return getProjectManager().getIgnoreManager().isAnalyzed(resource);
+
+ // }
 
   /**
    * Return true if directory contains a "packages" directory and a "pubspec.yaml" file
@@ -825,20 +831,28 @@ public class MadlCore extends Plugin {
     return !isMac() && !isWindows();
   }
 
-
   /**
-   * Return <code>true</code> if file is in the madl sdk lib directory
-   *
-   * @param file
-   * @return <code>true</code> if file is in madl-sdk/lib
+   * @return {@code true} if the given resource is located in the "packages" sub-folder that
+   *         corresponds to the enclosing package.
    */
   //ss
   /*
-   * public static boolean isMadlSdkLibraryFile(File file) { File sdkLibrary =
-   * MadlSdkManager.getManager().getSdk().getLibraryDirectory(); File parentFile =
-   * file.getParentFile(); while (parentFile != null) { if (parentFile.equals(sdkLibrary)) { return
-   * true; } parentFile = parentFile.getParentFile(); } return false; }
+   * public static boolean isInSelfLinkedPackageFolder(IResource resource) { if (resource == null) {
+   * return false; } try { // prepare "pub" folder PubFolder pubFolder =
+   * MadlCore.getProjectManager().getPubFolder(resource); if (pubFolder == null) { return false; }
+   * // the name of the enclosing package String packageName = pubFolder.getPubspec().getName(); //
+   * check if resource is in "packages" and references the enclosing package String[] segments =
+   * resource.getFullPath().segments(); for (int i = 0; i < segments.length - 1; i++) { String
+   * segment = segments[i]; if (segment.equals("packages") && segments[i + 1].equals(packageName)) {
+   * return true; } } } catch (Throwable e) { // pubFolder.getPubspec() may fail return false; } //
+   * not a self-reference return false; }
    */
+
+  public static boolean isMac() {
+    // Look for the "Mac" OS name.
+    return System.getProperty("os.name").toLowerCase().startsWith("mac");
+  }
+
 
   /**
    * Return <code>true</code> if the given file name's extension is an HTML-like extension.
@@ -880,28 +894,6 @@ public class MadlCore extends Plugin {
    */
 
   /**
-   * @return {@code true} if the given resource is located in the "packages" sub-folder that
-   *         corresponds to the enclosing package.
-   */
-  //ss
-  /*
-   * public static boolean isInSelfLinkedPackageFolder(IResource resource) { if (resource == null) {
-   * return false; } try { // prepare "pub" folder PubFolder pubFolder =
-   * MadlCore.getProjectManager().getPubFolder(resource); if (pubFolder == null) { return false; }
-   * // the name of the enclosing package String packageName = pubFolder.getPubspec().getName(); //
-   * check if resource is in "packages" and references the enclosing package String[] segments =
-   * resource.getFullPath().segments(); for (int i = 0; i < segments.length - 1; i++) { String
-   * segment = segments[i]; if (segment.equals("packages") && segments[i + 1].equals(packageName)) {
-   * return true; } } } catch (Throwable e) { // pubFolder.getPubspec() may fail return false; } //
-   * not a self-reference return false; }
-   */
-
-  public static boolean isMac() {
-    // Look for the "Mac" OS name.
-    return System.getProperty("os.name").toLowerCase().startsWith("mac");
-  }
-
-  /**
    * Return <code>true</code> if the given file name's extension is a Madl-like extension.
    *
    * @param fileName the file name being tested
@@ -910,8 +902,29 @@ public class MadlCore extends Plugin {
    */
   //ss
 
-    public static boolean isMadlLikeFileName(String fileName) { return isLikeFileName(fileName,
-    getMadlLikeExtensions()); }
+  public static boolean isMadlLikeFileName(String fileName) {
+    return isLikeFileName(fileName, getMadlLikeExtensions());
+  }
+
+  /**
+   * Return <code>true</code> if file is in the madl sdk lib directory
+   *
+   * @param file
+   * @return <code>true</code> if file is in madl-sdk/lib
+   */
+  //ss
+
+  public static boolean isMadlSdkLibraryFile(File file) {
+    File sdkLibrary = MadlSdkManager.getManager().getSdk().getLibraryDirectory();
+    File parentFile = file.getParentFile();
+    while (parentFile != null) {
+      if (parentFile.equals(sdkLibrary)) {
+        return true;
+      }
+      parentFile = parentFile.getParentFile();
+    }
+    return false;
+  }
 
   /**
    * Return true if directory is one that is installed by pub
@@ -1170,7 +1183,6 @@ public class MadlCore extends Plugin {
 //   public static void removeFromIgnores(IPath resource) throws IOException {
   //  getProjectManager().getIgnoreManager().removeFromIgnores(resource); }
 
-
   /**
    * Remove the given resource from the set of ignored resources.
    *
@@ -1281,20 +1293,27 @@ public class MadlCore extends Plugin {
   }
 
   //ss
-  /*
-   * private static void instrumentationLogErrorImpl(String message, Throwable exception) { if
-   * (instrumentationLogErrorEnabled) {
-   *
-   * InstrumentationBuilder instrumentation = Instrumentation.builder("MadlCore.LogError"); try {
-   * instrumentation.data("Log_Message", message != null ? message : "null");
-   * instrumentation.data("Log_Exception", exception != null ? exception.toString() : "null");
-   *
-   * if (exception != null) { instrumentation.record(exception); }
-   *
-   * } catch (Exception e) { instrumentationLogErrorEnabled = false;
-   * logErrorImpl("Instrumentation failed to log error", exception); } finally {
-   * instrumentation.log(); } } }
-   */
+
+  private static void instrumentationLogErrorImpl(String message, Throwable exception) {
+    if (instrumentationLogErrorEnabled) {
+
+      InstrumentationBuilder instrumentation = Instrumentation.builder("MadlCore.LogError");
+      try {
+        instrumentation.data("Log_Message", message != null ? message : "null");
+        instrumentation.data("Log_Exception", exception != null ? exception.toString() : "null");
+
+        if (exception != null) {
+          instrumentation.record(exception);
+        }
+
+      } catch (Exception e) {
+        instrumentationLogErrorEnabled = false;
+        logErrorImpl("Instrumentation failed to log error", exception);
+      } finally {
+        instrumentation.log();
+      }
+    }
+  }
 
   /**
    * Return <code>true</code> if the given file name's extension matches one of the passed
@@ -1307,11 +1326,17 @@ public class MadlCore extends Plugin {
    */
   //ss
 
-    private static boolean isLikeFileName(String fileName, String[] extensions) { if (fileName ==
-    null || fileName.length() == 0) { return false; } for (String extension : extensions) { if
-    (StringUtilities.endsWithIgnoreCase(fileName, '.' + extension)) { return true; } } return
-    false; }
-
+  private static boolean isLikeFileName(String fileName, String[] extensions) {
+    if (fileName == null || fileName.length() == 0) {
+      return false;
+    }
+    for (String extension : extensions) {
+      if (StringUtilities.endsWithIgnoreCase(fileName, '.' + extension)) {
+        return true;
+      }
+    }
+    return false;
+  }
 
   private static void logErrorImpl(String message, Throwable exception) {
     getPluginLog().log(new Status(Status.ERROR, PLUGIN_ID, message, exception));

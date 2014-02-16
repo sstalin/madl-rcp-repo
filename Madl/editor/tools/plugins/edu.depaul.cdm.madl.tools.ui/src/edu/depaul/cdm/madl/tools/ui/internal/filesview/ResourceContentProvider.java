@@ -1,11 +1,11 @@
 /*
  * Copyright (c) 2012, the Madl project authors.
- * 
+ *
  * Licensed under the Eclipse Public License v1.0 (the "License"); you may not use this file except
  * in compliance with the License. You may obtain a copy of the License at
- * 
+ *
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software distributed under the License
  * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
  * or implied. See the License for the specific language governing permissions and limitations under
@@ -41,7 +41,7 @@ public class ResourceContentProvider implements ITreeContentProvider, IResourceC
   private Viewer viewer;
 
 //ss
-  //private MadlSdkNode sdkNode;
+  private MadlSdkNode sdkNode;
 
   // private InstalledPackagesNode packagesNode;
 
@@ -50,9 +50,9 @@ public class ResourceContentProvider implements ITreeContentProvider, IResourceC
   public ResourceContentProvider() {
     ResourcesPlugin.getWorkspace().addResourceChangeListener(this, IResourceChangeEvent.POST_CHANGE);
 
-    // sdkNode = MadlSdkNode.createInstance();
+    sdkNode = MadlSdkNode.createInstance();
 
-    // packagesNode = InstalledPackagesNode.createInstance();
+    //packagesNode = InstalledPackagesNode.createInstance();
   }
 
   @Override
@@ -70,7 +70,7 @@ public class ResourceContentProvider implements ITreeContentProvider, IResourceC
 
         children.addAll(Arrays.asList(root.members()));
         //ss
-        // children.add(sdkNode);
+        children.add(sdkNode);
         //children.add(packagesNode);
 
         return children.toArray();
@@ -80,15 +80,16 @@ public class ResourceContentProvider implements ITreeContentProvider, IResourceC
       } else if (element instanceof IFileStore) {
         IFileStore fileStore = (IFileStore) element;
         return fileStore.childStores(EFS.NONE, null);
+      } else if (element instanceof MadlSdkNode) {
+        return ((MadlSdkNode) element).getResources();
+      } else if (element instanceof MadlLibraryNode) {
+        return ((MadlLibraryNode) element).getFiles();
+      }else if(element instanceof PlatformTemplateNode){
+        return ((PlatformTemplateNode) element).getFiles();
+      }else if(element instanceof ConfNode){
+        return ((ConfNode) element).getFiles();
       }
-      //ss
-      /*
-       * else if (element instanceof MadlSdkNode) { return ((MadlSdkNode) element).getLibraries(); }
-       * else if (element instanceof MadlLibraryNode) { return ((MadlLibraryNode)
-       * element).getFiles(); } else if (element instanceof InstalledPackagesNode) { return
-       * ((InstalledPackagesNode) element).getPackages(); } else if (element instanceof
-       * MadlPackageNode) { return ((MadlPackageNode) element).getFiles(); }
-       */
+
     } catch (CoreException ce) {
       //fall through
     }
@@ -149,13 +150,17 @@ public class ResourceContentProvider implements ITreeContentProvider, IResourceC
   }
 
   //ss
-  /*
-   * private Map<IFileStore, MadlLibraryNode> createSdkChildMap() { Map<IFileStore, MadlLibraryNode>
-   * map = new HashMap<IFileStore, MadlLibraryNode>();
-   * 
-   * for (MadlLibraryNode library : sdkNode.getLibraries()) { for (IFileStore child :
-   * library.getFiles()) { map.put(child, library); } } return map; }
-   */
+
+  private Map<IFileStore, MadlLibraryNode> createSdkChildMap() {
+    Map<IFileStore, MadlLibraryNode> map = new HashMap<IFileStore, MadlLibraryNode>();
+
+    for (MadlLibraryNode library : sdkNode.getLibraries()) {
+      for (IFileStore child : library.getFiles()) {
+        map.put(child, library);
+      }
+    }
+    return map;
+  }
 
   private List<IResource> filteredMembers(IContainer container) throws CoreException {
     List<IResource> children = new ArrayList<IResource>();
@@ -170,10 +175,11 @@ public class ResourceContentProvider implements ITreeContentProvider, IResourceC
     return children;
   }
 //ss
+
   /*
    * private MadlLibraryNode getSdkParent(IFileStore fileStore) { if (sdkChildMap == null) {
    * sdkChildMap = createSdkChildMap(); }
-   * 
+   *
    * return sdkChildMap.get(fileStore); }
    */
 

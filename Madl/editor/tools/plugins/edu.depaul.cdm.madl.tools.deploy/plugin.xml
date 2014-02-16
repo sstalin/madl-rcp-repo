@@ -512,17 +512,11 @@
    </extension>
 -->
 
-
-<!--
-   <extension
-         point="org.eclipse.ui.presentationFactories">
-      <factory
-            class="edu.depaul.cdm.madl.tools.ui.presentation.MadlEditorPresentationFactory"
-            id="edu.depaul.cdm.madl.tools.ui.presentation"
-            name="Madl Editor Presentation">
-      </factory>
+  <extension
+         point="org.eclipse.e4.ui.css.swt.theme">
    </extension>
-  -->
+
+
    
    <extension
          point="org.eclipse.ui.editors">
@@ -546,7 +540,8 @@
    </extension>
 
    <extension-point id="edu.depaul.cdm.madl.tools.ui.theme.mapper" name="Editor Mapping" schema="schema/edu.depaul.cdm.madl.tools.ui.theme.mapper.exsd"/>
-   <extension-point id="edu.depaul.cdm.madl.tools.ui.theme.theme" name="Color Theme" schema="schema/edu.depaul.cdm.madl.tools.ui.theme.theme.exsd"/> 
+   <extension-point id="edu.depaul.cdm.madl.tools.ui.theme.theme" name="Color Theme" schema="schema/edu.depaul.cdm.madl.tools.ui.theme.theme.exsd"/>
+  
    
 <!--
    <extension

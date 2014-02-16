@@ -29,6 +29,7 @@ public class BasicAppSample extends AbstractSample {
     List<String[]> templates = new ArrayList<String[]>();
 
     templates.add(new String[] {"src/{name.lower}.madl", "app(name: \"{name.lower}\"){\n\n}"});
+    templates.add(new String[]{"icons", ""});
     templates.add(new String[] {"org.properties", "developer {\n"
         + "\tname = \"App Team\"\n"
         + "\torg = \"App Inc\"\n"

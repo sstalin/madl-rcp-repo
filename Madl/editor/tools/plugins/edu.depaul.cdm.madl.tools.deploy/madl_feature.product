@@ -30,7 +30,7 @@
       startupForegroundColor="9F9F9F" />
    <launcher name="DartEditor">
       <linux icon="/com.google.dart.tools.deploy/icons/dart_48_48.xpm"/>
-      <macosx icon="/com.google.dart.tools.deploy/icons/dart.icns"/>
+      <macosx icon="/edu.depaul.cdm.madl.tools.deploy/icons/dart.icns"/>
       <solaris/>
       <win useIco="true">
          <ico path="/com.google.dart.tools.deploy/icons/dart.ico"/>

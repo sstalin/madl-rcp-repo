@@ -1,7 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.4"?>
 <plugin>
+   <extension point="org.eclipse.core.runtime.adapters">
+   
+      <factory 
+            class="edu.depaul.cdm.madl.tools.ui.NewMadlElementAdapterFactory" 
+            adaptableType="edu.depaul.cdm.madl.engine.element.Element">
+                        
+            <adapter type="org.eclipse.ui.IPersistableElement"/>
+            <adapter type="org.eclipse.ui.ide.IContributorResourceAdapter2"/>
+            <adapter type="org.eclipse.ui.IContainmentAdapter"/>
+            <adapter type="org.eclipse.ui.model.IWorkbenchAdapter"/>
+            <adapter type="org.eclipse.ui.views.properties.IPropertySource"/>
+            <adapter type="edu.depaul.cdm.madl.tools.ui.internal.IResourceLocator"/>
+      </factory>
+      
+      <factory 
+            class="edu.depaul.cdm.madl.tools.ui.MadlProjectAdapterFactory" 
+            adaptableType="edu.depaul.cdm.madl.tools.core.model.MadlProject">
+            <adapter type="org.eclipse.core.resources.IProject"/>
+      </factory>
+      
+      <factory 
+            class="edu.depaul.cdm.madl.tools.ui.ResourceAdapterFactory" 
+            adaptableType="org.eclipse.core.resources.IResource">
+            <adapter type="edu.depaul.cdm.madl.tools.core.model.MadlElement"/>
+      </factory>
+      
+      <factory 
+            class="edu.depaul.cdm.madl.tools.ui.internal.text.editor.EditorInputAdapterFactory" 
+            adaptableType="org.eclipse.ui.IEditorInput">
+            <!-- adapter type="org.eclipse.search.ui.ISearchPageScoreComputer"/ -->
+            <adapter type="edu.depaul.cdm.madl.tools.core.model.MadlElement"/>
+      </factory>
+      
+      
+      <factory 
+            class="edu.depaul.cdm.madl.tools.ui.internal.filesview.FileStoreAdapterFactory" 
+            adaptableType="org.eclipse.core.filesystem.IFileStore">
+            
+            <adapter type="org.eclipse.ui.model.IWorkbenchAdapter"/>
+      </factory>
 
+       <!-- Refactoring -->
+       <factory
+           class="edu.depaul.cdm.madl.tools.ui.internal.refactoring.RefactoringAdapterFactory"
+           adaptableType="edu.depaul.cdm.madl.tools.core.refactoring.CompilationUnitChange">
+           <adapter type="org.eclipse.ltk.ui.refactoring.TextEditChangeNode"/>
+       </factory>
+       <factory
+           class="edu.depaul.cdm.madl.tools.ui.internal.refactoring.RefactoringAdapterFactory"
+           adaptableType="org.eclipse.ltk.core.refactoring.MultiStateTextFileChange">
+           <adapter type="org.eclipse.ltk.ui.refactoring.TextEditChangeNode"/>
+       </factory>
+   </extension>
    <extension
          point="org.eclipse.ui.editors">
       <editor

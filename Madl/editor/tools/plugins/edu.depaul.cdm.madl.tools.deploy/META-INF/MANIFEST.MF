@@ -17,7 +17,9 @@ Require-Bundle: org.eclipse.ui,
  edu.depaul.cdm.madl.engine;bundle-version="1.0.0",
  edu.depaul.cdm.madl.tools.update.core;bundle-version="1.0.0",
  edu.depaul.cdm.madl.thirdparty;bundle-version="1.0.0",
- edu.depaul.cdm.madl.tools.ui;bundle-version="1.0.0"
+ edu.depaul.cdm.madl.tools.ui;bundle-version="1.0.0",
+ edu.depaul.cdm.madl.tools.debug.ui;bundle-version="1.0.0",
+ org.eclipse.e4.ui.css.swt.theme;bundle-version="0.9.100"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Bundle-ActivationPolicy: lazy
 Bundle-Vendor: %providerName

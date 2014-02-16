@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+   <extension-point id="workingCopyOwner" name="Working Copy Owner" schema="schema/workingCopyOwner.exsd"/>
+   <extension-point id="buildParticipants" name="Build Participants" schema="schema/buildParticipants.exsd"/>
+   <extension-point id="instrumentationLogger" name="Instrumentation Logger" schema="schema/instrumentationLogger.exsd"/>
+   
+	<extension
+			point="org.eclipse.core.resources.natures"
+			id="madlNature"
+			name="%madl.nature.name">
+		<runtime>
+			<run class="edu.depaul.cdm.madl.tools.core.internal.model.MadlProjectNature"/>
+		</runtime>
+	</extension>
+
+	<extension
+			point="org.eclipse.core.resources.builders"
+			id="madlBuilder"
+			name="%madl.builder.name">
+		<builder>
+			<run class="edu.depaul.cdm.madl.tools.core.internal.builder.MadlBuilder"/>
+		</builder>
+	</extension>
+   
+   <!-- 
+   <extension
+         point="org.eclipse.core.contenttype.contentTypes">
+      <content-type
+            id="edu.depaul.cdm.madl.tools.core.madlSourceFile"
+            name="%madl.contentType.sourceFile.name"
+            base-type="org.eclipse.core.runtime.text"
+            file-extensions="madl"
+            default-charset="UTF-8"/>
+      <content-type
+            id="edu.depaul.cdm.madl.tools.core.pubspecFile"
+            name="%madl.contentType.pubspecFile.name"
+            base-type="org.eclipse.core.runtime.text"
+            file-names="pubspec.yaml"
+            default-charset="UTF-8"/>
+   </extension>
+  --> 
+
+	<extension
+			point="org.eclipse.team.core.fileTypes">
+		<fileTypes extension="madl" type="text"/>
+	</extension>
+
+	<extension id="problem" name="%madl.marker.problem.name" point="org.eclipse.core.resources.markers">
+		<super type="org.eclipse.core.resources.problemmarker"/>
+		<super type="org.eclipse.core.resources.textmarker"/>
+		<persistent value="true"/>
+		<attribute name="id"/>
+		<attribute name="flags"/>
+		<attribute name="arguments"/>
+		<attribute name="categoryId"/>
+	</extension>
+
+  <extension id="hint" name="%madl.marker.hint.problem.name" point="org.eclipse.core.resources.markers">
+    <super type="edu.depaul.cdm.madl.tools.core.problem"/>
+  </extension>
+
+	<extension id="task" name="%madl.marker.task.name" point="org.eclipse.core.resources.markers">
+	    <super type="org.eclipse.core.resources.taskmarker"/> 
+	    <persistent value="true"/>
+	</extension>
+
+   <extension id="issue" name="%madl.marker.issue.name" point="org.eclipse.core.resources.markers">
+      <super type="org.eclipse.core.resources.problemmarker"/>
+      <super type="org.eclipse.core.resources.textmarker"/>
+      <persistent value="true"/>
+   </extension>
+   
+   <extension id="buildMadlIssue" name="%madl.marker.buildMadlIssue.name" point="org.eclipse.core.resources.markers">
+      <super type="org.eclipse.core.resources.problemmarker"/>
+      <super type="org.eclipse.core.resources.textmarker"/>
+      <persistent value="true"/>
+   </extension>
+   <extension id="pubspecIssue" name="Pubspec issue marker" point="org.eclipse.core.resources.markers">
+      <super type="org.eclipse.core.resources.textmarker"/>
+      <persistent value="false"/>
+   </extension>
+   
+   <extension
+       point="org.eclipse.core.expressions.propertyTesters">
+    <propertyTester
+          class="edu.depaul.cdm.madl.tools.core.expressions.MadlResourcePropertyTester"
+          id="edu.depaul.cdm.madl.tools.core.analyzableFilePropertTester"
+          namespace="edu.depaul.cdm.madl.tools.core.expressions"
+          properties="isAnalyzed, isAnalyzable, isIgnored"
+          type="java.lang.Object">
+    </propertyTester>
+   </extension>
+
+  <!--
+   <extension
+         point="org.eclipse.core.resources.filterMatchers">
+      <filterMatcher
+            argumentType="string"
+            class="edu.depaul.cdm.madl.tools.core.refresh.MadlPackagesFolderMatcher"
+            id="edu.depaul.cdm.madl.tools.core.packagesFolderMatcher"
+            name="%madl.packages.matcher.name">
+      </filterMatcher>
+   </extension>
+   -->
+
+  <extension
+          point="edu.depaul.cdm.madl.tools.core.buildParticipants">
+       <!--<buildParticipant
+             class="edu.depaul.cdm.madl.tools.core.pub.PubBuildParticipant"
+             id="edu.depaul.cdm.madl.tools.core.buildParticipant.pub"
+             priority="30">
+       </buildParticipant>-->
+       <buildParticipant
+             class="edu.depaul.cdm.madl.tools.core.internal.builder.BuildMadlParticipant"
+             id="edu.depaul.cdm.madl.tools.core.buildParticipant.buildMadl"
+             priority="40">
+       </buildParticipant>
+      <!-- <buildParticipant
+             class="edu.depaul.cdm.madl.tools.core.html.HtmlBuildParticipant"
+             id="edu.depaul.cdm.madl.tools.core.buildParticipant.html"
+             priority="70">
+       </buildParticipant>
+       <buildParticipant
+             class="edu.depaul.cdm.madl.tools.core.internal.builder.AnalysisEngineParticipant"
+             id="edu.depaul.cdm.madl.tools.core.buildParticipant.analysis.engine"
+             priority="80">
+       </buildParticipant>-->
+  </extension>
+
+</plugin>

@@ -1,11 +1,11 @@
 /*
  * Copyright (c) 2012, the Madl project authors.
- * 
+ *
  * Licensed under the Eclipse Public License v1.0 (the "License"); you may not use this file except
  * in compliance with the License. You may obtain a copy of the License at
- * 
+ *
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software distributed under the License
  * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
  * or implied. See the License for the specific language governing permissions and limitations under
@@ -103,12 +103,17 @@ public class ResourceLabelProvider implements IStyledLabelProvider, ILabelProvid
 
       IResource resource = (IResource) element;
 //ss
-      /*
-       * if (!MadlCore.isAnalyzed(resource)) { if (resource instanceof IFile) { return
-       * MadlToolsPlugin.getImage(IGNORE_FILE_ICON); }
-       * 
-       * if (resource instanceof IFolder) { return MadlToolsPlugin.getImage(IGNORE_FOLDER_ICON); } }
-       */
+
+ /*     if (!MadlCore.isAnalyzed(resource)) {
+        if (resource instanceof IFile) {
+          return MadlToolsPlugin.getImage(IGNORE_FILE_ICON);
+        }
+
+        if (resource instanceof IFolder) {
+          return MadlToolsPlugin.getImage(IGNORE_FOLDER_ICON);
+        }
+      }*/
+
 
       if (resource instanceof IFile) {
         IFile file = (IFile) resource;
@@ -117,12 +122,16 @@ public class ResourceLabelProvider implements IStyledLabelProvider, ILabelProvid
           return MadlToolsPlugin.getImage(BUILD_FILE_ICON);
         }
 
+
         //ss
-        /*
-         * if (MadlCoreDebug.EXPERIMENTAL) { SourceKind kind =
-         * MadlCore.getProjectManager().getSourceKind(file); if (kind == SourceKind.LIBRARY) {
-         * return MadlToolsPlugin.getImage(LIBRARY_ICON); } }
-         */
+
+     /*   if (MadlCoreDebug.EXPERIMENTAL) {
+          SourceKind kind = MadlCore.getProjectManager().getSourceKind(file);
+          if (kind == SourceKind.LIBRARY) {
+            return MadlToolsPlugin.getImage(LIBRARY_ICON);
+          }
+        }*/
+
       }
 
       if (element instanceof IFolder) {
@@ -150,7 +159,7 @@ public class ResourceLabelProvider implements IStyledLabelProvider, ILabelProvid
       IResource resource = (IResource) element;
 
       // Un-analyzed resources are grey.
-      //ss 
+      //ss
       /*
        * if (!MadlCore.isAnalyzed(resource)) { return new StyledString(resource.getName(),
        * StyledString.QUALIFIER_STYLER); }
@@ -202,14 +211,14 @@ public class ResourceLabelProvider implements IStyledLabelProvider, ILabelProvid
           /*
            * if (kind == SourceKind.LIBRARY) { LibraryElement libraryElement =
            * projectManager.getLibraryElementOrNull((IFile) resource);
-           * 
+           *
            * if (libraryElement != null) { String name = libraryElement.getName();
-           * 
+           *
            * if (name == null || name.length() == 0) {
-           * 
+           *
            * if (libraryElement.getEntryPoint() != null) { name =
            * FilenameUtils.removeExtension(resource.getName()); } }
-           * 
+           *
            * string.append(" [" + name + "]", StyledString.QUALIFIER_STYLER); //$NON-NLS-1$
            * //$NON-NLS-2$ } }
            */
@@ -226,7 +235,7 @@ public class ResourceLabelProvider implements IStyledLabelProvider, ILabelProvid
      * { StyledString string = new StyledString(((MadlLibraryNode) element).getLabel());
      * string.append(" [" + ((MadlLibraryNode) element).getCategory() + "]", //$NON-NLS-1$
      * //$NON-NLS-2$ StyledString.QUALIFIER_STYLER);
-     * 
+     *
      * return string; }
      */
 

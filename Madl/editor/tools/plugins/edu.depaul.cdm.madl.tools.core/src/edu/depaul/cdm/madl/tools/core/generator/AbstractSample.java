@@ -47,7 +47,7 @@ import java.util.Map;
 public class AbstractSample {
 
   public static List<AbstractSample> getAllSamples() {
-    List<AbstractSample> samples= new ArrayList<AbstractSample>();
+    List<AbstractSample> samples = new ArrayList<AbstractSample>();
     samples.add(new BasicAppSample());
     return samples;
   }
@@ -74,17 +74,19 @@ public class AbstractSample {
       String contents = substitute(template[1], variables);
 
       //ss not needed
-   /*   try {
-        if (contents.startsWith("@") && !contents.endsWith(".png")) {
-          contents = substitute(getResourceAsString(contents.substring(1)), variables);
-        }
-      } catch (IOException e) {
-        throw new CoreException(new Status(IStatus.ERROR, MadlCore.PLUGIN_ID, e.toString(), e));
-      }*/
+      /*
+       * try { if (contents.startsWith("@") && !contents.endsWith(".png")) { contents =
+       * substitute(getResourceAsString(contents.substring(1)), variables); } } catch (IOException
+       * e) { throw new CoreException(new Status(IStatus.ERROR, MadlCore.PLUGIN_ID, e.toString(),
+       * e)); }
+       */
 
       if (path.startsWith(".settings")) {
         createFile(container.getProject(), path, contents);
-      } else {
+      } else if (path.equals("icons")){
+        IFolder folder = container.getFolder(new Path(path));
+        createFolder(folder, false, true, null);
+      }else {
         createFile(container, path, contents);
       }
     }
