@@ -36,6 +36,11 @@
 			<type>2</type>
 			<locationURI>MADL_TRUNK/third_party/guava</locationURI>
 		</link>
+		<link>
+			<name>lib/json</name>
+			<type>2</type>
+			<locationURI>MADL_TRUNK/third_party/json</locationURI>
+		</link>
 	</linkedResources>
 	<variableList>
 		<variable>

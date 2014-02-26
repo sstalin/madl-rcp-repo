@@ -22,8 +22,8 @@
 			<run class="edu.depaul.cdm.madl.tools.core.internal.builder.MadlBuilder"/>
 		</builder>
 	</extension>
+ 
    
-   <!-- 
    <extension
          point="org.eclipse.core.contenttype.contentTypes">
       <content-type
@@ -32,14 +32,14 @@
             base-type="org.eclipse.core.runtime.text"
             file-extensions="madl"
             default-charset="UTF-8"/>
-      <content-type
+     <!-- <content-type
             id="edu.depaul.cdm.madl.tools.core.pubspecFile"
             name="%madl.contentType.pubspecFile.name"
             base-type="org.eclipse.core.runtime.text"
             file-names="pubspec.yaml"
-            default-charset="UTF-8"/>
+            default-charset="UTF-8"/>-->
    </extension>
-  --> 
+  
 
 	<extension
 			point="org.eclipse.team.core.fileTypes">
@@ -120,12 +120,12 @@
              class="edu.depaul.cdm.madl.tools.core.html.HtmlBuildParticipant"
              id="edu.depaul.cdm.madl.tools.core.buildParticipant.html"
              priority="70">
-       </buildParticipant>
+       </buildParticipant>-->
        <buildParticipant
              class="edu.depaul.cdm.madl.tools.core.internal.builder.AnalysisEngineParticipant"
              id="edu.depaul.cdm.madl.tools.core.buildParticipant.analysis.engine"
              priority="80">
-       </buildParticipant>-->
+       </buildParticipant>
   </extension>
 
 </plugin>

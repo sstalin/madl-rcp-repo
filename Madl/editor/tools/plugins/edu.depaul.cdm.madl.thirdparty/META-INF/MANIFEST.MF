@@ -7,7 +7,9 @@ Bundle-Vendor: %pluginProvider
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Bundle-ClassPath: lib/commons-lang/3.1/commons-lang3-3.1.jar,
  .,
- lib/guava/r13/guava-13.0.1.jar
+ lib/guava/r13/guava-13.0.1.jar,
+ lib/json/r2_20080312/json-src.jar,
+ lib/json/r2_20080312/json.jar
 Export-Package: com.google.common.annotations,
  com.google.common.base,
  com.google.common.base.internal,
@@ -32,4 +34,5 @@ Export-Package: com.google.common.annotations,
  org.apache.commons.lang3.text,
  org.apache.commons.lang3.text.translate,
  org.apache.commons.lang3.time,
- org.apache.commons.lang3.tuple
+ org.apache.commons.lang3.tuple,
+ org.json

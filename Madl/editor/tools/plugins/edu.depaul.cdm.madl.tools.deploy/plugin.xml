@@ -552,6 +552,7 @@
             name="Visual Theme">
       </page>
    </extension>
+   -->
 
    <extension
          point="org.eclipse.core.runtime.preferences">
@@ -559,7 +560,7 @@
             class="edu.depaul.cdm.madl.tools.ui.theme.preferences.PreferenceInitializer">
       </initializer>
    </extension>
-
+<!--
    <extension
          point="edu.depaul.cdm.madl.tools.ui.theme.mapper">
       <mapper

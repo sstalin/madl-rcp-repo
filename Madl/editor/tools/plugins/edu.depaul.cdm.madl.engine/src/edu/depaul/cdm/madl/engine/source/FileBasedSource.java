@@ -1,11 +1,11 @@
 /*
- * Copyright (c) 2012, the Dart project authors.
- * 
+ * Copyright (c) 2012, the Madl project authors.
+ *
  * Licensed under the Eclipse Public License v1.0 (the "License"); you may not use this file except
  * in compliance with the License. You may obtain a copy of the License at
- * 
+ *
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software distributed under the License
  * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
  * or implied. See the License for the specific language governing permissions and limitations under
@@ -29,8 +29,8 @@ import java.nio.charset.Charset;
 
 /**
  * Instances of the class {@code FileBasedSource} implement a source that represents a file.
- * 
- * @coverage dart.engine.source
+ *
+ * @coverage madl.engine.source
  */
 public class FileBasedSource implements Source {
   /**
@@ -62,7 +62,7 @@ public class FileBasedSource implements Source {
   /**
    * Initialize a newly created source object. The source object is assumed to not be in a system
    * library.
-   * 
+   *
    * @param contentCache the content cache used to access the contents of this source
    * @param file the file represented by this source
    */
@@ -72,7 +72,7 @@ public class FileBasedSource implements Source {
 
   /**
    * Initialize a newly created source object.
-   * 
+   *
    * @param contentCache the content cache used to access the contents of this source
    * @param file the file represented by this source
    * @param flags {@code true} if this source is in one of the system libraries
@@ -82,7 +82,7 @@ public class FileBasedSource implements Source {
     this.file = file;
     this.uriKind = uriKind;
     // Test for invalid path on Windows
-    // See exception in https://code.google.com/p/dart/issues/detail?id=12146
+    // See exception in https://code.google.com/p/madl/issues/detail?id=12146
     if (file.getPath().indexOf(':') > 2) {
       try {
         throw new IllegalArgumentException("Invalid source path: " + file);
@@ -160,7 +160,7 @@ public class FileBasedSource implements Source {
 
   @Override
   public boolean isInSystemLibrary() {
-    return uriKind == UriKind.DART_URI;
+    return uriKind == UriKind.MADL_URI;
   }
 
   @Override
@@ -187,7 +187,7 @@ public class FileBasedSource implements Source {
    * methods defined on the receiver will be invoked unless an exception is thrown. The method that
    * will be invoked depends on which of the possible representations of the contents is the most
    * efficient. Whichever method is invoked, it will be invoked before this method returns.
-   * 
+   *
    * @param receiver the content receiver to which the content of this source will be passed
    * @throws Exception if the contents of this source could not be accessed
    * @see #getContents(edu.depaul.cdm.madl.engine.source.Source.ContentReceiver)
@@ -247,7 +247,7 @@ public class FileBasedSource implements Source {
   /**
    * Return the file represented by this source. This is an internal method that is only intended to
    * be used by {@link UriResolver}.
-   * 
+   *
    * @return the file represented by this source
    */
   File getFile() {

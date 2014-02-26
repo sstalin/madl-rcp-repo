@@ -16,14 +16,14 @@ package edu.depaul.cdm.madl.tools.core.model;
 
 import edu.depaul.cdm.madl.engine.context.AnalysisContext;
 //import edu.depaul.cdm.madl.engine.internal.context.AnalysisContextImpl;
-//import edu.depaul.cdm.madl.engine.sdk.DirectoryBasedMadlSdk;
+import edu.depaul.cdm.madl.engine.sdk.DirectoryBasedMadlSdk;
 import edu.depaul.cdm.madl.engine.sdk.SdkLibrary;
 import edu.depaul.cdm.madl.engine.source.ContentCache;
 //import edu.depaul.cdm.madl.engine.source.MadlUriResolver;
-//import edu.depaul.cdm.madl.engine.source.FileBasedSource;
+import edu.depaul.cdm.madl.engine.source.FileBasedSource;
 import edu.depaul.cdm.madl.engine.source.Source;
-//import edu.depaul.cdm.madl.engine.source.SourceFactory;
-//import edu.depaul.cdm.madl.engine.source.UriKind;
+import edu.depaul.cdm.madl.engine.source.SourceFactory;
+import edu.depaul.cdm.madl.engine.source.UriKind;
 import edu.depaul.cdm.madl.tools.core.MadlCore;
 
 import org.eclipse.core.runtime.FileLocator;
@@ -208,7 +208,7 @@ public class MadlSdkManager {
   private MadlSdk oldSdk;
 
   // To replace the oldSdk
-  //private edu.depaul.cdm.madl.engine.sdk.MadlSdk newSdk;
+  private edu.depaul.cdm.madl.engine.sdk.MadlSdk newSdk;
 
   private List<MadlSdkListener> listeners = new ArrayList<MadlSdkListener>();
 
@@ -225,17 +225,17 @@ public class MadlSdkManager {
    * <p>
    * This will eventually replace {@link #getSdk()}.
    */
-/*  public edu.depaul.cdm.madl.engine.sdk.MadlSdk getNewSdk() {
+  public edu.depaul.cdm.madl.engine.sdk.MadlSdk getNewSdk() {
     if (newSdk == null) {
       File sdkDir = getSdk().getDirectory();
       if (sdkDir == null) {
-        newSdk = NO_SDK;
+        //newSdk = NO_SDK;
       } else {
         newSdk = new DirectoryBasedMadlSdk(sdkDir);
       }
     }
     return newSdk;
-  }*/
+  }
 
   public MadlSdk getSdk() {
     return oldSdk;

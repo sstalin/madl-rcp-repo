@@ -83,17 +83,17 @@ public class DirectoryBasedMadlSdk implements MadlSdk {
   /**
    * The name of the file containing the Madlium executable on Linux.
    */
-  private static final String DARTIUM_EXECUTABLE_NAME_LINUX = "chrome"; //$NON-NLS-1$
+  private static final String MADLIUM_EXECUTABLE_NAME_LINUX = "chrome"; //$NON-NLS-1$
 
   /**
    * The name of the file containing the Madlium executable on Macintosh.
    */
-  private static final String DARTIUM_EXECUTABLE_NAME_MAC = "Chromium.app/Contents/MacOS/Chromium"; //$NON-NLS-1$
+  private static final String MADLIUM_EXECUTABLE_NAME_MAC = "Chromium.app/Contents/MacOS/Chromium"; //$NON-NLS-1$
 
   /**
    * The name of the file containing the Madlium executable on Windows.
    */
-  private static final String DARTIUM_EXECUTABLE_NAME_WIN = "Chrome.exe"; //$NON-NLS-1$
+  private static final String MADLIUM_EXECUTABLE_NAME_WIN = "Chrome.exe"; //$NON-NLS-1$
 
   /**
    * The name of the {@link System} property whose value is the path to the default Madl SDK
@@ -195,14 +195,15 @@ public class DirectoryBasedMadlSdk implements MadlSdk {
     this.sdkDirectory = sdkDirectory.getAbsoluteFile();
     initializeSdk();
     initializeLibraryMap();
-    analysisContext = new AnalysisContextImpl();
+    //ss
+ /*   analysisContext = new AnalysisContextImpl();
     analysisContext.setSourceFactory(new SourceFactory(new MadlUriResolver(this)));
     String[] uris = getUris();
     ChangeSet changeSet = new ChangeSet();
     for (String uri : uris) {
       changeSet.added(analysisContext.getSourceFactory().forUri(uri));
     }
-    analysisContext.applyChanges(changeSet);
+    analysisContext.applyChanges(changeSet);*/
   }
 
   /**
@@ -226,10 +227,11 @@ public class DirectoryBasedMadlSdk implements MadlSdk {
     analysisContext.applyChanges(changeSet);
   }
 
-  @Override
+  //ss
+ /* @Override
   public Source fromEncoding(ContentCache contentCache, UriKind kind, URI uri) {
     return new FileBasedSource(contentCache, new File(uri), kind);
-  }
+  }*/
 
   @Override
   public AnalysisContext getContext() {
@@ -412,7 +414,7 @@ public class DirectoryBasedMadlSdk implements MadlSdk {
     }
     return new FileBasedSource(analysisContext.getSourceFactory().getContentCache(), new File(
         getLibraryDirectory(),
-        library.getPath()), UriKind.DART_URI);
+        library.getPath()), UriKind.MADL_URI);
   }
 
   /**
@@ -436,11 +438,11 @@ public class DirectoryBasedMadlSdk implements MadlSdk {
    */
   private String getMadliumBinaryName() {
     if (OSUtilities.isWindows()) {
-      return DARTIUM_EXECUTABLE_NAME_WIN;
+      return MADLIUM_EXECUTABLE_NAME_WIN;
     } else if (OSUtilities.isMac()) {
-      return DARTIUM_EXECUTABLE_NAME_MAC;
+      return MADLIUM_EXECUTABLE_NAME_MAC;
     } else {
-      return DARTIUM_EXECUTABLE_NAME_LINUX;
+      return MADLIUM_EXECUTABLE_NAME_LINUX;
     }
   }
 

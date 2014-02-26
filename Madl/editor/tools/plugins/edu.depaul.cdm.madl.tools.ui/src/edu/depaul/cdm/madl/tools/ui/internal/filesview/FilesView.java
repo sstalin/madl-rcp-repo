@@ -250,7 +250,7 @@ public class FilesView extends ViewPart implements ISetSelectionTarget {
   private OpenNewFolderWizardAction createFolderAction;
   private OpenNewApplicationWizardAction createApplicationAction;
 
-  //private IgnoreResourceAction ignoreResourceAction;
+  private IgnoreResourceAction ignoreResourceAction;
 
   //private EnableMadlBuilderAction enableBuilderAction;
 
@@ -278,7 +278,7 @@ public class FilesView extends ViewPart implements ISetSelectionTarget {
 //ss
   // private IPubUpdateListener pubUpdateListener = new PubUpdateListener();
 
-  //private RefreshAction refreshAction;
+  private RefreshAction refreshAction;
 
   //private CopyAction copyAction;
 
@@ -401,17 +401,21 @@ public class FilesView extends ViewPart implements ISetSelectionTarget {
     this.memento = memento;
 //ss
 
-    /*
-     * madlIgnoreListener = new MadlIgnoreListener() {
-     *
-     * @Override public void ignoresChanged(MadlIgnoreEvent event) {
-     * Display.getDefault().asyncExec(new Runnable() {
-     *
-     * @Override public void run() { treeViewer.refresh(); } }); } };
-     *
-     * MadlCore.addIgnoreListener(madlIgnoreListener);
-     */
+   /* madlIgnoreListener = new MadlIgnoreListener() {
 
+      @Override
+      public void ignoresChanged(MadlIgnoreEvent event) {
+        Display.getDefault().asyncExec(new Runnable() {
+
+          @Override
+          public void run() {
+            treeViewer.refresh();
+          }
+        });
+      }
+    };
+
+    MadlCore.addIgnoreListener(madlIgnoreListener);*/
   }
 
   @Override
@@ -537,7 +541,7 @@ public class FilesView extends ViewPart implements ISetSelectionTarget {
       }
 
       manager.add(new Separator());
-      // manager.add(refreshAction);
+      manager.add(refreshAction);
       // reanalyze
       if (!selection.isEmpty() && allElementsAreProjects(selection)) {
         // manager.add(cleanFoldersAction);
@@ -570,8 +574,8 @@ public class FilesView extends ViewPart implements ISetSelectionTarget {
         }
 
         if (analysisTargets) {
-          // ignoreResourceAction.updateLabel();
-          // manager.add(ignoreResourceAction);
+          ignoreResourceAction.updateLabel();
+           manager.add(ignoreResourceAction);
         }
 
         /*
@@ -755,7 +759,7 @@ public class FilesView extends ViewPart implements ISetSelectionTarget {
 
     // actionBars.setGlobalActionHandler(ActionFactory.COPY.getId(), copyAction);
     //actionBars.setGlobalActionHandler(ActionFactory.PASTE.getId(), pasteAction);
-    //actionBars.setGlobalActionHandler(ActionFactory.REFRESH.getId(), refreshAction);
+    actionBars.setGlobalActionHandler(ActionFactory.REFRESH.getId(), refreshAction);
 
   }
 
@@ -849,8 +853,8 @@ public class FilesView extends ViewPart implements ISetSelectionTarget {
     propertyDialogAction.setEnabled(false); //selection events will update
     treeViewer.addSelectionChangedListener(propertyDialogAction);
 
-   // ignoreResourceAction = new IgnoreResourceAction(getShell());
-    //treeViewer.addSelectionChangedListener(ignoreResourceAction);
+    ignoreResourceAction = new IgnoreResourceAction(getShell());
+    treeViewer.addSelectionChangedListener(ignoreResourceAction);
 
     //enableBuilderAction = new EnableMadlBuilderAction(getShell());
     //treeViewer.addSelectionChangedListener(enableBuilderAction);
@@ -864,8 +868,8 @@ public class FilesView extends ViewPart implements ISetSelectionTarget {
     //copyAction.setEnabled(false); //selection events will update
     //treeViewer.addSelectionChangedListener(copyAction);
 
-   // refreshAction = new RefreshAction(this);
-    //treeViewer.addSelectionChangedListener(refreshAction);
+    refreshAction = new RefreshAction(this);
+    treeViewer.addSelectionChangedListener(refreshAction);
 
     deleteAction = new DeleteAction(getSite());
     deleteAction.setImageDescriptor(PlatformUI.getWorkbench().getSharedImages().getImageDescriptor(

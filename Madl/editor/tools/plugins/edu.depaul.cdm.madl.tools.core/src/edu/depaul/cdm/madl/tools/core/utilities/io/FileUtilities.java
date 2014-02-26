@@ -1,11 +1,11 @@
 /*
- * Copyright (c) 2012, the Dart project authors.
- * 
+ * Copyright (c) 2012, the Madl project authors.
+ *
  * Licensed under the Eclipse Public License v1.0 (the "License"); you may not use this file except
  * in compliance with the License. You may obtain a copy of the License at
- * 
+ *
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software distributed under the License
  * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
  * or implied. See the License for the specific language governing permissions and limitations under
@@ -36,14 +36,14 @@ import java.net.URL;
 /**
  * The class <code>FileUtilities</code> implements utility methods used to create and manipulate
  * files.
- * 
- * @coverage dart.tools.core.utilities
+ *
+ * @coverage madl.tools.core.utilities
  */
 public class FileUtilities {
   /**
    * Copy over all the files and directories contained in the source directory to the target
    * directory.
-   * 
+   *
    * @param sourceDirectory the directory whose contents are to be copied
    * @param targetDirectory the directory to which the contents are to be copied
    */
@@ -79,7 +79,7 @@ public class FileUtilities {
 
   /**
    * Copy the contents of the given input file to the given output file.
-   * 
+   *
    * @param input the input file from which the contents are to be read
    * @param output the output file to which the contents are to be written
    * @throws IOException if the files cannot be either read or written
@@ -91,7 +91,7 @@ public class FileUtilities {
   /**
    * Copy all of the bytes from the given input stream to the given output stream. Both streams will
    * be closed after the operation.
-   * 
+   *
    * @param input the input stream from which bytes are to be read
    * @param output the output stream to which bytes are to be written
    * @throws IOException if the bytes cannot be either read or written
@@ -124,7 +124,7 @@ public class FileUtilities {
 
   /**
    * Copy the contents of the given input file to the given output file.
-   * 
+   *
    * @param input the input file from which the contents are to be read
    * @param output the output file to which the contents are to be written
    * @throws IOException if the files cannot be either read or written
@@ -135,7 +135,7 @@ public class FileUtilities {
 
   /**
    * Create the given file, including any parent directories that do not already exist.
-   * 
+   *
    * @param file the file to be created
    * @throws IOException if the file could not be created
    */
@@ -160,7 +160,7 @@ public class FileUtilities {
   /**
    * Given some {@link File} valid absolute directory path on disk that does or doesn't exist yet,
    * this method will create the directories no disk that don't yet exist.
-   * 
+   *
    * @param directory some valid absolute directory path on disk that does or doesn't exist yet
    */
   public static void createDirectory(File directory) {
@@ -176,7 +176,7 @@ public class FileUtilities {
   /**
    * Delete the given file or directory. If the argument is a directory, then the contents of the
    * directory will be deleted before the directory itself is deleted.
-   * 
+   *
    * @param file the file or directory to be deleted
    */
   public static void delete(File file) {
@@ -188,7 +188,7 @@ public class FileUtilities {
 
   /**
    * Delete the contents of the given directory without deleting the directory itself.
-   * 
+   *
    * @param directory the directory whose contents are to be deleted
    * @throws IllegalArgumentException if the argument is not a directory
    */
@@ -203,7 +203,7 @@ public class FileUtilities {
   /**
    * Return a string that contains all of the characters in the given string that can be included in
    * a valid file name.
-   * 
+   *
    * @param string the string used to build the valid file name
    * @return a valid file name that is as close to the given string as possible
    */
@@ -226,7 +226,7 @@ public class FileUtilities {
    * Return the base name of the given file. The base name is the portion of the name that occurs
    * before the period or extension when a file name is assumed to be of the form
    * <code>baseName '.' extension</code>.
-   * 
+   *
    * @return the base name of the given file
    */
   public static String getBaseName(File file) {
@@ -243,7 +243,7 @@ public class FileUtilities {
 
   /**
    * Return the contents of the given file, interpreted as a string.
-   * 
+   *
    * @param file the file whose contents are to be returned
    * @return the contents of the given file, interpreted as a string
    * @throws IOException if the file contents could not be read
@@ -257,7 +257,7 @@ public class FileUtilities {
   /**
    * Return the contents of the given reader, interpreted as a string. The {@link Reader} will be
    * closed.
-   * 
+   *
    * @param reader the reader whose contents are to be returned
    * @return the contents of the given reader, interpreted as a string
    * @throws IOException if the reader could not be read
@@ -271,17 +271,10 @@ public class FileUtilities {
   }
 
   /**
-   * @return the contents of the given Dart file with UTF-8 encoding.
-   */
-  public static String getDartContents(File file) throws IOException {
-    return getContents(file, "UTF-8");
-  }
-
-  /**
    * Return the extension of the given file. The extension is the portion of the name that occurs
    * after the final period when a file name is assumed to be of the form
    * <code>baseName '.' extension</code>.
-   * 
+   *
    * @return the extension of the given file
    */
   public static String getExtension(File file) {
@@ -297,10 +290,17 @@ public class FileUtilities {
   }
 
   /**
+   * @return the contents of the given Madl file with UTF-8 encoding.
+   */
+  public static String getMadlContents(File file) throws IOException {
+    return getContents(file, "UTF-8");
+  }
+
+  /**
    * Return a directory with the given name in the given base directory. If the directory did not
    * already exist it will be created. If there is a file of the same name in the base directory,
    * then the directory name will be made unique by appending an integer to the base name.
-   * 
+   *
    * @return a directory with the given name in the given base directory
    * @throws SecurityException if the directory cannot be accessed or created
    */
@@ -323,7 +323,7 @@ public class FileUtilities {
   /**
    * Return a file in the given directory whose name is composed from the given base name and
    * extension (which should include the period), but which does not currently exist.
-   * 
+   *
    * @param directory the directory that should contain the file
    * @param baseName the base name of the file
    * @param extension the extension used for the file
@@ -344,7 +344,7 @@ public class FileUtilities {
 
   /**
    * Returns whether the given file is a symlinked file.
-   * 
+   *
    * @param file
    * @return
    * @throws CoreException
@@ -361,7 +361,7 @@ public class FileUtilities {
   /**
    * Return <code>true</code> if the given parent directory is either the same as or a parent of the
    * given child directory.
-   * 
+   *
    * @param parentDirectory the directory that might be a parent of the child directory
    * @param childDirectory the directory that might be a child of the parent directory
    * @return <code>true</code> if the given parent directory is a parent of the given child
@@ -380,7 +380,7 @@ public class FileUtilities {
 
   /**
    * Overwrite the contents of the given file to the given contents.
-   * 
+   *
    * @param file the file whose contents are to be written
    * @param contents the new contents for the file
    * @throws IOException if the file contents could not be written
@@ -403,7 +403,7 @@ public class FileUtilities {
 
   /**
    * Return <code>true</code> if the given character can be included in a valid file name.
-   * 
+   *
    * @param character the character being tested
    * @return <code>true</code> if the given character can be included in a valid file name
    */
@@ -427,7 +427,7 @@ public class FileUtilities {
 
   /**
    * Delete the contents of the given directory, given that we know it is a directory.
-   * 
+   *
    * @param directory the directory whose contents are to be deleted
    */
   private static void safelyDeleteContents(File directory) {

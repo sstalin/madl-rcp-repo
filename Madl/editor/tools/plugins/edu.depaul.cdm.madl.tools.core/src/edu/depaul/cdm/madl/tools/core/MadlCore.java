@@ -13,37 +13,36 @@
  */
 package edu.depaul.cdm.madl.tools.core;
 
+
 import edu.depaul.cdm.madl.engine.AnalysisEngine;
 import edu.depaul.cdm.madl.engine.error.ErrorCode;
 import edu.depaul.cdm.madl.engine.utilities.instrumentation.Instrumentation;
 import edu.depaul.cdm.madl.engine.utilities.instrumentation.InstrumentationBuilder;
 import edu.depaul.cdm.madl.engine.utilities.logging.Logger;
-
 import edu.depaul.cdm.madl.tools.core.analysis.model.ProjectManager;
 import edu.depaul.cdm.madl.tools.core.analysis.model.PubFolder;
 import edu.depaul.cdm.madl.tools.core.internal.MessageConsoleImpl;
 import edu.depaul.cdm.madl.tools.core.internal.OptionManager;
-
-// import edu.depaul.cdm.madl.tools.core.internal.analysis.model.ProjectManagerImpl;
+import edu.depaul.cdm.madl.tools.core.internal.analysis.model.ProjectManagerImpl;
 import edu.depaul.cdm.madl.tools.core.internal.builder.AnalysisMarkerManager;
-// import edu.depaul.cdm.madl.tools.core.internal.model.MadlIgnoreManager;
+import edu.depaul.cdm.madl.tools.core.internal.model.MadlIgnoreManager;
 import edu.depaul.cdm.madl.tools.core.internal.util.Extensions;
 import edu.depaul.cdm.madl.tools.core.internal.util.ResourceUtil;
 import edu.depaul.cdm.madl.tools.core.internal.util.Util;
 // import edu.depaul.cdm.madl.tools.core.jobs.CleanLibrariesJob;
 import edu.depaul.cdm.madl.tools.core.model.CompilationUnit;
 import edu.depaul.cdm.madl.tools.core.model.MadlElement;
-// import edu.depaul.cdm.madl.tools.core.model.MadlIgnoreListener;
-// import edu.depaul.cdm.madl.tools.core.model.MadlLibrary;
+import edu.depaul.cdm.madl.tools.core.model.MadlIgnoreListener;
+ //import edu.depaul.cdm.madl.tools.core.model.MadlLibrary;
 import edu.depaul.cdm.madl.tools.core.model.MadlModel;
 import edu.depaul.cdm.madl.tools.core.model.MadlModelException;
 import edu.depaul.cdm.madl.tools.core.model.MadlProject;
 import edu.depaul.cdm.madl.tools.core.model.MadlSdk;
-// import edu.depaul.cdm.madl.tools.core.model.MadlSdkListener;
+import edu.depaul.cdm.madl.tools.core.model.MadlSdkListener;
 import edu.depaul.cdm.madl.tools.core.model.MadlSdkManager;
 // import edu.depaul.cdm.madl.tools.core.model.ElementChangedListener;
 import edu.depaul.cdm.madl.tools.core.utilities.general.StringUtilities;
-// import edu.depaul.cdm.madl.tools.core.utilities.performance.PerformanceManager;
+import edu.depaul.cdm.madl.tools.core.utilities.performance.PerformanceManager;
 
 import edu.depaul.cdm.madl.tools.core.model.MadlProject;
 import edu.depaul.cdm.madl.tools.core.model.MadlElement;
@@ -98,7 +97,7 @@ import java.util.Properties;
  *
  * @coverage madl.tools.core
  */
-public class MadlCore extends Plugin {
+public class MadlCore extends Plugin implements MadlSdkListener{
   /**
    * The unique instance of this class.
    */
@@ -304,10 +303,9 @@ public class MadlCore extends Plugin {
    * @param listener the listener to add
    */
   //ss
-  /*
-   * public static void addIgnoreListener(MadlIgnoreListener listener) {
-   * getProjectManager().getIgnoreManager().addListener(listener); }
-   */
+    public static void addIgnoreListener(MadlIgnoreListener listener) {
+    getProjectManager().getIgnoreManager().addListener(listener); }
+
 
   /**
    * Add the given resource to the set of ignored resources.
@@ -317,10 +315,10 @@ public class MadlCore extends Plugin {
    * @throws CoreException if there was an error deleting markers
    */
   //ss
-  /*
-   * public static void addToIgnores(IResource resource) throws IOException, CoreException {
-   * getProjectManager().getIgnoreManager().addToIgnores(resource); }
-   */
+
+   public static void addToIgnores(IResource resource) throws IOException, CoreException {
+   getProjectManager().getIgnoreManager().addToIgnores(resource); }
+
 
   /**
    * Remove any resource mapping for the given container.
@@ -350,7 +348,7 @@ public class MadlCore extends Plugin {
         }
       });
     } catch (CoreException e) {
-      //MadlCore.logError(e);
+      MadlCore.logError(e);
     }
   }
 
@@ -625,8 +623,8 @@ public class MadlCore extends Plugin {
 
     synchronized (projectManagerLock) {
       if (projectManager == null) {
-       // projectManager = new ProjectManagerImpl(ResourcesPlugin.getWorkspace().getRoot(),
-         //   MadlSdkManager.getManager().getNewSdk(), MadlIgnoreManager.getInstance());
+        projectManager = new ProjectManagerImpl(ResourcesPlugin.getWorkspace().getRoot(),
+            MadlSdkManager.getManager().getNewSdk(), MadlIgnoreManager.getInstance());
       }
     }
     return projectManager;
@@ -721,10 +719,9 @@ public class MadlCore extends Plugin {
    * @return <code>true</code> if the given resource should be analyzed
    */
   //ss
-//  public static boolean isAnalyzed(IResource resource) {
-    //return getProjectManager().getIgnoreManager().isAnalyzed(resource);
-
- // }
+  public static boolean isAnalyzed(IResource resource) {
+    return getProjectManager().getIgnoreManager().isAnalyzed(resource);
+}
 
   /**
    * Return true if directory contains a "packages" directory and a "pubspec.yaml" file
@@ -1293,7 +1290,6 @@ public class MadlCore extends Plugin {
   }
 
   //ss
-
   private static void instrumentationLogErrorImpl(String message, Throwable exception) {
     if (instrumentationLogErrorEnabled) {
 
@@ -1325,8 +1321,7 @@ public class MadlCore extends Plugin {
    *         extensions
    */
   //ss
-
-  private static boolean isLikeFileName(String fileName, String[] extensions) {
+private static boolean isLikeFileName(String fileName, String[] extensions) {
     if (fileName == null || fileName.length() == 0) {
       return false;
     }
@@ -1441,11 +1436,14 @@ public class MadlCore extends Plugin {
   }
 
   //ss
-  /*
-   * @Override public void sdkUpdated(MadlSdk sdk) { Job job = new CleanLibrariesJob();
-   *
-   * job.schedule(); }
-   */
+
+    @Override
+    public void sdkUpdated(MadlSdk sdk) {
+     // Job job = new CleanLibrariesJob();
+
+    //job.schedule();
+    }
+
 
   public void setDisableMadlBasedBuilder(IProject project, boolean value) throws CoreException {
     try {
@@ -1471,52 +1469,80 @@ public class MadlCore extends Plugin {
   public void start(BundleContext context) throws Exception {
     super.start(context);
 
-    /*
-     * CmdLineOptions.setOptions(CmdLineOptions.parseCmdLine(Platform.getApplicationArgs()));
-     * CmdLineOptions.getOptions().printWarnings();
-     *
-     * if (MadlCoreDebug.PERF_THREAD_CONTENTION_MONIOR) { try { java.lang.management.ThreadMXBean th
-     * = ManagementFactory.getThreadMXBean(); th.setThreadContentionMonitoringEnabled(true); } catch
-     * (UnsupportedOperationException e) { } }
-     *
-     * AnalysisEngine analysisEngine = AnalysisEngine.getInstance(); analysisEngine.setLogger(new
-     * Logger() {
-     *
-     * @Override public void logError(String message) { MadlCore.logError(message); }
-     *
-     * @Override public void logError(String message, Throwable exception) {
-     * MadlCore.logError(message, exception); }
-     *
-     * @Override public void logError(Throwable exception) { MadlCore.logError(exception); }
-     *
-     * @Override public void logInformation(String message) { MadlCore.logInformation(message); }
-     *
-     * @Override public void logInformation(String message, Throwable exception) {
-     * MadlCore.logInformation(message, exception); } });
-     *
-     * MadlSdkManager.getManager().addSdkListener(this);
-     *
-     * // Perform the project manager initialization in a job. Job job = new
-     * Job("Initialize ProjectManager") {
-     *
-     * @Override protected IStatus run(IProgressMonitor monitor) { getProjectManager().start();
-     * return Status.OK_STATUS; } }; job.setSystem(true); job.schedule();
-     */
+//ss
+    //CmdLineOptions.setOptions(CmdLineOptions.parseCmdLine(Platform.getApplicationArgs()));
+    //CmdLineOptions.getOptions().printWarnings();
+
+    if (MadlCoreDebug.PERF_THREAD_CONTENTION_MONIOR) {
+      try {
+        java.lang.management.ThreadMXBean th = ManagementFactory.getThreadMXBean();
+        th.setThreadContentionMonitoringEnabled(true);
+      } catch (UnsupportedOperationException e) {
+      }
+    }
+
+    AnalysisEngine analysisEngine = AnalysisEngine.getInstance();
+    analysisEngine.setLogger(new Logger() {
+      @Override
+      public void logError(String message) {
+        MadlCore.logError(message);
+      }
+
+      @Override
+      public void logError(String message, Throwable exception) {
+        MadlCore.logError(message, exception);
+      }
+
+      @Override
+      public void logError(Throwable exception) {
+        MadlCore.logError(exception);
+      }
+
+      @Override
+      public void logInformation(String message) {
+        MadlCore.logInformation(message);
+      }
+
+      @Override
+      public void logInformation(String message, Throwable exception) {
+        MadlCore.logInformation(message, exception);
+      }
+    });
+
+    MadlSdkManager.getManager().addSdkListener(this);
+
+    // Perform the project manager initialization in a job.
+    Job job = new Job("Initialize ProjectManager") {
+      @Override
+      protected IStatus run(IProgressMonitor monitor) {
+        getProjectManager().start();
+        return Status.OK_STATUS;
+      }
+    };
+    job.setSystem(true);
+    job.schedule();
+
   }
 
   @Override
   public void stop(BundleContext context) throws Exception {
+    MadlSdkManager.getManager().removeSdkListener(this);
 
+    try {
+      getProjectManager().stop();
+
+      if (MadlCoreDebug.METRICS) {
+        StringWriter writer = new StringWriter();
+        PerformanceManager.getInstance().printMetrics(new PrintWriter(writer));
+        String metricsInfo = writer.toString();
+        if (metricsInfo.length() > 0) {
+          getLog().log(new Status(Status.INFO, PLUGIN_ID, metricsInfo, null));
+        }
+      }
+    } finally {
+      super.stop(context);
+    }
     super.stop(context);
-    /*
-     * MadlSdkManager.getManager().removeSdkListener(this);
-     *
-     * try { getProjectManager().stop();
-     *
-     * if (MadlCoreDebug.METRICS) { StringWriter writer = new StringWriter();
-     * PerformanceManager.getInstance().printMetrics(new PrintWriter(writer)); String metricsInfo =
-     * writer.toString(); if (metricsInfo.length() > 0) { getLog().log(new Status(Status.INFO,
-     * PLUGIN_ID, metricsInfo, null)); } } } finally { super.stop(context); }
-     */
+
   }
 }

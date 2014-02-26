@@ -1,11 +1,11 @@
 /*
  * Copyright (c) 2012, the Dart project authors.
- * 
+ *
  * Licensed under the Eclipse Public License v1.0 (the "License"); you may not use this file except
  * in compliance with the License. You may obtain a copy of the License at
- * 
+ *
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software distributed under the License
  * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
  * or implied. See the License for the specific language governing permissions and limitations under
@@ -26,8 +26,8 @@ import edu.depaul.cdm.madl.engine.error.AnalysisError;
 import edu.depaul.cdm.madl.engine.source.Source;
 import edu.depaul.cdm.madl.engine.source.SourceContainer;
 
-//import edu.depaul.cdm.madl.engine.source.SourceFactory;
-//import edu.depaul.cdm.madl.engine.source.SourceKind;
+import edu.depaul.cdm.madl.engine.source.SourceFactory;
+import edu.depaul.cdm.madl.engine.source.SourceKind;
 
 import edu.depaul.cdm.madl.engine.utilities.source.LineInfo;
 
@@ -71,7 +71,7 @@ public interface AnalysisContext {
   /**
    * Apply the changes specified by the given change set to this context. Any analysis results that
    * have been invalidated by these changes will be removed.
-   * 
+   *
    * @param changeSet a description of the changes that are to be applied
    */
   public void applyChanges(ChangeSet changeSet);
@@ -81,7 +81,7 @@ public interface AnalysisContext {
    * (complete with the beginning and ending delimiters), or {@code null} if the element does not
    * have a documentation comment associated with it. This can be a long-running operation if the
    * information needed to access the comment is not cached.
-   * 
+   *
    * @param element the element whose documentation comment is to be returned
    * @return the element's documentation comment
    * @throws AnalysisException if the documentation comment could not be determined because the
@@ -93,7 +93,7 @@ public interface AnalysisContext {
    * Return an array containing all of the errors associated with the given source. If the errors
    * are not already known then the source will be analyzed in order to determine the errors
    * associated with it.
-   * 
+   *
    * @param source the source whose errors are to be returned
    * @return all of the errors associated with the given source
    * @throws AnalysisException if the errors could not be determined because the analysis could not
@@ -108,7 +108,7 @@ public interface AnalysisContext {
    * for an HTML file can long-running, depending on the size of the file and the number of
    * libraries that are defined in it (via script tags) that also need to have a model built for
    * them.
-   * 
+   *
    * @param source the source defining the HTML file whose element model is to be returned
    * @return the element model corresponding to the HTML file defined by the given source
    * @throws AnalysisException if the element model could not be determined because the analysis
@@ -120,19 +120,19 @@ public interface AnalysisContext {
   /**
    * Return the kind of the given source, computing it's kind if it is not already known. Return
    * {@link SourceKind#UNKNOWN} if the source is not contained in this context.
-   * 
+   *
    * @param source the source whose kind is to be returned
    * @return the kind of the given source
    * @see #getKindOf(Source)
    */
- // public SourceKind computeKindOf(Source source);
+  public SourceKind computeKindOf(Source source);
 
   /**
    * Return the element model corresponding to the library defined by the given source. If the
    * element model does not yet exist it will be created. The process of creating an element model
    * for a library can long-running, depending on the size of the library and the number of
    * libraries that are imported into it that also need to have a model built for them.
-   * 
+   *
    * @param source the source defining the library whose element model is to be returned
    * @return the element model corresponding to the library defined by the given source
    * @throws AnalysisException if the element model could not be determined because the analysis
@@ -146,7 +146,7 @@ public interface AnalysisContext {
    * recognized kind (neither a Dart nor HTML file). If the line information was not previously
    * known it will be created. The line information is used to map offsets from the beginning of the
    * source to line and column pairs.
-   * 
+   *
    * @param source the source whose line information is to be returned
    * @return the line information for the given source
    * @throws AnalysisException if the line information could not be determined because the analysis
@@ -158,7 +158,7 @@ public interface AnalysisContext {
   /**
    * Create a new context in which analysis can be performed. Any sources in the specified container
    * will be removed from this context and added to the newly created context.
-   * 
+   *
    * @param container the container containing sources that should be removed from this context and
    *          added to the returned context
    * @return the analysis context that was created
@@ -169,7 +169,7 @@ public interface AnalysisContext {
    * Return the set of analysis options controlling the behavior of this context. Clients should not
    * modify the returned set of options. The options should only be set by invoking the method
    * {@link #setAnalysisOptions(AnalysisOptions)}.
-   * 
+   *
    * @return the set of analysis options controlling the behavior of this context
    */
   public AnalysisOptions getAnalysisOptions();
@@ -180,7 +180,7 @@ public interface AnalysisContext {
    * can occur, for example, if the location describes an element from a different context or if the
    * element has been removed from this context as a result of some change since it was originally
    * obtained.
-   * 
+   *
    * @param location the reference describing the element to be returned
    * @return the element referenced by the given location
    */
@@ -191,7 +191,7 @@ public interface AnalysisContext {
    * associated with the given source. The array of errors will be empty if the source is not known
    * to this context or if there are no errors in the source. The errors contained in the array can
    * be incomplete.
-   * 
+   *
    * @param source the source whose errors are to be returned
    * @return all of the errors associated with the given source and the line info
    * @see #computeErrors(Source)
@@ -202,7 +202,7 @@ public interface AnalysisContext {
    * Return the element model corresponding to the HTML file defined by the given source, or
    * {@code null} if the source does not represent an HTML file, the element representing the file
    * has not yet been created, or the analysis of the HTML file failed for some reason.
-   * 
+   *
    * @param source the source defining the HTML file whose element model is to be returned
    * @return the element model corresponding to the HTML file defined by the given source
    * @see #computeHtmlElement(Source)
@@ -213,7 +213,7 @@ public interface AnalysisContext {
    * Return the sources for the HTML files that reference the given compilation unit. If the source
    * does not represent a Dart source or is not known to this context, the returned array will be
    * empty. The contents of the array can be incomplete.
-   * 
+   *
    * @param source the source referenced by the returned HTML files
    * @return the sources for the HTML files that reference the given compilation unit
    */
@@ -222,19 +222,19 @@ public interface AnalysisContext {
   /**
    * Return an array containing all of the sources known to this context that represent HTML files.
    * The contents of the array can be incomplete.
-   * 
+   *
    * @return the sources known to this context that represent HTML files
    */
   public Source[] getHtmlSources();
 
   /**
    * Return the kind of the given source, or {@code null} if the kind is not known to this context.
-   * 
+   *
    * @param source the source whose kind is to be returned
    * @return the kind of the given source
    * @see #computeKindOf(Source)
    */
-  //public SourceKind getKindOf(Source source);
+   public SourceKind getKindOf(Source source);
 
   /**
    * Return an array containing all of the sources known to this context that represent the defining
@@ -242,7 +242,7 @@ public interface AnalysisContext {
    * represent libraries that have a 'main' method and are either referenced by an HTML file or
    * import, directly or indirectly, a client-only library. The contents of the array can be
    * incomplete.
-   * 
+   *
    * @return the sources known to this context that represent the defining compilation unit of a
    *         library that can be run within a browser
    */
@@ -252,7 +252,7 @@ public interface AnalysisContext {
    * Return an array containing all of the sources known to this context that represent the defining
    * compilation unit of a library that can be run outside of a browser. The contents of the array
    * can be incomplete.
-   * 
+   *
    * @return the sources known to this context that represent the defining compilation unit of a
    *         library that can be run outside of a browser
    */
@@ -266,7 +266,7 @@ public interface AnalysisContext {
    * a library, then the returned array will contain the given source as its only element. If the
    * source does not represent a Dart source or is not known to this context, the returned array
    * will be empty. The contents of the array can be incomplete.
-   * 
+   *
    * @param source the source contained in the returned libraries
    * @return the sources for the libraries containing the given source
    */
@@ -275,7 +275,7 @@ public interface AnalysisContext {
   /**
    * Return the sources for the defining compilation units of any libraries that depend on the given
    * library. One library depends on another if it either imports or exports that library.
-   * 
+   *
    * @param librarySource the source for the defining compilation unit of the library being depended
    *          on
    * @return the sources for the libraries that depend on the given library
@@ -286,7 +286,7 @@ public interface AnalysisContext {
    * Return the element model corresponding to the library defined by the given source, or
    * {@code null} if the element model does not currently exist or if the library cannot be analyzed
    * for some reason.
-   * 
+   *
    * @param source the source defining the library whose element model is to be returned
    * @return the element model corresponding to the library defined by the given source
    */
@@ -295,7 +295,7 @@ public interface AnalysisContext {
   /**
    * Return an array containing all of the sources known to this context that represent the defining
    * compilation unit of a library. The contents of the array can be incomplete.
-   * 
+   *
    * @return the sources known to this context that represent the defining compilation unit of a
    *         library
    */
@@ -305,7 +305,7 @@ public interface AnalysisContext {
    * Return the line information for the given source, or {@code null} if the line information is
    * not known. The line information is used to map offsets from the beginning of the source to line
    * and column pairs.
-   * 
+   *
    * @param source the source whose line information is to be returned
    * @return the line information for the given source
    * @see #computeLineInfo(Source)
@@ -316,7 +316,7 @@ public interface AnalysisContext {
    * Return an array containing all of the sources known to this context and their resolution state
    * is not valid or flush. So, these sources are not safe to update during refactoring, because we
    * may be don't know all the references in them.
-   * 
+   *
    * @return the sources known to this context and are not safe for refactoring
    */
   public Source[] getRefactoringUnsafeSources();
@@ -324,7 +324,7 @@ public interface AnalysisContext {
   /**
    * Return a fully resolved AST for a single compilation unit within the given library, or
    * {@code null} if the resolved AST is not already computed.
-   * 
+   *
    * @param unitSource the source of the compilation unit
    * @param library the library containing the compilation unit
    * @return a fully resolved AST for the compilation unit
@@ -335,7 +335,7 @@ public interface AnalysisContext {
   /**
    * Return a fully resolved AST for a single compilation unit within the given library, or
    * {@code null} if the resolved AST is not already computed.
-   * 
+   *
    * @param unitSource the source of the compilation unit
    * @param librarySource the source of the defining compilation unit of the library containing the
    *          compilation unit
@@ -346,10 +346,10 @@ public interface AnalysisContext {
 
   /**
    * Return the source factory used to create the sources that can be analyzed in this context.
-   * 
+   *
    * @return the source factory used to create the sources that can be analyzed in this context
    */
-  //public SourceFactory getSourceFactory();
+    public SourceFactory getSourceFactory();
 
   /**
    * Return {@code true} if the given source is known to be the defining compilation unit of a
@@ -358,7 +358,7 @@ public interface AnalysisContext {
    * <b>Note:</b> In addition to the expected case of returning {@code false} if the source is known
    * to be a library that cannot be run on a client, this method will also return {@code false} if
    * the source is not known to be a library or if we do not know whether it can be run on a client.
-   * 
+   *
    * @param librarySource the source being tested
    * @return {@code true} if the given source is known to be a library that can be run on a client
    */
@@ -373,7 +373,7 @@ public interface AnalysisContext {
    * to be a library that cannot be run on the server, this method will also return {@code false} if
    * the source is not known to be a library or if we do not know whether it can be run on the
    * server.
-   * 
+   *
    * @param librarySource the source being tested
    * @return {@code true} if the given source is known to be a library that can be run on the server
    */
@@ -383,7 +383,7 @@ public interface AnalysisContext {
    * Add the sources contained in the specified context to this context's collection of sources.
    * This method is called when an existing context's pubspec has been removed, and the contained
    * sources should be reanalyzed as part of this context.
-   * 
+   *
    * @param context the context being merged
    */
   public void mergeContext(AnalysisContext context);
@@ -391,7 +391,7 @@ public interface AnalysisContext {
   /**
    * Parse a single source to produce an AST structure. The resulting AST structure may or may not
    * be resolved, and may have a slightly different structure depending upon whether it is resolved.
-   * 
+   *
    * @param source the source to be parsed
    * @return the AST structure representing the content of the source
    * @throws AnalysisException if the analysis could not be performed
@@ -402,7 +402,7 @@ public interface AnalysisContext {
    * Parse a single HTML source to produce an AST structure. The resulting HTML AST structure may or
    * may not be resolved, and may have a slightly different structure depending upon whether it is
    * resolved.
-   * 
+   *
    * @param source the HTML source to be parsed
    * @return the parse result (not {@code null})
    * @throws AnalysisException if the analysis could not be performed
@@ -413,14 +413,14 @@ public interface AnalysisContext {
    * Perform the next unit of work required to keep the analysis results up-to-date and return
    * information about the consequent changes to the analysis results. This method can be long
    * running.
-   * 
+   *
    * @return the results of performing the analysis
    */
   public AnalysisResult performAnalysisTask();
 
   /**
    * Parse and resolve a single source within the given context to produce a fully resolved AST.
-   * 
+   *
    * @param unitSource the source to be parsed and resolved
    * @param library the library containing the source to be resolved
    * @return the result of resolving the AST structure representing the content of the source in the
@@ -435,7 +435,7 @@ public interface AnalysisContext {
    * Parse and resolve a single source within the given context to produce a fully resolved AST.
    * Return the resolved AST structure, or {@code null} if the source could not be either parsed or
    * resolved.
-   * 
+   *
    * @param unitSource the source to be parsed and resolved
    * @param librarySource the source of the defining compilation unit of the library containing the
    *          source to be resolved
@@ -449,7 +449,7 @@ public interface AnalysisContext {
 
   /**
    * Parse and resolve a single source within the given context to produce a fully resolved AST.
-   * 
+   *
    * @param htmlSource the source to be parsed and resolved
    * @return the result of resolving the AST structure representing the content of the source
    * @throws AnalysisException if the analysis could not be performed
@@ -459,7 +459,7 @@ public interface AnalysisContext {
   /**
    * Set the set of analysis options controlling the behavior of this context to the given options.
    * Clients can safely assume that all necessary analysis results have been invalidated.
-   * 
+   *
    * @param options the set of analysis options that will control the behavior of this context
    */
   public void setAnalysisOptions(AnalysisOptions options);
@@ -472,7 +472,7 @@ public interface AnalysisContext {
    * <p>
    * Changes made to the list after this method returns will <b>not</b> be reflected in the priority
    * order.
-   * 
+   *
    * @param sources the sources to be given priority over other sources
    */
   public void setAnalysisPriorityOrder(List<Source> sources);
@@ -481,7 +481,7 @@ public interface AnalysisContext {
    * Set the contents of the given source to the given contents and mark the source as having
    * changed. The additional offset and length information is used by the context to determine what
    * reanalysis is necessary.
-   * 
+   *
    * @param source the source whose contents are being overridden
    * @param contents the text to replace the range in the current contents
    * @param offset the offset into the current contents
@@ -495,7 +495,7 @@ public interface AnalysisContext {
    * Set the contents of the given source to the given contents and mark the source as having
    * changed. This has the effect of overriding the default contents of the source. If the contents
    * are {@code null} the override is removed so that the default contents will be returned.
-   * 
+   *
    * @param source the source whose contents are being overridden
    * @param contents the new contents of the source
    */
@@ -505,16 +505,16 @@ public interface AnalysisContext {
    * Set the source factory used to create the sources that can be analyzed in this context to the
    * given source factory. Clients can safely assume that all analysis results have been
    * invalidated.
-   * 
+   *
    * @param factory the source factory used to create the sources that can be analyzed in this
    *          context
    */
- // public void setSourceFactory(SourceFactory factory);
+   public void setSourceFactory(SourceFactory factory);
 
   /**
    * Given a collection of sources with content that has changed, return an {@link Iterable}
    * identifying the sources that need to be resolved.
-   * 
+   *
    * @param changedSources an array of sources (not {@code null}, contains no {@code null}s)
    * @return An iterable returning the sources to be resolved
    */
