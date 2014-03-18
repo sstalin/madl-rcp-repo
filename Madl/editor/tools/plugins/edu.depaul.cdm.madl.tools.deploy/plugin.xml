@@ -205,7 +205,7 @@
          </property>
          <property
                name="startupProgressRect"
-               value="100,350,400,15">
+               value="100,330,400,15">
          </property>
          <property
                name="preferenceCustomization"
@@ -217,7 +217,7 @@
          </property>
          <property
                name="startupMessageRect"
-               value="100,330,400,15">
+               value="100,310,400,15">
          </property>
       </product>
    </extension>

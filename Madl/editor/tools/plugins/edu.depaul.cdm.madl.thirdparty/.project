@@ -29,12 +29,12 @@
 		<link>
 			<name>lib/commons-lang</name>
 			<type>2</type>
-			<locationURI>MADL_TRUNK/third_party/commons-lang</locationURI>
+			<locationURI>$%7BPARENT-4-PROJECT_LOC%7D/third_party/commons-lang</locationURI>
 		</link>
 		<link>
 			<name>lib/guava</name>
 			<type>2</type>
-			<locationURI>MADL_TRUNK/third_party/guava</locationURI>
+			<locationURI>$%7BPARENT-4-PROJECT_LOC%7D/third_party/guava</locationURI>
 		</link>
 	</linkedResources>
 	<variableList>
